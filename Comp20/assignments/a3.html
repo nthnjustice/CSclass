@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/pygment_trac.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/custom.css" media="screen" />
+
+<!--[if lt IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<title>COMP 20: Web Programming - Assignment 3</title>
+</head>
+
+<body>
+<header>
+<div class="inner">
+<h1>Web Programming</h1>
+<h2>Assignment 3: The Server for the Real Marauder's Map</h2>
+<h2>Due: Wednesday, April 15th</h2>
+</div>
+</header>
+
+<div id="content-wrapper">
+<div class="inner clearfix">
+<section id="main-content">
+
+<h2>Objectives</h2>
+<ul>
+<li>Develop a server-side web application using Heroku, Node.js, and the Express web framework.</li>
+<li>Enable and use Cross-Origin Resource Sharing (CORS).</li>
+<li>Read and write data to a MongoDB database.</li>
+<li>Build JSON-based APIs.</li>
+</ul>
+
+<h2>Overview</h2>
+<p>In <a href="a2.html">Assignment 2</a>, you sent your login, latitude, and longitude to a web application server (i.e., <code>http://secret-about-box.herokuapp.com/</code>), and it responded with a gob of data, where others in the class are in JSON format.  In this assignment, you will write a web application that is almost exactly like that used for Assignment 2, and deploy it to server(s).</p>
+
+<p>Using Heroku, Node.js with the Express web framework, and MongoDB, you are to build a web application that maintains "location check-ins" (login, latitude, and longitude) for a long period of time.</p>
+
+<h2>Data Description</h2>
+<p>Your web application shall only work with one set of data: <code>locations</code>.  In MongoDB, a set of data is known as a <span class="stress">collection</span>.  If you are familiar with relational databases, a collection is analogous to a "table".  The collection contains a number of records, properly known as <span class="stress">documents</span>.  If you are familiar with relational databases, a document is analogous to a "row".  The data that must be stored in one document (or record) are:</p>
+<ul>
+<li><code>login</code> <span class="note">(a string)</span> - A user's handle</li>
+<li><code>lat</code> <span class="note">(a floating point number)</span> - The user's latitude</li>
+<li><code>lng</code> <span class="note">(a floating point number)</span> - The user's longitude</li>
+<li><code>created_at</code> - The timestamp, generated for each new record entry.  Use the JavaScript <code>Date</code> object to generate timestamp.</li>
+</ul>
+
+<p>Each document will have the data field <code>_id</code> (the document's unique field, primary key) created automatically.</p>
+
+<h2>Requirements</h2>
+<p>Your web application shall have the following features:</p>
+<h3>1. A <code>POST /sendLocation</code> API</h3>
+<p>Submits check-in from any domain.  The mandatory fields and <span class="stress">exact field names</span> for submission to this API are <code>login</code>, <code>lat</code>, and <code>lng</code>.  Successful submission of these three pieces of data shall result in one entry into the collection <code>locations</code> in Mongo. If a submission is missing any one of the data fields, do not insert new record into the database and send the following JSON as the response: <code>{"error":"Whoops, something is wrong with your data!"}</code>.  Cross-origin resource sharing must be enabled for this API, else data cannot be sent from another domain.  Upon successful insertion of record into database, return a JSON string that is an array of objects.</p>
+<p>Example JSON response (same as the one seen in the Assignment 2 specification: <code>[{"_id":"54e95ff46cca2a030048cf14","login":"mchow","lat":40.67693,"lng":117.23193,"created_at":"2015-02-22T05:12:24.596Z"},{"_id":"54e9619bfd68b4030062ddc2","login":"carmensandiego","lat":-22.951944,"lng":-43.210556,"created_at":"2015-02-22T04:56:59.495Z"},{"_id":"54e96122fd96990300d54521","login":"nrnrnr","lat":42.090944,"lng":-71.264344,"created_at":"2015-02-22T04:54:58.589Z"},{"_id":"54e960e5fd96990300d54520","login":"kaytea","lat":41.903056,"lng":12.454444,"created_at":"2015-02-22T04:53:57.214Z"}]</code></p>
+
+<p>You must prevent duplicate records for a login from being stored.  That is, if a login (e.g., "mchow") makes a number of successful POST requests, only the last entry is recorded (i.e., the last latitude, longitude, and timestamp).  The old entry shall be overwritten.  Failure to prevent duplicate records from being stored will result in a deduction of 4 points (out of 30)</p>
+
+<p>Finally, you are not allowed to use loops (e.g., <code>for</code> or <code>while</code>) to do this feature, API.</p>
+
+<h3>2. A <code>GET /location.json</code> API</h3>
+<p>Returns a JSON string, one object, of the last known location for a specified login.  The mandatory parameter for this API is <code>login</code>.  If <code>login</code> is empty or no results found, return empty JSON object <code>{}</code>.  Example: <code>/location.json?login=kaytea</code> returns <code>{"_id":"54e960e5fd96990300d54520","login":"kaytea","lat":41.903056,"lng":12.454444,"created_at":"2015-02-22T04:53:57.214Z"}</code></p>
+<p>Cross-origin resource sharing must be enabled for this API else another another domain cannot retrieve data.</p>
+
+<h3>3. <code>/</code> - Home, the root, the index in HTML.</h3>
+<p>You may also use additional JavaScript and CSS, and you are free to design this page however you desire. Accessing this on a web browser shall display list of the check-ins for all logins sorted in descending order by timestamp --the last person who checked-in is displayed first.  Login and check-in timestamp must be displayed in addition to the location (latitude and longitude).  Simply outputting JSON as the page is unacceptable.  Example output: <code>kaytea checked in at 41.903056, 12.454444 on 2015-02-22T04:53:57.214Z</code></p>
+
+<h2>Security</h2>
+<p>Please note that I did not mention a thing about security or error handling in the requirements.  Authentication to this web application is not required.  There is a reason for this, as you will see in Assignment 4.</p>
+
+<h2>On Getting Started</h2>
+<ul>
+<li class="note">For this assignment, you will not be using your private GitHub repository!</li>
+<li>If you are on a Windows machine, you will need to use the virtual machine I created for this assignment as it contains MongoDB and Node.js installed (although it will need to be updated via <code>sudo apt-get update ; sudo apt-get upgrade</code>).</li>
+<li>In order to use MongoDB in a web application on Heroku, you will need to verify your Heroku account via of a credit card.  You will not be billed.  The reason for this is to verify that you are a human, and not a spammer.</li>
+<li>You will need to use the MongoLab plugin add-on for your web application.  See <a href="https://addons.heroku.com/mongolab" target="_blank">https://addons.heroku.com/mongolab</a>.  This will enable MongoDB in your web application.  There is a 5 MB limit for data storage, more than enough for our needs.  If you forget to add a MongoDB plugin for your web application, your web application will return errors.</li>
+</ul>
+
+<h2>References You Will Need</h2>
+<ol>
+<li><a href="http://expressjs.com/api.html" target="_blank">The Express web framework API reference (offcial)</a></li>
+<li><a href="https://github.com/tuftsdev/WebProgramming/tree/gh-pages/examples/nodejs/nodemongoapp">The <code>nodemongoapp</code> example I wrote</a></li>
+<li><a href="http://stackoverflow.com/questions/11181546/node-js-express-cross-domain-scripting" target="_blank">Node.js + Express + Cross-Domain Scripting (Stack Overflow)</a></li>
+<li><a href="http://docs.mongodb.org/manual/tutorial/getting-started/#getting-started-with-mongodb-development" target="_blank">Getting Started with MongoDB Development (official)</a></li>
+<li><a href="lab-nodejsheroku.html">Lab 8</a></li>
+<li><a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs#using-mongodb" target="_blank">Getting Started with Node.js on Heroku - Using MongoDB</a></li>
+<li><a href="https://github.com/mongodb/node-mongodb-native" target="_blank">The Official MongoDB Node.JS Driver QUICK START</a></li>
+<li><a href="https://mongodb.github.io/node-mongodb-native/genindex.html" target="_blank">The Official MongoDB Node.JS Driver Documentation</a></li>
+</ol>
+
+<h2>Testing Your Web Application</h2>
+<ul>
+<li>Push and deploy your app to Heroku.</li>
+<li>Connect your <a href="a2.html">Assignment 2</a> to your app instead of <code>http://secret-about-box.herokuapp.com/...</code>.  f your Assignment 2 breaks, then there is something wrong with your Assignment 2.</li>
+</ul>
+
+<h2>The <code>README</code> File</h2>
+<p>Include a <code>README</code> file that describes the work. This description must:</p>
+<ol>
+<li>Identify what aspects of the work have been correctly implemented and what have not.</li>
+<li>Identify anyone with whom you have collaborated or discussed the assignment.</li>
+<li>Say approximately how many hours you have spent completing the assignment.</li>
+<li>Be written in either text format (thus <code>README.txt</code>) or in Markdown (thus <code>README.md</code>). No other formats will be accepted.</li>
+</ol>
+
+<h2>Submitting the Assignment</h2>
+<ol>
+<li>Push and deploy your app to Heroku.</li>
+<li>Complete the form at <a href="https://docs.google.com/forms/d/1pZE5GdfsWxNBqF0nChjFnOxpyLoM9D8fxEGJQVW0kC4/viewform" target="_blank">https://docs.google.com/forms/d/1pZE5GdfsWxNBqF0nChjFnOxpyLoM9D8fxEGJQVW0kC4/viewform</a>. <span class="note">You only need to complete this form once!</span></li>
+<li>Add me as a collaborator (using my email address <code>mchow[AT]cs[DOT]tufts[DOT]edu</code>) for your web application in Heroku.  You can do this by logging on to Heroku, go to the dashboard for your web application, under "Access", click on the "Edit" button and enter my email address. <img src="a3-submission.png" alt="Dashboard" />.</li>
+</ol>
+
+<h2>Assessment</h2>
+<ul>
+<li>(10 total points) The <code>POST /sendLocation</code> API as specified above</li>
+<li>(5 points) The <code>GET /location.json</code> API as specified above</li>
+<li>(5 points) The index <code>/</code> as specified above</li>
+<li class="note">Please note that if I cannot access any of the APIs above, you will receive NO CREDIT.</li>
+<li>(5 points) The README</li>
+</ul>
+
+</section>
+</div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-582953-9");
+pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+</body>
+</html>

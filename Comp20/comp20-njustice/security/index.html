@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<title>Assignment 4 - Security</title>
+</head>
+
+<body>
+	<h1>INSTRUCTIONS:</h1>
+	<h2>Introduction</h2>
+	<p> - Provide a description of the product and what you were hired to do </p>
+	<h2>Methodology</h2>
+	<p> - Describe your methodology pen testing the application, including the tools that you used </p>
+	<h2>Abstract of Findings</h2>
+	<p> - Provide an overview of all the security and privacy issues you identified. This section should be written for non-technical managers who do not have technical expertise and do not have time to read the entire document. Write this section using lay language.</p>
+	<h2>Issues Found</h2>
+	<p> - For each issue that you find, document:</p>
+	<ul>
+		<li>Issue (e.g., database injection, really bad programming practice)</li>
+		<li>Location / page where issue was found</li>
+		<li>Severity of issue (e.g., low, medium , or high). Justify your answer.</li>
+		<li>Description of issue. How did you find it? A screenshot of problem is excellent.</li>
+		<li>Proof of vulnerability. Screenshots are ideal.</li>
+		<li>Resolution. How did you resolve the issue? Show code if possible.</li>
+	</ul>	
+	<p>Conclusion - You can also list future considerations and recommendations with costs.</p>
+	<hr>
+	<h1>MY REPORT:</h1>
+	<h2>Introduction</h2>
+	<p>I was instructed to check for security vulnerabilities in a project developed by a fellow COMP20 classmate. The classmate built a "Maurader's Map", which displays the location of students who have accessed the site and whose location is stored in a database (upon access). Using the Google Maps API, the web-application displays the location of everyone stored in the database with a marker. Additionally, the application displays the username, geographic coordinates, and distance from the user of everyone stored in the database using a distinct info-window. The server and database management was developed by the student using Node.js and MongoDB. Specifically, my task was to evaluate potential attacks which may be conducted on my classmate's server.</p>
+	<h2>Methodology</h2>
+	<p>Initial testing was conducting via a "black-box" approach using <code>curl</code>. I was able to take advantage of the fact I know the appropriate URL's and POST parameters for this assignment. Afterwards, I investigated the client and server source-code to further "break" my classmate's assignment.</p>
+	<h2>Abstract of Finidngs</h2>
+	<p>The majority of security vulnerabilities I was able to find and exploit were aspects associated with the implementation of the /sendLocation API feature. The issues stem from reliability on user-input, which should never be trusted. In general, the data and information stored by this web-application is not secure and it is susceptible to a variety of attacks executed via the HTTP POST protocol.</p>
+	<h2>Issues Found</h2>
+	<ol>
+		<li>Issue: XSS</li>
+		<ul>
+			<li>
+				Location: POST - /sendLocation
+			</li>
+			<li>
+				Severity: High - this vulnerability makes the web-application exceptionally fragile. There are a number of examples in which a hacker could comprise the application and render it either obnoxious or unuseable. Additionally, this vulnerability could relequish access to sensitive data.
+			</li>
+			<li>
+				Description: I found this issue by utilizing <code>curl --data</code> terminal command and then using the POST feature to send a script into the database. Upon loading the index, the script is read and executed.
+			</li>
+			<li>
+				Proof of vulnerability:
+				<image src="image1.png"></image>
+				<image src="image2.png"></image>
+			</li>
+			<li>
+				Resolution: This issue could be resolved by "sanitizing" or validating user-input with a server-side feature. Converting html tags POST'ed by the user to symbolic equivalents BEFORE they are stored in the web application's database would prevent XSS hacking. 
+			</li>
+		</ul>
+		<li>Issue: CORS availability makes entire DB visible</li>
+		<ul>
+			<li>
+				Location: POST - /sendLocation
+			</li>
+			<li>
+				Severity: Medium - in the context in which CORS is enabled, it may be assumed there isn't sensitive information being stored in the server's database, which is why I rank this vulnerability's severity as medium-level. However, if it is the case in which important and sensitive information is being stored in the database, this vulnerability is extrememly severe because it relequishes data to attackers. 
+			</li>
+			<li>
+				Description: I didn't so much "discover" this vulnerability, but rather investigated this issue as a feature of the server's API. Indeed, it is a dangerously designed feature, assuming the client is not meant to be able to see everything stored in the database (which is almost always the case). When I sent data to the server via <code>curl --data</code>, the API feature returns all of the information stored in the database as a JSON object. This was required to be implemented by my classmate in accordance to the assignment's guidelines, but ultimately it's a risky feature to have.  
+			</li>
+			<li>
+				Proof of Vulnerability:
+				<image src="image3.png"></image>
+				<image src="image4.png"></image>
+			</li>
+			<li>
+				Resolution: Resolving this issue is quite simple, and that is to never send any JSON data from the database to the client upon POST'ing. If information does need to be sent from the server back to the client, it would be best to implement the API such that it returns ONLY the necessary information, and nothing more. 
+			</li>
+		</ul>
+		<li>Issue: DOS/terminal Attack</li>
+		<ul>
+			<li>
+				Location: POST - /sendLocation
+			</li>
+			<li> 
+				Severity: Medium - in total, this vulnerability is not detrimental to the web-application's functionality, nor does it reliquish any more sensitive information than the consequence of the issue described previously. However, the vulnerability does allow someone to corrupt the database with nonesense information. In this particular situation, my classmate is using Heroku's MongoLab add-on, which is a free service for a limited amount of data-storage. Running my DOS script would fill his database beyond the free-capacity and charge his credit card. If my classmate were to decline to pay in order to expand his data-capacity, the web-application would be taken down. In this regard, the vulnerability could be considered to have a higher severity. 
+			</li>
+			<li>
+				Description: This vulnerability didn't have a "discovery" process. Knowing <code>curl --data</code> can be used to POST and send information to the server's database, I knew I could write a DOS script to automate the <code>curl</code> command repetitively. <em>Sid Prasad helped me write the DOS script</em>.
+			</li>
+			<li>
+				Proof of vulnerability:
+				<image src="image5.png"></image>
+			</li>
+			<li>
+				Resolution: To resolve this issue, my classmate would have to either purchase an exceptionally large database service or implement a feature in the server API to check if the database is at capacity, and reject additional POST's if it's full. 
+			</li>
+		</ul>
+	</ol>
+	<h2>Conclusion</h2>
+	<p>In my opinion, my classmate implemented their server's / and /location.json features quite well. Despite a plethora of attempts, I was unable to detect any glaring vulnerabilities in their /location.json API feature - they did a tremendous job parsing the URL search query for acceptable parameters. Despite their successes, there was a handful of vulnerabilities associated with their /sendLocation feature. The theme of these security issues is that attackers have considerable access to information stored in the server's database. In a situation in which important and sensitive information is exchanged between a client and the web-application, it is imperative these vulnerabilities be addressed via server-side input validation and solely return required information back to the client. 
+</body>
+
+</html>

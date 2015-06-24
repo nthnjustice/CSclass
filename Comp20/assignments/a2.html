@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/pygment_trac.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/custom.css" media="screen" />
+
+<!--[if lt IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<title>COMP 20: Web Programming - Assignment 2</title>
+</head>
+    
+<body>
+<header>
+<div class="inner">
+<h1>Web Programming</h1>
+<h2>Assignment 2: The Real Marauder's Map</h2>
+<h2>Due: Thursday, March 12th</h2>
+</div>
+</header>
+
+<div id="content-wrapper">
+<div class="inner clearfix">
+<section id="main-content">
+
+<p class="note">This assignment is worth 15 points. You must work on this assignment individually.</p>
+
+<h2>Objectives</h2>
+<ol>
+<li>Use a JSON API.</li>
+<li>Use a third-party JavaScript API (in this case, Google Maps).</li>
+<li>Use the HTML5 geolocation API to determine your location.</li>
+<li>Use the <code>XMLHttpRequest</code> object to make requests and manage the response data.</li>
+</ol>
+
+<h2>Overview</h2>
+<p>In <span class="title">Harry Potter</span>, the Marauder's Map is a magical document that reveals all of Hogwarts School of Witchcraft and Wizardry.  Not only does it show every classroom, every hallway, every corner of the castle, but it also shows every inch of the grounds, as well as all the secret passages that are hidden within its walls and <span class="stress">the location of every person in the grounds, portrayed by a dot</span> (taken from <a href="http://harrypotter.wikia.com/wiki/Marauder's_Map" target="_blank">http://harrypotter.wikia.com/wiki/Marauder's_Map</a>).  In this assignment, you will build a Marauder's Map-like product that:</p>
+<ol>
+<li>Retrieves your current location and sends your current location to a datastore that I created.</li>
+<li>Retrieves and displays the locations of people in the class on the map.</li>
+</ol>
+
+<h2>Requirements</h2>
+<ol>
+<li>The HTML file must be named <code>index.html</code> in a folder named <code>mmap</code> in your private Git repository.  You can write your JavaScript in the HTML file.</li>
+<li>You must use at least one (1) CSS file.  You can name the file whatever you want.</li>
+<li>You must use the JavaScript <code>navigator.geolocation</code> object to retrieve your geolocation information (latitude and longitude).</li>
+<li>You must use the JavaScript <code>XMLHttpRequest</code> object to make requests (i.e., send your information) and manage the response data.</li>
+<li>You must display your location on the map with unique marker (i.e., using an image of your choice) and info window with a note of your login after retrieving information from <code>navigator.geolocation</code>.</li>
+<li>You must display locations of people on the map (i.e., a marker on the map) and info window that displays person's login and mile(s) away from you.</li>
+</ol>
+
+<h2>APIs</h2>
+<p>This assignment will require the use of two external APIs:</p>
+<ol>
+<li>The datastore API to send your location information and to retrieve information where everyone else is: <code>https://secret-about-box.herokuapp.com/sendLocation</code></li>
+<li>The Google Maps API.  Please refer to my notes at <a href="../lecture_notes/ajax.html">http://tuftsdev.github.com/WebProgramming/lecture_notes/ajax.html</a>.  Working examples are available at <a href="https://github.com/tuftsdev/WebProgramming/tree/gh-pages/examples/google_maps">https://github.com/tuftsdev/WebProgramming/tree/gh-pages/examples/google_maps</a>.  <span class="note">NOTES: the <code>geolocation_map.html</code> example requires the page to be on a web server, see below or push a copy of it with corresponding CSS to your special repo <code>username.github.io</code>.  Also, you do not need to create an API key to use Google Maps API version 3.</span>You can see <code>geolocation_map.html</code> in action at <a href="http://tuftsdev.github.com/WebProgramming/examples/google_maps/geolocation_map.html" target="_blank">http://tuftsdev.github.com/WebProgramming/examples/google_maps/geolocation_map.html</a>.</li>
+</ol>
+
+<h3>More on The Datastore API and Location of People</h3>
+<p>The datastore API <code>https://secret-about-box.herokuapp.com/sendLocation</code> is HTTP POST only.  It takes in three parameters and will return a JSON feed of the locations of the people in the class if the three parameters are legitimate.</p>
+<ul>
+<li><code>login</code> - Your username. <span class="note">NOTE: you will be assigned, emailed a randomly generated handle for this lab. We will not be using Tufts CS login names for this assignment.</span></li>
+<li><code>lat</code> - Your latitude</li>
+<li><code>lng</code> - Your longitude</li>
+</ul>
+<p>If you successfully send the three inputs to the datastore, you will receive a JSON that looks like the following: <code>[{"_id":"54e95ff46cca2a030048cf14","login":"mchow","lat":40.67693,"lng":117.23193,"created_at":"2015-02-22T05:12:24.596Z"},{"_id":"54e9619bfd68b4030062ddc2","login":"carmensandiego","lat":-22.951944,"lng":-43.210556,"created_at":"2015-02-22T04:56:59.495Z"},{"_id":"54e96122fd96990300d54521","login":"nrnrnr","lat":42.090944,"lng":-71.264344,"created_at":"2015-02-22T04:54:58.589Z"},{"_id":"54e960e5fd96990300d54520","login":"kaytea","lat":41.903056,"lng":12.454444,"created_at":"2015-02-22T04:53:57.214Z"}]</code></p>
+<p>If you do not send the three inputs to the datastore correctly, you will receive a JSON that looks like the following: <code>{"error":"Whoops, something is wrong with your data!"}</code></p>
+<p class="note">Important: Cross-Origin Resource Sharing (CORS) is enabled for this API!</p>
+
+<h2>Important Notes</h2>
+<ul>
+<li>You are not allowed to use jQuery or any JavaScript front-end framework for this assignment.</li>
+<li>To help you better understand and read the JSON that is sent to you, try this <a href="http://json.parser.online.fr/" target="_blank">Online JSON Parser</a></li>
+</ul>
+
+<h2>Getting Started</h2>
+<ol>
+<li>Create a new folder named <code>mmap</code> in your folder <code>comp20-username</code> on your computer (the one you have been using since Lab 4).</li>
+<li>Follow the Google Maps JavaScript API tutorial "Getting Started" at <a href="https://developers.google.com/maps/documentation/javascript/tutorial" target="_blank">https://developers.google.com/maps/documentation/javascript/tutorial</a>.</li>
+</ol>
+
+<p class="note">IMPORTANT NOTE: You do not need to create an API key for Google Maps.  I also used the HTTP version of the API.  You can take a look at another example I wrote: <a href="http://tuftsdev.github.com/WebProgramming/examples/google_maps/geolocation_map.html" target="_blank">http://tuftsdev.github.com/WebProgramming/examples/google_maps/geolocation_map.html</a>.  However, please go through Google's tutorial first!</p>
+
+<h2>Executing HTTP POST via <code>XMLHttpRequest</code></h2>
+<p>In order to execute HTTP POST using the JavaScript <code>XMLHttpRequest</code>, you need to add a parameter to the HTTP request header: <code>xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");</code></p>
+<p>Also, the parameter to send via xhr.send() must the in the following format: <code>"login=YOURLOGIN&amp;lat=YOUR_LATITUDE&amp;lng=YOUR_LONGITUDE"</code> (with the double quotes).  This is standard URI convention.  Remember replace YOUR_LATITUDE and YOUR_LONGITUDE using string concatenation!</p>
+<p>See <a href="https://stackoverflow.com/questions/9713058/sending-post-data-with-a-xmlhttprequest
+" target="_blank">https://stackoverflow.com/questions/9713058/sending-post-data-with-a-xmlhttprequest</a> for more information.</p>
+
+<h2>The Haversine Formula: The Distance Between Two (Geo)Points</h2>
+<p>To calculate the distance between two geopoints (latitude and longitude), you must use the Haversine Formula.  The formula is provided and analyzed at <a href="http://www.movable-type.co.uk/scripts/latlong.html" target="_blank">http://www.movable-type.co.uk/scripts/latlong.html</a>.  Also, you can refer to this on Stack Overflow: <a href="http://stackoverflow.com/questions/14560999/using-the-haversine-formula-in-javascript" target="_blank">http://stackoverflow.com/questions/14560999/using-the-haversine-formula-in-javascript</a>.</p>
+
+<!-- So I ripped this off from Norman Ramsey at http://www.cs.tufts.edu/comp/105/details.html -->
+<h2>The <code>README</code> File</h2>
+<p>Every assignment shall include a <code>README</code> file that describes the work. This description must:</p>
+<ol>
+<li>Identify what aspects of the work have been correctly implemented and what have not.</li>
+<li>Identify anyone with whom you have collaborated or discussed the assignment.</li>
+<li>Say approximately how many hours you have spent completing the assignment.</li>
+<li>Be written in either text format (thus <code>README.txt</code>) or in Markdown (thus <code>README.md</code>). No other formats will be accepted.</li>
+</ol>
+
+<h2>Viewing Your Work and Submitting the Assignment</h2>
+<p>Using the JavaScript Geolocation API requires your page to be hosted on a web server.  Alas, simply opening the <code>index.html</code> page on a web browser will not work for this assignment. You must create branch named <code>gh-pages</code> on your private GitHub repo and then view your work via <code>http://tuftsdev.github.io/comp20-username/mmap</code>.  Think of a branch in Git as a new project history or a new idea.  If you create a specific branch named <code>gh-pages</code> in GitHub, content in the branch will be served to the public.</p>
+
+<p>To create the <code>gh-pages</code> branch in your private Git repository, run <code>git branch gh-pages</code>.  <span class="note">You only need to run this once!</span></p>
+
+<p>To push work on your private Git repository under your new <code>gh-pages</code> branch to GitHub, run <code>git push origin gh-pages</code>.</p>
+
+<p>To switch back to using your default <code>master</code> branch, run <code>git checkout master</code>.</p>
+
+<p>To switch back to using your <code>gh-pages</code> branch, run <code>git checkout gh-pages</code>.</p>
+
+<p>To submit this assignment, your work must be in both the <code>gh-pages</code> and <code>master</code> branches of your private Git repository on GitHub.</p>
+
+<p>To make sure that both your <code>gh-pages</code> and <code>master</code> are in sync, you must merge them.  To replace everything that is in your <code>gh-pages</code> branch with everything that is in the <code>master</code> branch, run <code>git checkout gh-pages ; git merge -X theirs master</code>.  Or to replace everything that is in your <code>master</code> branch with everything that is in the <code>gh-pages</code> branch, run <code>git checkout master ; git merge -X theirs gh-pages</code>.</p>
+
+<h2>Assessment</h2>
+<p>This assignment is worth 15 points.</p>
+<ul>
+<li>(1 point) Have at least one (1) CSS file</li>
+<li>(2 points) Retrieves your location via JavaScript <code>navigator.geolocation</code> object</li>
+<li>(2 points) Sends your location (latitude, longitude, login) to datastore</li>
+<li>(2 points) Displays your location on the map with unique marker and info window</li>
+<li>(3 points) Retrieves locations of people in the class</li>
+<li>(3 points) Displays locations of people in the class on the map and info window that displays login name and distance in miles away from you</li>
+<li>(2 points) The basics (e.g., <code>README</code> file, proper folder name)</li>
+<li>(-5 points) Nonsense Git commit messages or did not commit much.</li>
+<li>(-8 points) Errors and <code>console.log()</code> outputs exist in JavaScript console (warnings acceptable).</li>
+<li>(-15 points) You used jQuery.</li>
+</ul>
+
+</section>
+</div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-582953-9");
+pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+</body>
+</html>

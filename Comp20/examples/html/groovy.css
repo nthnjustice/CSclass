@@ -1,0 +1,30 @@
+/* Comment */
+
+body {
+	text-align: center;
+	color: magenta;
+	font-size: 28px;
+	font-family: "Comic Sans MS";
+	background-color: yellow;
+}
+
+/*
+  Lines 3 - 9 => a rule
+  The word "body" (in line 3) => selector
+  "color: magenta;" => declaration; must end with a semicolon
+  "color" => attribute
+  "magenta" => value
+
+  Three types of selectors:
+  1. HTML tag name
+  2. ID => think of as identifier for section;
+     ID selectors start with "#"
+  3. class => can be used many times
+     class selectors start with "."
+
+
+
+
+
+
+  ;

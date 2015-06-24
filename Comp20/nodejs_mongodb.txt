@@ -1,0 +1,31 @@
+#To insert a document into a MongoDB collection via MongoDB client:
+	`db.NAME_OF_COLLECTION.insert(SOME_JSON_DOCUMENT_HERE)`
+	
+Example: db.students.insert({"last_name":"Brooks"})
+
+#To insert a document into a MongoDB collection via Node.js:
+	db.collection('NAME_OF_COLLECTION', function(ERROR_IF_COLLECTION_IS_NOT_FOUND, REFERENCE_TO_COLLECTION) {
+	var id = REFERENCE_TO_COLLECTION.insert(SOME_JSON_DOCUMENT HERE, function(ERROR_IF_DOCUMENT_COULD_NOT_BE_INSERTED, saved) {
+		if (err) {
+			response.send("SOME ERROR MESSAGE");
+		}
+		else {
+			response.send(...);
+		}
+	});
+
+Example (see https://github.com/tuftsdev/WebProgramming/blob/gh-pages/examples/nodejs/nodemongoapp/server.js):
+
+	// Assume that db is not null
+	// That is, connection is successfully made to MongoDB server and database
+	db.collection('fooditems', function(error1, coll) {
+		var id = coll.insert(toInsert, function(error2, saved) {
+			if (error2) {
+				response.send(500);
+			}
+			else {
+				console.log("Jake, it's okay...");
+				response.send(200);
+			}
+	    });
+	});

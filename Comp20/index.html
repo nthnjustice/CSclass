@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+<link rel="stylesheet" type="text/css" href="stylesheets/custom.css" />
+
+<!--[if lt IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<title>COMP 20: Web Programming</title>
+</head>
+
+<body>
+<header>
+<div class="inner">
+<h1>Web Programming</h1>
+<h2>COMP 20, Tufts University Department of Computer Science, Spring 2015</h2>
+</div>
+</header>
+
+<div id="content-wrapper">
+<div class="inner clearfix">
+<section id="main-content">
+
+<h2>Instructor</h2>
+<ul>
+<li>Ming Chow, <a href="mailto:mchow@cs.tufts.edu">mchow@cs.tufts.edu</a></li>
+<li>Office Hours: Wednesdays from 1 - 4 PM, or by appointment, on the second floor of Halligan Hall by the CS Main Office (hours are good until the last day of classes, April 23rd)</li>
+<li>Please send all class questions (e.g., help on assignments and labs) <a href="https://piazza.com/tufts/spring2015/comp20/home" target="_blank">via Piazza</a>. DO NOT E-MAIL ME! Sign up at <a href="https://piazza.com/tufts/spring2015/comp20" target="_blank">https://piazza.com/tufts/spring2015/comp20</a>.</li>
+<li>For emergencies or private matters, please e-mail or see me directly.</li>
+</ul>
+
+<h2>Teaching Assistants and Office Hours</h2>
+<ul>
+<li>George Brown (Web Programming Class of Spring 2014)</li>
+<li>Andrew Dempsey (Web Programming Class of Spring 2013)</li>
+<li>Obaid Farooqui (Tufts ARC Tutor for the class; Web Programming Class of Spring 2014)</li>
+<li>Connor Taylor (Web Engineering Class of Fall 2013)</li>
+<li>Nick Teleky (Web Programming Class of Spring 2013)</li>
+<li>Lucy Qin (Web Programming Class of Spring 2014)</li>
+<li>Kate Wasynczuk (Web Programming Class of Fall 2014)</li>
+<li>The official list of office hours is on Piazza.  TAs will be showing when and where they are on office hours on <a href="http://www.halliganhelper.com" target="_blank">http://www.halliganhelper.com</a>.</li>
+</ul>
+
+<h2>Class Time and Location</h2>
+<ul>
+<li>Tuesdays and Thursdays, 12:00 - 1:15 PM in Barnum 8</li>
+</ul>
+
+<h2>Prerequisites</h2>
+<ul>
+<li>COMP 11: Introduction to Computer Science</li>
+</ul>
+
+<h2>Textbook</h2>
+<ul>
+<li>None</li>
+</ul>
+
+<h2>Software Downloads</h2>
+<ul>
+	<li><a href="http://vmap-tufts.onthehub.com/WebStore/Welcome.aspx" target="_blank">VMware Fusion for Mac OS X or VMware Workstation for Windows or Linux (free one year license via Tufts CS)</a>
+		<ul>
+			<li>Ubuntu VM I created for this class - Download: <a href="http://www.cs.tufts.edu/comp/20/Ubuntu.zip">Ubuntu.zip</a> (MD5 checksum=<code>be936a69bf1eea64ff2bfa65404a7973</code>; username is <code>developer</code>, password is <code>Wh@t3ver!</code>). Instructions: unzip the .zip file and open using VMware.  This virtual machine is loaded with Git, Node.js, MongoDB, Heroku, etc.  This VM can work on 32 or 64-bit machines.</li>
+		</ul>
+	</li>
+	<li><a href="http://brew.sh/" target="_blank">Homebrew for Mac OS X</a></li>
+</ul>
+
+<h2>Assessment (a.k.a., Grading)</h2>
+<ul>
+<li>Programming assignments and labs (45%)</li>
+<li>Quizzes (30%; there will be three in the class)</li>
+<li>Semester group project (15%)</li>
+<li>Participation in classroom activities (10%)</li>
+</ul>
+
+<p>Class participation encompasses a variety of activities, all with the same purpose.  To earn high grades for class participation, you must show that you are actively engaged in managing your own learning, developing new skills, and developing new ways of programming and problem-solving. You can be engaged in a variety of ways:</p>
+<ul>
+<li>Writing sane and sensible answers on quizzes</li>
+<li>Asking appropriate questions in class</li>
+<li>Answering questions when called on in class</li>
+<li>Asking appropriate questions on Piazza</li>
+<li>Answering questions well on Piazza</li>
+<li>Organizing study groups</li>
+<li>Interacting professionally with programming partners and course staff</li>
+<li>Working out ideas with teaching assistants</li>
+<li>Helping other COMP 20 students in Halligan</li>
+</ul>
+
+<p>Nobody has to do all of these things; you can earn top grades for class participation by doing just a few things well. In particular, nobody is required to speak in class, but everybody should be prepared to answer questions if called upon.</p>
+
+<p>Professional interactions with other students and with course staff are the same as those which are expected in any workplace. It is also professional for you to recognize that a member of the course staff may be present but not actually available to talk about COMP 20.</p>
+
+<h2 id="polciy">Course Policies</h2>
+
+<h3>Assignment Late Policy</h3>
+<p>Assignments (labs, homework) that is submitted electronically (most homework) are due at 11:59 PM on a Tuesday or Thursday. We will grant an automatic extension of ten minutes at no cost to you. If you plan on submitting your work at midnight or at six, you will have nine minutes for last-minute changes.</p>
+<p>An assignment is expected to be submitted on time. However, we recognize that the exigencies of college life occasionally interfere with on-time submission. If you have difficulty getting the assignment in on time, you have two options:</p>
+<ol>
+<li>For ordinary difficulties, each student is automatically issued three (3) "extension tokens." By expending an extension token, you can get an automatic 24-hour extension on all deadlines associated with a single assignment.  To use an extension token, you must e-mail me at <code>mchow@cs.tufts.edu</code>. Thus must be sent before the assignment is due.  At most two extension tokens may be expended on any single assignment.  When you are out of tokens, late assignments will no longer be accepted: it will be returned ungraded, and you will receive no credit for the work.</li>
+<li>If a serious illness affects your ability to complete the assignment on time, your first step is to report the illness using the "Illness Notification Form" that is available in WebCenter for Students. We will make suitable arrangements. For extraordinary difficulties, such as bereavement, family emergencies, or other extraordinary unpleasant events, your first step should be to make contact with your associate dean for undergraduate education. You must take this step before the assignment is due. Ask your dean to drop me an email or give me a call, and we will make special arrangements that are suited to your circumstances.</li>
+</ol>
+<p>Please understand that extension tokens are meant to be used.  That is, you will not receive any special bonus at the end of the course if you do not use any of your extension tokens.</p>
+
+<h3>Labs</h3>
+<p>A lab is due one week from the day it is assigned.</p>
+
+<h3>Solutions to Assignments and Examinations</h3>
+<p>Solutions to assignments and examinations will not be posted for this course.</p>
+
+<h2 id="syllabus">Syllabus</h2>
+
+<p class="note">Schedule is subject to change.</p>
+<table>
+<tr>
+<th>Date</th>
+<th>Agenda</th>
+<th>Deliverables</th>
+</tr>
+
+<tr>
+<td>Thursday, January 15th</td>
+<td>
+	<ul>
+		<li><a href="lecture_notes/intro.html">Course Introduction</a></li>
+	</ul>
+</td>
+<td><a href="https://docs.google.com/forms/d/1r5p_YRnrHXETyIo07K7YgEs_VhDus-nSNZ9UBL3IgMQ/viewform">Lab 1: Course Roster. <span class="note">PLEASE COMPLETE ASAP! This lab is worth 1 point.</span></a></td>
+</tr>
+
+<tr>
+<td>Tuesday, January 20th</td>
+<td>
+	<ul>
+		<li><a href="lecture_notes/http.html">Hypertext Transport Protocol (HTTP)</a></li>
+		<li><a href="https://adainitiative.org/2012/08/defcon-why-conference-harassment-matters/" target="_blank"><span class="title">DEF CON: Why Conference Harassment Matters</span></a></li>
+		<li>Reading: <a href="http://mkcohen.com/how-the-web-works-in-one-easy-lesson" target="_blank">How The Web Works --In One Easy Lesson (mkcohen.com)</a></li>
+		<li>Reading: <a href="https://news.ycombinator.com/item?id=8902105" target="_blank">What happens when you type Google.com into your browser and press enter? (Hacker News)</a></li>
+	</ul>
+</td>
+<td><a href="https://docs.google.com/forms/d/1cxV_uD0KJ0dENXRrm_QTut160mYrJPF9rKrd279kLKM/viewform">Lab 2: HTTP and Developer Tools</a></td>
+</tr>
+
+<tr>
+<td>Thursday, January 22nd</td>
+<td>
+	<ul>
+		<li><a href="lecture_notes/html.html">HyperText Markup Language (HTML)</a></li>
+		<li><a href="lecture_notes/html-cheat-sheet-v1.pdf">HTML cheat sheet PDF</a> (from <a href="https://www.addedbytes.com/download/html-cheat-sheet-v1/pdf/" target="_blank">AddedBytes</a>)</li>
+	</ul>
+</td>
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>Tuesday, January 27th</td>
+<td><span class="note">NO CLASS (BLIZZARD)</span></td>
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>Thursday, January 29th</td>
+<td>
+	<ul>
+		<li><a href="lecture_notes/git.html">Revision Control with Git</a></li>
+		<li><a href="https://training.github.com/kit/downloads/github-git-cheat-sheet.pdf">Git Cheat Sheet from GitHub</a></li>
+	</ul>
+</td>
+<td>
+	<ul>
+		<li><a href="assignments/a1.html">Assignment 1: Your Portfolio. Due: Thursday, February 12th</a></li>
+		<li><a href="assignments/lab-git.html">Lab 3: Git Introduction</a></li>
+		<li><a href="http://careers.tufts.edu/students/" target="_blank">Sci-Tech Fair and Spring Job and Internship Fair on Wednesday, February 11th at the Gantcher Center</a></li>
+	</ul>
+</td>
+</tr>
+
+<tr>
+<td>Tuesday, February 3rd</td>
+<td><a href="lecture_notes/html.html">HyperText Markup Language (HTML) continued; HTML5</a></td>
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>Thursday, February 5th</td>
+<td>
+	<ul>
+		<li><a href="lecture_notes/css.html">Cascading Style Sheets (CSS)</a></li>
+		<li><a href="http://lesliefranke.com/files/reference/csscheatsheet.html" target="_blank">CSS Cheat Sheet from Leslie Franke</a></li>
+	</ul>
+</td>
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>Tuesday, February 10th</td>
+<td><span class="note">NO CLASS (SNOW)</span></td>
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>Thursday, February 12th</td>
+<td><a href="lecture_notes/css3.html">Mobile and Responsive Design</a></td>
+<td><a href="assignments/lab-responsive.html">Lab 4: Responsive Design</a></td>
+</tr>
+
+<tr>
+<td>Tuesday, February 17th</td>
+<td><a href="lecture_notes/javascript.html">(Client-Side) JavaScript: Data Structures and Objects</a></td>
+<td>
+	<ul>
+		<li><a href="assignments/q1_practice.pdf">Practice Quiz 1 (PDF)</a></li>
+		<li><a href="assignments/semester_group_project.html">Semester Group Project Announced</a></li>
+		<li><a href="https://docs.google.com/forms/d/1lqSi3iJhjhwi83JMjmyPbhoHvIpiyOKebrblnHTH40Q/viewform">Semester Group Project Team Selection Form</a> <span class="note">Important: this form will be closed on Friday, February 20th at 6 PM. If you do not complete this form, you will be assigned to random team.</span></li>
+	</ul>
+</td>
+</tr>
+
+<tr>
+<td>Tuesday, February 24th</td>
+<td>
+	<ul>
+		<li><a href="lecture_notes/dom.html">Document Object Model (DOM)</a></li>
+		<li><a href="lecture_notes/canvas_audio_video.html">JavaScript APIs: Canvas, Audio, Video</a></li>
+		<li><a href="lecture_notes/git-ctaylor.pdf">Connor Taylor's Git Recitation Presentation Slides</a></li>
+	</ul>
+</td>
+<td>
+	<ul>
+		<li><a href="assignments/lab-dom.html">Lab 5: Ms. Pac-Man</a></li>
+		<li><a href="assignments/a2.html">Assignment 2: The Real Marauder's Map. Due: Thursday, March 12th</a></li>
+	</ul>
+</td>
+</tr>
+
+<tr>
+<td>Thursday, February 26th</td>
+<td>
+	<ul>
+		<li><a href="lecture_notes/objects_functions.html">JSON, First-Class Functions</a></li>
+		<li><a href="http://eloquentjavascript.net/05_higher_order.html" target="_blank">Reading: "Higher-Order Functions in JavaScript"</a></li>
+		<li><a href="http://www.joelonsoftware.com/items/2006/08/01.html" target="_blank">Reading: "Can Your Programming Language Do This?" (Joel on Software)</a></li>
+
+	</ul>
+</td>
+<td>Quiz 1</td>
+</tr>
+
+<tr>
+<td>Tuesday, March 3rd</td>
+<td><a href="lecture_notes/ajax.html">Asynchronous JavaScript and XML (AJAX)</a></td>
+<td><a href="assignments/lab-json.html">Lab 6: Messages</a></td>
+</tr>
+
+<tr>
+<td>Thursday, March 5th</td>
+<td>Loose Ends</td>
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>Tuesday, March 10th</td>
+<td><a href="lecture_notes/persistence1.html">Data Persistence with Cookies and Local Storage</a></td>
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>Thursday, March 12th</td>
+<td>Guest Speaker: Mike Champion (E'01), Tech Lead at HubSpot</td>
+<td><a href="assignments/q2_practice.pdf">Practice Quiz 2 (PDF)</a></td>
+</tr>
+
+<tr>
+<td>Tuesday, March 24th</td>
+<td><a href="lecture_notes/jquery.html">JavaScript Libraries and jQuery</a></td>
+<td><a href="assignments/lab-lsjquery.html">Lab 7: Captain's Log</a></td>
+</tr>
+
+<tr>
+<td>Thursday, March 26th</td>
+<td>Server-Side Development, Web Applications and Frameworks</td>
+<td>
+	<ul>
+		<li>Quiz 2</li>
+		<li><a href="assignments/a3.html">Assignment 3: The Server for the Real Marauder's Map, Due: Wednesday, April 15th</a></li>
+	</ul>
+</td>
+</tr>
+
+<tr>
+<td>Tuesday, March 31st</td>
+<td>Guest Speaker: Robin Kahan, Associate Director of Employer Outreach and Engineering Career Services, Tufts University</td>
+<td><a href="assignments/lab-nodejsheroku.html">Lab 8: Getting Started with the Server Side using Node.js and Heroku</a></td>
+</tr>
+
+<tr>
+<td>Thursday, April 2nd</td>
+<td><a href="lecture_notes/nodejs.html">Web Applications (with Node.js + Express)</a></td>
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>Tuesday, April 7th</td>
+<td>
+	<ul>
+		<li><a href="lecture_notes/mongodb.html">Databases and Persistent Data Storage (with MongoDB)</a></li>
+		<li><a href="http://mongly.openmymind.net/tutorial/index" target="_blank">Interactive MongoDB tutorial</a></li>
+	</ul>
+</td>
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>Thursday, April 9th</td>
+<td><a href="lecture_notes/nodejs_mongodb.txt">Node.js + Express + MongoDB</a></td>
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>Tuesday, April 14th</td>
+<td rowspan="2">
+	<ul>
+		<li><a href="lecture_notes/web_security.html">Web Security</a></li>
+		<li><a href="http://www.veracode.com/security/xss" target="_blank">Cross-Site Scripting (XSS) Tutorial: Learn About XSS Vulnerabilities, Injections and How to Prevent Attacks (Veracode)</a></li>
+		<li><a href="http://www.youtube.com/watch?v=lcO1BTNh8r8" target="_blank">Abusing NoSQL Database (my presentation at DEF CON 21, August 2013; ~20 minutes long)</a></li>
+		<li><a href="http://mchow01.github.io/talks/SOURCE2013-mchow.pdf" target="_blank">JavaScript Pitfalls (from SOURCE Conference Boston 2013)</a></li>
+		<li><a href="https://mchow01.github.io/talks/bsmcon3-mchow.pdf" target="_blank">A Growing Mongo Problem! (from the Boston Security Meetup Conference #3, October 2014)</a></li>
+	</ul>
+</td>
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>Thursday, April 16th</td>
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>Tuesday, April 21st</td>
+<td>&nbsp;</td>
+<td>Quiz 3</td>
+</tr>
+
+<tr>
+<td>Thursday, April 23rd</td>
+<td>Looking Ahead</td>
+<td>Course Evaluation</td>
+</tr>
+
+<tr>
+<td>Friday, May 1st</td>
+<td colspan="2">Semester Group Project Presentations from 12 - 2 PM in Halligan Rooms 111A and 111B</td>
+</tr>
+
+</table>
+</section>
+
+<aside id="sidebar">
+<p><a href="https://github.com/tuftsdev/WebProgramming/tree/gh-pages/examples" class="button"><small>All examples used in<br/>class are here on </small>GitHub</a></p>
+
+<p class="repo-owner"><a href="https://github.com/tuftsdev/WebProgramming" target="_blank">This website and repository</a> is maintained by <a href="https://github.com/mchow01" target="_blank">Ming Chow</a> (<a href="mailto:mchow@cs.tufts.edu">mchow@cs.tufts.edu</a>).</p>
+
+<p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.</p>
+</aside>
+
+</div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-582953-9");
+pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+</body>
+</html>

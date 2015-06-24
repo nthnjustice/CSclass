@@ -1,0 +1,39 @@
+body {
+	text-align: center;
+	font-family: Verdana, Helvetica;
+}
+
+#header {
+	border-style: dotted;
+	border-width: 25px;
+}
+
+#content {
+	margin-left: 20%;
+	margin-right: 20%;
+}
+
+.stress {
+	font-size: 12px;
+	background-color: yellow;
+}
+
+p {
+	font-size: 28px;
+}
+
+.stress {
+	font-size: 96px;
+}
+
+p {
+	background-color: orange;
+	font-size: 18px;
+}
+
+p.moby {
+	font-style: italic;
+}
+
+
+

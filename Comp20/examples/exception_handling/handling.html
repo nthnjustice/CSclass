@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<title>Exception</title>
+<script>
+function init() {
+	try {
+		elem = document.getElementById("list");
+		elem.innerHTML = "<p>Moar!</p>";
+	}
+	catch (someError) {
+		alert("Whoops, exception caught!");
+	}
+	finally {
+		alert("Yay!");
+	}
+}
+</script>
+</head>
+
+<body onload="init()">
+</body>
+
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE>
+
+<html>
+
+<head>
+	<title>MMarauder's Map</title>
+
+	<link rel="stylesheet" href="mmapStyles.css">
+
+	<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+
+	<script>
+		var myLat = 0;
+		var myLng = 0;
+		me = new google.maps.LatLng(myLat, myLng);
+		var preferences = {
+				zoom: 5,
+				center: me,
+			};
+		var map;
+		var marker;
+		var infowindow = new google.maps.InfoWindow();
+		var everyone = [];
+		var myID="KeithRumfelt";
+		var audio = new Audio('audio.mp3');
+
+		function init() {
+			audio.play();
+			fetchData();
+			map = new google.maps.Map(document.getElementById("map_canvas"), preferences);
+		}
+
+		function fetchData() {
+			xhr = new XMLHttpRequest();
+			
+			url = "https://gentle-bayou-5873.herokuapp.com/sendLocation";
+			url = "https://gentle-bayou-5873.herokuapp.com/sendLocation"
+
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(function(position) {
+					myLat = position.coords.latitude;
+					myLng = position.coords.longitude;
+					renderMap(); 
+				});
+			}
+			else {
+				alert("No Geolocation for you! Get a new browser... But actually.");
+			}
+
+			params = "login="+myID+"&lat="+myLat+"&lng="+myLng;
+
+			xhr.open("POST", url, true);
+			xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+			xhr.onreadystatechange = parseData;
+			xhr.send(params);
+		}
+
+		function parseData() {
+			if ((xhr.readyState == 4) && (xhr.status == 200)) {
+
+			data = JSON.parse(xhr.responseText);
+
+			var tempLogin;
+			var tempLat;
+			var tempLng;
+			var person;
+			personIcon = {
+				url: "crosshairs.png",
+				size: new google.maps.Size(32, 32),
+				origin: new google.maps.Point(0,0)
+			}
+
+			for (i = 0; i < data.length; i++){
+				if (data[i]["login"] != "KeithRumfelt") {
+					tempLogin = data[i]["login"];
+					tempLat = data[i]["lat"];
+					tempLng = data[i]["lng"];
+				}
+
+				person = new google.maps.LatLng(tempLat, tempLng);
+
+				markerForOthers = new google.maps.Marker( {
+					position: person,
+					icon: personIcon,
+					map: map,
+					title: tempLogin
+					});
+
+				markerForOthers.setMap(map);
+
+				google.maps.event.addListener(markerForOthers, 'click', function() {
+  					//infowindow.setContent(this.title+" is "+calculatedDistance(tempLat, tempLng)+" miles away.");
+  					infowindow.open(map, this);
+				});
+			}
+
+			marker.setMap(map);
+			}
+ 		}
+
+		function renderMap() {
+			me = new google.maps.LatLng(myLat, myLng);
+			myIcon = {
+				url: "boba.png",
+				size: new google.maps.Size(32, 32),
+				origin: new google.maps.Point(0,0)
+			};
+
+			map.panTo(me);
+
+			marker = new google.maps.Marker( {
+				position: me,
+				icon: myIcon,
+				map: map,
+				title: "KeithRumfelt"
+			});
+
+			google.maps.event.addListener(marker, 'click', function() {
+				infowindow.setContent(marker.title);
+				infowindow.open(map, marker);
+			});
+		}
+
+		//function calculatedDistance(tempLat, tempLng) {
+			// var lat1 = myLat;
+			// var lat2 = tempLat;
+			// var lng1 = myLng;
+			// var lng2 = tempLng;
+			// var R = 6371;
+			// var p1 = lat1 * 3.14159/180;
+			// var p2 = lat2 * 3.14159/180;
+			// var dp = (lat2 - lat1) * 3.14159/180;
+			// var dl = (lng2 - lng1) * 3.14159/180;
+
+			// var a = Math.sin(dp/2) * Math.sin(dp/2) +
+			// 	Math.cos(p1) * Math.cos(p2) * Math.sin(dl/2)
+			// 	* Math.sin(dl/2);
+
+			// var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+			// var d = R * c;
+
+			// d *= 0.621371;
+
+			// d = Math.round(d * 100) / 100;
+
+			// return d; 
+		//}
+
+	</script>
+</head>
+
+<body onload="init();" >
+	<div id="box">
+		<div><h1 id="title">Marauder's Map</h1></div>
+		<div><h2 id="subtitle">(Great for Bounty Hunting)</h2></div>
+		<div id="map_canvas"></div>
+	</div>
+</body>
+
+</html>

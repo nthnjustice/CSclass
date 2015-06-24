@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/pygment_trac.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/custom.css" media="screen" />
+
+<!--[if lt IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<title>COMP 20: Web Programming - Lab: Local Storage and jQuery</title>
+</head>
+    
+<body>
+<header>
+<div class="inner">
+<h1>Web Programming</h1>
+<h2>Lab: Captain's Log</h2>
+</div>
+</header>
+
+<div id="content-wrapper">
+<div class="inner clearfix">
+<section id="main-content">
+
+<p class="note">This lab is worth 3 points.</p>
+
+<h2>Lab Objectives</h2>
+<ul>
+<li>Practice with data persistence via local storage.</li>
+<li>Practice using jQuery.</li>
+</ul>
+
+<h2>Getting Started</h2>
+<ol>
+<li>Inside of your private GitHub repo folder, create a new folder named <code>captainslog</code>.</li>
+<li>Copy all the HTML of below, and paste into an HTML file named <code>index.html</code> in your <code>captainslog</code> folder.</li>
+</ol>
+<pre>
+&lt;!DOCTYPE html&gt;
+
+&lt;html&gt;
+
+&lt;head&gt;
+	&lt;title&gt;Captain's Log&lt;/title&gt;
+	&lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"&gt;&lt;/script&gt;
+	&lt;script&gt;
+	  // Most of your work will be done here...
+	&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+	&lt;h1&gt;Captain's Log&lt;/h1&gt;
+	&lt;h3&gt;New entry: &lt;input type="text" id="msg" name="msg" size="30" /&gt;&lt;/h3&gt;
+	&lt;div id="log"&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<h2>Instructions</h2>
+<p>Modify the page, your copy of <code>index.html</code>, so that entries entered (that is, on pressing the enter / return key) will be displayed dynamically (i.e., no page refresh) in the "log" section <em>with the latest update showing first!</em>  All displayed messages must be preceded with a timestamp (e.g., "12569537329", "Sat Jul 23 02:16:57 2005", Sun Mar 22 2015 16:05:32 GMT-0400 (EDT)").  A space followed by a hyphen followed by a space must follow the timestamp.  Example: <code>Sat Jul 23 02:16:57 2005 - Hello all!</code>.  <span class="note">You are required to use jQuery for this lab!</span>  More importantly, messages must be stored in local storage so if you leave the page and return to the page, your messages are preserved and are redisplayed.  <span class="note">You are not allowed to modify the HTML!</p>
+
+<h2>Notes and References</h2>
+<ol>
+<li>jQuery is already included but you must have Internet connection.</li>
+<li>You will need to use the JavaScript <code>Date</code> object to get the timestamp.  Please refer to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date</a> for methods of the object.</li>
+</ol>
+
+<h2>Viewing Your Work</h2>
+<p>Open your <code>index.html</code> page on any web browser.</p>
+
+<!-- So I ripped this off from Norman Ramsey at http://www.cs.tufts.edu/comp/105/details.html -->
+<h2>The <code>README</code> File</h2>
+<p>Every assignment and lab shall include a <code>README</code> file that describes the work. This description must:</p>
+<ol>
+<li>Identify what aspects of the work have been correctly implemented and what have not.</li>
+<li>Identify anyone with whom you have collaborated or discussed the assignment.</li>
+<li>Say approximately how many hours you have spent completing the assignment.</li>
+<li>Be written in either text format (<code>README.txt</code>) or in Markdown (<code>README.md</code>). No other formats will be accepted.</li>
+</ol>
+
+<h2>Submitting the Lab</h2>
+<p>Commit and push your two files for this lab, the <code>README</code> and <code>index.html</code>, to your private repo in a folder named <code>captainslog</code>.</p>
+
+<h2>Assessment</h2>
+<ol>
+<li>(1 point) Messages are displayed in the "log" section with latest message displayed first, at the top</li>
+<li>(1 point) Messages are redisplayed (from local storage) on return to the page</li>
+<li>(1 point) The basics (e.g., folder name, README)</li>
+<li>(-3 points) Errors and outputs exist in JavaScript console; you modified the HTML; you didn't use jQuery</li>
+</ol>
+
+</section>
+</div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-582953-9");
+pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+</body>
+</html>

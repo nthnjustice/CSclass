@@ -1,0 +1,17 @@
+{
+  "name": "myDJpublic",
+  "version": "0.0.1",
+  "main": "server.js",
+  "scripts": {
+  	"start": "node server.js"
+  },
+  "dependencies": {
+    "body-parser": "latest",
+    "express": "latest",
+    "mongodb": "latest",
+    "validator": "latest",
+    "dot": "latest",
+    "express-dot": "latest"
+  }
+}
+  

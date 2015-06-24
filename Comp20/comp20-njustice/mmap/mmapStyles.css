@@ -1,0 +1,27 @@
+html { 
+	height: 90%; 
+}
+
+body { 
+	height: 90%; 
+	margin: 0px; 
+	padding: 0px;
+	background-color: black;
+}
+
+#map_canvas { 
+	height: 100%;
+}
+
+#title {
+	position: relative;
+	margin-top: 0%;
+	text-align: center;
+	color: white;
+}
+
+#subtitle {
+	position: relative;
+	text-align: center;
+	color: white;
+}

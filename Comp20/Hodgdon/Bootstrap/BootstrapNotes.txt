@@ -1,0 +1,7 @@
+What is Bootstrap?  --> Front-end framework for developing responsive websites
+
+Bootstrap uses the Grid system
+Breakpoints- where the content changes 
+768px, 992px, and 1200 px are the three breakpoints used by Bootstrap
+
+Most grid systems uses 12 columns 

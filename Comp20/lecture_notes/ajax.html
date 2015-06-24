@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/pygment_trac.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/custom.css" media="screen" />
+
+<!--[if lt IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<title>COMP 20: Web Programming - Exception Handling, Asynchronous JavaScript and XML (AJAX), and the Google Maps API</title>
+</head>
+    
+<body>
+<header>
+<div class="inner">
+<h1>Web Programming</h1>
+<a href="https://github.com/tuftsdev/WebProgramming" class="button"><small>All examples used in class<br/>are here on </small>GitHub</a>
+<h2>Exception Handling, Asynchronous JavaScript and XML (AJAX), and the Google Maps API</h2>
+</div>
+</header>
+
+<div id="content-wrapper">
+<div class="inner clearfix">
+<section id="main-content">
+
+<h3>Readings</h3>
+<ul>
+    <li><a href="http://www.adaptivepath.com/ideas/ajax-new-approach-web-applications/" target="_blank" class="title">Ajax: A New Approach to Web Applications</a> by Jesse James Garrett (thanks to Nitesh Gupta for the reminder)</li>
+</ul>
+
+<h3>Exception Handling: Handing Errors the Right Way</h3>
+<ul>
+<li>Readings:
+<ol>
+<li><a href="http://eloquentjavascript.net/chapter5.html" target="_blank">http://eloquentjavascript.net/chapter5.html</a></li>
+<li><a href="http://stackoverflow.com/questions/205688/javascript-exception-handling" target="_blank">http://stackoverflow.com/questions/205688/javascript-exception-handling</a></li>
+</ol>
+</li>
+</ul>
+<pre>
+try {
+  // Run some code here --which may or may not work!
+}
+catch (error) {
+  // Handle errors here. That is, catch and suppress the error
+}
+finally {
+  // Code here will *ALWAYS* be executed regardless whether an error occurred
+}
+</pre>
+<h3>What is Ajax?</h3>
+<ul>
+<li>All of our web programs have been of the response-request model (circa late 1990s).  In other words, there is a lot of waiting!  Thus, causes usability issues</li>
+<li>Why can't web applications be more like desktop applications (i.e., as fast)?</li>
+<li>Not a programming language</li>
+<li>The big ideas:
+<ol>
+<li>No more waiting around!</li>
+<li>Only update a certain section of a page at a certain time with data from a server-side script (most of the times from the same domain and some times from a different domain)</li>
+</ol>
+</li>
+<li>The <span class="stress">asynchronous</span> process:
+<ol>
+<li>The web page sends its requests <span class="stress">using a JavaScript function</span> which handles talking to the server</li>
+<li>The JavaScript code makes a request to the server</li>
+<li>You continue to work on the page</li>
+<li>The server's response has only the data the page needs --without any markups</li>
+<li>The JavaScript dynamically updates the web page --without drawing everything or disturbing the user experience!</li>
+</ol>
+</li>
+</ul>
+
+<h3>The Core of Ajax: The <code>XMLHttpRequest</code> Object</h3>
+<ul>
+<li><code>XMLHttpRequest</code> is invoked (in a JavaScript function) on an event --e.g., <code>onChange</code> in a text box</li>
+<li><code>XMLHttpRequest</code> requests a document from the web server</li>
+<li>Server retrieves data, sends it back</li>
+<li>Ah ha, <code>XMLHttpRequest</code> fires event saying that data has arrived
+<ul>
+<li>A handler function is necessary to receive the notification...</li>
+</ul>
+</li>
+<li>...and to process the data.  Update the display typically using the DOM</li>
+<li>Methods:
+<ul>
+<li><code>abort</code></li>
+<li><code>getAllResponseHeaders</code></li>
+<li><code>getResponseHeader</code></li>
+<li><code>open(<span class="stress">method</span>, <span class="stress">url</span>, <span class="stress">asynchronous? (true or false)</span>)</code></li>
+<li><code>send(<span class="stress">data string</span>)</code> - start it up!  Usually send <code>null</code> as data string</li>
+<li><code>setRequestHeader</code></li>
+</ul>
+</li>
+<li>Properties:
+<ul>
+<li><code>onreadystatechange</code> - Set this to the handler function (when request is complete)!</li>
+<li><code>readyState</code> - A number indicating what state the request is in:
+<ul>
+<li>0 =&gt; Not initialized</li>
+<li>1 =&gt; Set up</li>
+<li>2 =&gt; Sent</li>
+<li>3 =&gt; In progress</li>
+<li>4 =&gt; Complete</li>
+<li>A change in <code>readyState</code> =&gt;<code>onreadystatechange</code> handler function runs</li>
+</ul>
+</li>
+<li><code>responseText</code> - The response data</li>
+<li><code>responseXML</code> - The response data as a document tree</li>
+<li><code>status</code> - The HTTP status code returned from the server</li>
+<li><code>statusText</code></li>
+</ul>
+</li>
+<li>Q: Can ready state = 4 but you receive errors?  How do you account for this?</li>
+</ul>
+
+<h3><span class="note">Important!</span> Security Restrictions</h3>
+<ul>
+<li>Cannot open files on your own machine (i.e., <code>file:///</code>)</li>
+<li>Most of the times, can only fetch files from the same site that the page is on.  This is also known as <span class="stress">JavaScript's Same Origin Policy</span>.</li>
+<li>You can fetch files from a different web server --if the server-side script on the different web server has enabled <span class="stress">Cross-Origin Request Sharing (CORS)</span></li>
+</ul>
+
+<h3>Dealing With Microsoft Internet Explorer</h3>
+<ul>
+<li>IE does not use <code>XMLHttpRequest</code> but <code>ActiveXObject("Msxml2.XMLHTTP")</code> or <code>new ActiveXObject("Microsoft.XMLHTTP")</code></li>
+<li>Alas, you have to manually check if the browser is IE or non-IE</li>
+<li>The code:
+<pre>
+var request;
+
+try {
+  request = new XMLHttpRequest();
+}
+catch (ms1) { // yes, exception handling is supported in JavaScript
+  try {
+    request = new ActiveXObject("Msxml2.XMLHTTP");
+  }
+  catch (ms2) {
+    try {
+      request = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    catch (ex) {
+      request = null;
+    }
+  }
+}
+if (request == null) {
+  alert("Error creating request object --Ajax not supported?");
+}
+</pre>
+</li>
+</ul>
+
+<h3>Question: Does a readyState of 4 always mean a good thing?</h3>
+
+<h3>Google Maps API</h3>
+<ul>
+<li>Documentation: <a href="http://code.google.com/apis/maps/documentation/javascript/" target="_blank">http://code.google.com/apis/maps/documentation/javascript/</a></li>
+<li>Uses HTML5.</li>
+<li>You can write a page that uses Google Maps and run it from your desktop (with Internet connection); no web server required.</li>
+<li>Requirements:
+<ol>
+<li>In the <code>&lt;head&gt;</code>, the JavaScript source <code>http://maps.google.com/maps/api/js?sensor=<span class="stress">set_to_true_or_false</span></code> (in our case, we will use <code>true</code> for the most part because we will write applications that use a sensor to determine the user's location)
+<ul>
+<li>That is, put <code>&lt;script src="http://maps.google.com/maps/api/js?sensor=true"&gt;&lt;/script&gt;</code> in the <code>&lt;head&gt;</code></li>
+</ul>
+</li>
+<li>CSS: <pre>
+	html { height: 100% }
+	body { height: 100%; margin: 0px; padding: 0px }
+	#map_canvas { height: 100% }</pre></li>
+</ol>
+</li>
+<li>Tutorial: <a href="http://code.google.com/apis/maps/documentation/javascript/tutorial.html" target="_blank">http://code.google.com/apis/maps/documentation/javascript/tutorial.html</a></li>
+<li>Objects:
+<ul>
+<li><a href="http://code.google.com/apis/maps/documentation/javascript/reference.html#Map"><code>google.maps.Map</code></a> - The map object (duh!)</li>
+<li><a href="http://code.google.com/apis/maps/documentation/javascript/reference.html#LatLng"><code>google.maps.LatLng</code></a> - An object that contains the latitude and longitude pair</li>
+<li><a href="http://code.google.com/apis/maps/documentation/javascript/reference.html#Marker"><code>google.maps.Marker</code></a> - A marker</li>
+<li><a href="http://code.google.com/apis/maps/documentation/javascript/reference.html#InfoWindow"><code>google.maps.InfoWindow</code></a> - An info window</li>
+<li><a href="http://code.google.com/apis/maps/documentation/javascript/reference.html#Polyline"><code>google.maps.Polyline</code></a> - A linear overlay</li>
+<li><a href="http://code.google.com/apis/maps/documentation/javascript/reference.html#event"><code>google.maps.event</code></a> - An event listener for Google Maps</li>
+</ul>
+</li>
+<li>Complete reference: <a href="http://code.google.com/apis/maps/documentation/javascript/reference.html" target="_blank">http://code.google.com/apis/maps/documentation/javascript/reference.html</a></li>
+</ul>
+
+<h3>Structure of a Google Maps API version 3 Page</h3>
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta name="viewport" content="initial-scale=1.0, user-scalable=no" /&gt;
+
+&lt;!-- Better put the following style into a separate CSS file --&gt;
+&lt;style&gt;
+  html { height: 100% }
+  body { height: 100%; margin: 0px; padding: 0px }
+  #map_canvas { height: 100% }
+&lt;/style&gt;
+&lt;script src="http://maps.google.com/maps/api/js?sensor=true"&gt;&lt;/script&gt;
+&lt;script&gt;
+	function initialize() {
+		latlng = new google.maps.LatLng(...);
+		// "..." is stuff you have to fill in
+		...
+		...
+		...
+		myOptions = {...};
+		map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+	}
+&lt;/script&gt;
+
+&lt;/head&gt;
+&lt;body onload="initialize()"&gt;
+	&lt;div id="map_canvas" style="width:100%; height:100%"&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+</section>
+</div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-582953-9");
+pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+</body>
+</html>

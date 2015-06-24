@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/pygment_trac.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/custom.css" media="screen" />
+
+<!--[if lt IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<title>COMP 20: Web Programming - Lab: Getting Started with the Server Side using Node.js and Heroku</title>
+</head>
+    
+<body>
+<header>
+<div class="inner">
+<h1>Web Programming</h1>
+<h2>Lab: Getting Started with the Server Side using Node.js and Heroku</h2>
+</div>
+</header>
+
+<div id="content-wrapper">
+<div class="inner clearfix">
+<section id="main-content">
+
+<p class="note">This lab is worth 1 point.</p>
+
+<h2>Lab Objectives</h2>
+<ul>
+<li>Set up your workstation properly to use Node.js, MongoDB, and Heroku.</li>
+<li>Build a simple server-side web application and deploy it to Heroku.</li>
+</ul>
+
+<h2>Overview</h2>
+<p>Server-side development is a lot more involved than what we have been doing so far and requires a number of components and software including Node.js and MongoDB (database).  You will be using a database in Assignment 3 but not in this lab.</p>
+<p>For this class, we will deploy our server-side web application to Heroku.  Why use Heroku you may ask?  With Heroku, we do not need to worry about the server hardware, server configuration, and server maintenance.  Server configuration and maintenance require an extraodinary amount of work --just ask my Web Enginering students what they had to go through when they were thrown into the fire to use Amazon EC2 (part of the Amazon Web Services family, or AWS for short).  For a more elaborate discussion on Heroku vs Amazon AWS, see <a href="http://stackoverflow.com/questions/9802259/why-do-people-use-heroku-when-aws-is-present-whats-distinguishing-about-heroku" target="_blank">http://stackoverflow.com/questions/9802259/why-do-people-use-heroku-when-aws-is-present-whats-distinguishing-about-heroku</a>.</p>
+
+<h2>Software Installation Option 1: For Windows Users and For Those Who Do Not Want to Install the Required Software On Their Own</h2>
+<p>It is urged that you use a virtual machine for server-side development.  Why?  Installing all the required software for server-side development is time-consuming; for Windows, the process is a nightmare.  A virtual machine is an entire operating system as a file running on top of your computer (e.g., Linux running on top of Mac OS X).  One software to run virtual machines is VMware Workstation (or VMWare Fusion for Mac OS X).  One significant benefit of using a virtual machine is that it provides isolation from your host / main operating system.  That is, if something goes wrong within the virtual machine, it will not affect your host operating system.  You can also delete the virtual machine and start over, or roll back to a good snapshot of the virtual machine.</p>
+
+<p>1. Download and install <a href="http://vmap-tufts.onthehub.com/" target="_blank">VMware Fusion for Mac OS X or VMware Workstation for Windows or Linux (free one year license via Tufts CS)</a>.</p>
+<p>2. Download: Ubuntu.zip <a href="http://www.cs.tufts.edu/comp/20/Ubuntu.zip">http://www.cs.tufts.edu/comp/20/Ubuntu.zip</a> (MD5 checksum = be936a69bf1eea64ff2bfa65404a7973; username is <code>developer</code>, password is <code>Wh@t3ver!</code>). This virtual machine is loaded with Git, Gnome Desktop, Python, MongoDB, vim, emacs, Node.js, etc. To update all the software on the machine, run <code>sudo apt-get update ; sudo apt-get upgrade;</code>.</p>
+
+<h2>Software Installation Option 2: For Advanced Mac OS X Users</h2>
+<p>If you are a Mac user and choose not to use a virtual machine, install Node.js, Mongo DB, and the Heroku toolbelt via <code>brew install node mongo heroku-toolbelt</code>.</p>
+
+<h2>Software Installation Option 3: For Advanced Linux Users</h2>
+<p>Install Node.js using directions at <a href="https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager" target="_blank">https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager</a>.  Then, install MongoDB using directions at <a href="http://docs.mongodb.org/manual/administration/install-on-linux/" target="_blank">http://docs.mongodb.org/manual/administration/install-on-linux/</a>.</p>
+
+<h2>Instructions</h2>
+<ol>
+<li>Create a Heroku account: <a href="http://www.heroku.com/" target="_blank">http://www.heroku.com/</a></li>
+<li>In order to use MongoDB in a web application on Heroku, you will need to verify your Heroku account via of a credit card. You will not be billed. The reason for this is to verify that you are a human, and not a spammer.  If you do not have a credit card or not comfortable with using one, an alternative option is to buy and use prepaid credit card.</li>
+<li><strong>(UPDATED ON APRIL 4, 2015)</strong> Follow the instructions at <a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs-o" target="_blank">https://devcenter.heroku.com/articles/getting-started-with-nodejs-o</a> <span class="note">up to the "Provision add-ons" section. <span class="note">IMPORTANT: Be careful in the "Scale the app" section.  I suggest you skip the section because if you are not careful, you will be billed and we will not be responsible for your actions!</span></li>
+<li>Please also read the README for the <code>node-js-getting-started</code> example on GitHub: <a href="https://github.com/heroku/node-js-getting-started" target="_blank">https://github.com/heroku/node-js-getting-started</a></li>
+</ol>
+
+<h2>Submitting the Lab</h2>
+<p>Submit your Tufts CS login and the URL that contains the random name generated by Heroku for your web application using the form <a href="https://docs.google.com/forms/d/1Cbm6FEZ49gnecPjxBqJDrcmusjV3MQGIs-shpwj0dvs/viewform" target="_blank">https://docs.google.com/forms/d/1Cbm6FEZ49gnecPjxBqJDrcmusjV3MQGIs-shpwj0dvs/viewform</a></p>
+<p class="note">IMPORTANT NOTES: your web application does not need to be in your private GitHub repository!  Also, DO NOT share your web application with me unlike in Assignment 3!</p>
+</section>
+</div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-582953-9");
+pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+</body>
+</html>

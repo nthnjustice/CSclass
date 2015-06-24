@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<!-- saved from url=(0077)http://tuftsdev.github.io/WebProgramming/lecture_notes/objects_functions.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link href="./COMP 20_ Web Programming - Javascript Objects, JSON, and First-Class Functions_files/css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="./COMP 20_ Web Programming - Javascript Objects, JSON, and First-Class Functions_files/stylesheet.css" media="screen">
+<link rel="stylesheet" type="text/css" href="./COMP 20_ Web Programming - Javascript Objects, JSON, and First-Class Functions_files/pygment_trac.css" media="screen">
+<link rel="stylesheet" type="text/css" href="./COMP 20_ Web Programming - Javascript Objects, JSON, and First-Class Functions_files/print.css" media="print">
+<link rel="stylesheet" type="text/css" href="./COMP 20_ Web Programming - Javascript Objects, JSON, and First-Class Functions_files/custom.css" media="screen">
+
+<!--[if lt IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<title>COMP 20: Web Programming - Javascript Objects, JSON, and First-Class Functions</title>
+<style type="text/css"></style><style type="text/css"></style></head>
+    
+<body>
+<header>
+<div class="inner">
+<h1>Web Programming</h1>
+<a href="https://github.com/tuftsdev/WebProgramming" class="button"><small>All examples used in class<br>are here on </small>GitHub</a>
+<h2>Javascript Objects, JSON, and First-Class Functions</h2>
+</div>
+</header>
+
+<div id="content-wrapper">
+<div class="inner clearfix">
+<section id="main-content">
+<h3>Readings</h3>
+<ul>
+<li><a href="http://www.joelonsoftware.com/items/2006/08/01.html" target="_blank"><span class="title">Can Your Programming Language Do This?</span> by Joel Spolsky (Joel on Software)</a></li>
+<li><a href="http://helephant.com/2008/08/19/functions-are-first-class-objects-in-javascript/" target="_blank"><span class="title">Functions are first class objects in javascript</span></a></li>
+<li><a href="http://yehudakatz.com/2011/08/12/understanding-prototypes-in-javascript/" target="_blank"><span class="title">Understanding "Prototypes" in JavaScript</span> by Yehuda Katz</a></li>
+<li><a href="http://selflanguage.org/_static/published/self-power.pdf" target="_blank"><span class="title">SELF: The Power of Simplicity</span> by David Ungar and Randall Smith (OOPSLA '87)</a> - This paper is the theory behind prototypes in JavaScript.</li>
+</ul>
+
+<h3>JavaScript Object</h3>
+<ul>
+<li>Recall: almost everything in JavaScript is an object</li>
+<li>An object in JavaScript is simply a collection of data and functions with a given object name</li>
+<li>Objects that you have seen so far: <code>Math</code>, <code>Date</code>, strings, and arrays</li>
+<li>Work "sort of" like objects in C++</li>
+<li>You must have an <code>Object</code> in order to assign attributes to it</li>
+<li>Attributes are created when assigned to</li>
+</ul>
+
+<h3>Hashes a.k.a. Dictionaries a.k.a. Associative Arrays</h3>
+<ul>
+<li>Recall arrays</li>
+<li>Now imagine the ability of using strings as array indices</li>
+<li>The index is better known as a <span class="stress">key</span></li>
+<li>The corresponding value for the key can be anything (e.g., a string, a number, an object)!</li>
+</ul>
+<pre>	o = new Object;
+	o['a'] = 5;
+	o[7] = [1,2,3];
+	o['hi'] = {'hello':'there', 'yo':'man'};
+	console.log(o['a']);
+	console.log(o[7]);
+	console.log(o['hi']['hello']); 
+</pre>
+<ul>
+<li>This results in the JavaScript console:
+<pre>	5
+	1,2,3
+	there
+</pre>
+</li>
+<li><code>o['a']</code> is the value associated with index 'a'</li>
+<li><code>{ 'hello':'there', 'yo':'man' }</code> is an associative array literal. This means
+<ul>
+<li>map <code>hello</code> to <code>there</code></li>
+<li>map <code>yo</code> to <code>man</code></li> 
+</ul>
+</li>
+</ul>
+
+<h3>JavaScript Object Notation (JSON)</h3>
+<ul>
+<li>Lightweight data-interchange format (i.e., transferring data from one computer to another)</li>
+<li>Alternative to XML</li>
+<li>Based off of JavaScript's associative arrays</li>
+<li>Language-independent</li>
+<li>Commonly used in APIs</li>
+<li>RFC <a href="http://www.ietf.org/rfc/rfc4627.txt" target="_blank">http://www.ietf.org/rfc/rfc4627.txt</a></li>
+<li><img src="./COMP 20_ Web Programming - Javascript Objects, JSON, and First-Class Functions_files/object.gif" alt="object"><br>
+<img src="./COMP 20_ Web Programming - Javascript Objects, JSON, and First-Class Functions_files/array.gif" alt="array"></li>
+<li>Example:
+<pre>{"menu": {
+  "id": "file",
+  "value": "File",
+  "popup": {
+    "menuitem": [
+      {"value": "New", "onclick": "CreateNewDoc()"},
+      {"value": "Open", "onclick": "OpenDoc()"},
+      {"value": "Close", "onclick": "CloseDoc()"}
+    ]
+  }
+}}
+</pre></li>
+<li>The same text (above) expressed as XML:
+<pre>&lt;menu id="file" value="File"&gt;
+  &lt;popup&gt;
+    &lt;menuitem value="New" onclick="CreateNewDoc()" /&gt;
+    &lt;menuitem value="Open" onclick="OpenDoc()" /&gt;
+    &lt;menuitem value="Close" onclick="CloseDoc()" /&gt;
+  &lt;/popup&gt;
+&lt;/menu&gt;
+</pre>
+</li>
+<li>JSON can be converted to XML, vice versa</li>
+<li>The JSON parser for JavaScript: <a href="https://github.com/douglascrockford/JSON-js" target="_blank">https://github.com/douglascrockford/JSON-js</a>; now built-in to most web browsers
+<ul>
+<li>To encode (object to string): <code>namesSelected = JSON.stringify(listItems);</code></li>
+<li>To decode (string to object): <code>datasets = JSON.parse(txt);</code></li>
+</ul>
+</li>
+<li><a href="http://json.parser.online.fr/" target="_blank">Online JSON parser to better understand and read a JSON string</a></li>
+<li>Example: <pre>&lt;!DOCTYPE html&gt;
+
+&lt;html&gt;
+
+&lt;head&gt;
+	&lt;title&gt;JSON Test&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+	&lt;script&gt;
+		// Let's print just the landmark, latitude, and longitude of this JSON
+		str = '{"landmark":"Golden Gate Bridge","location":{"latitude":37.81972,"longitude":-122.47861}}';
+		parsed = JSON.parse(str);
+		console.log(parsed['landmark']);
+		console.log(parsed['location']['latitude']);
+		console.log(parsed['location']['longitude']);
+	&lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</pre>
+</li>
+</ul>
+
+<h3>So What About JavaScript Functions?</h3>
+<ul>
+<li>I hope you all read <a href="http://www.joelonsoftware.com/items/2006/08/01.html" target="_blank"><span class="title">Can Your Programming Language Do This?</span> by Joel Spolsky (Joel on Software)</a></li>
+<li>Functions are also objects in JavaScript too!</li>
+<li>The big ideas: <!--http://stackoverflow.com/questions/705173/what-is-meant-by-first-class-object-->
+<ul>
+<li>A function is an instance of the <code>Object</code> type in JavaScript</li>
+<li>A function may be named by variables</li>
+<li>A function may be passed as arguments to procedures (i.e., functions)</li>
+<li>A function may be returned as the results of procedures (i.e., functions)</li>
+<li>They may be included in data structures (read: other <code>Objects</code>)</li>
+</ul>
+</li>
+<li>...and thus given these big ideas, functions in JavaScript are <span class="stress">first class</span></li>
+<li>Why is this important?
+<ol>
+<li>More opportunities for abstraction =&gt; your code is smaller, tighter, more reusable, and more scalable</li>
+<li>Functional composition (math anyone?)</li>
+<li>Fake the idea of Object-Oriented Programming with JavaScript</li>
+<li>Used extensively in jQuery</li>
+<li>This is how the Google Maps API and jQuery were written!</li>
+</ol>
+</li>
+</ul>
+
+<h3>Examples</h3>
+<pre>&lt;script&gt;
+	function square(x)
+	{
+		return x * x;
+	}
+
+	// Functions as variable values
+	t = square;
+	document.write("The square of 2 is " + t(2) + "&lt;br/&gt;");
+
+	// Functions as subroutine arguments
+	function apply (func,value)
+	{
+		return func(value);
+	}
+	document.write("The square of 3 is " + apply(square, 3) + "&lt;br/&gt;");
+
+	// Functions as object attributes
+	o = new Object;
+	o.sq = square;
+	document.write("The square of 4 is " + o.sq(4) + "&lt;br/&gt;");
+
+	// Functions as array elements
+	a = new Array(20);
+	a[5] = square;
+	document.write("The square of 5 is " + a[5](5) + "&lt;br/");
+&lt;/script&gt;
+</pre>
+<ul>
+<li>Member functions are simply properties of an object!</li>
+<li>Called with an implicit first argument that is the object itself...</li>
+<li>...that first argument's name is <code>this</code> (just as in C++)</li>
+</ul>
+<pre>&lt;script&gt;
+	function Person_toString()
+	{
+		return this.name+', '+this.address+', '+this.phone;
+	}
+
+	function Person_toTable() {
+		return "&lt;table border=\"1\"&gt;&lt;tr&gt;&lt;td&gt;" + this.name
+			+ "&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;" + this.address
+			+ "&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;" + this.phone
+			+ "&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;";
+	}
+
+	function Person_toList() {
+		return "&lt;ul&gt;\n&lt;li&gt;" + this.name
+			+ "&lt;/li&gt;\n&lt;li&gt;" + this.address
+			+ "&lt;/li&gt;\n&lt;li&gt;" + this.phone
+			+ "&lt;/li&gt;\n&lt;/ul&gt;";
+	}
+
+	var p = new Object;
+	p.name = 'The Barack';
+	p.address = '1600 Pennsylvania Avenue';
+	p.phone = '(111) 111-1111';
+	p.toString = Person_toString; // interesting...
+	p.toTable = Person_toTable;
+	p.toList = Person_toList;
+	document.write("p is " + p + "&lt;br/&gt;\n");
+	document.write("p.toTable() is " + p.toTable() + "&lt;br/&gt;\n");
+	document.write("p.toList() is " + p.toList() + "&lt;br/&gt;\n");
+&lt;/script&gt;
+</pre>
+<ul>
+<li>One more example...</li>
+</ul>
+<pre>&lt;script&gt;
+	function circle_area()
+	{
+		return Math.PI * this.radius * this.radius;
+	}
+
+	function circle_inside(x, y)
+	{
+		var xd = this.x - x;
+		var yd = this.y - y;
+		var dist = Math.sqrt(xd * xd + yd * yd);
+		return dist &lt; this.radius;
+	}
+
+	function Circle (r, x, y)
+	{
+		this.radius = r;
+		this.x = x;
+		this.y = y;
+		this.area = circle_area;
+		this.inside = circle_inside;
+	}
+
+	var circle = new Circle(3, 4.5 , 5.3);
+	document.write("Circle area is " + circle.area() + "&lt;br/&gt;");
+	if (circle.inside(2, 2)) {
+		document.write("(2, 2) is inside the circle&lt;br/&gt;");
+	}
+	else {
+		document.write("(2, 2) is outside the circle&lt;br/&gt;");
+	}
+	if (circle.inside(4, 5)) {
+		document.write("(4, 5) is inside the circle&lt;br/&gt;");
+	}
+	else {
+		document.write("(4, 5) is outside the circle&lt;br/&gt;");
+	}
+&lt;/script&gt;
+</pre>
+
+</section>
+</div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="./COMP 20_ Web Programming - Javascript Objects, JSON, and First-Class Functions_files/ga.js" type="text/javascript"></script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-582953-9");
+pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+
+
+</body></html>

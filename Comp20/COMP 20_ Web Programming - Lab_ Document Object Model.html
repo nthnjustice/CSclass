@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<!-- saved from url=(0065)http://tuftsdev.github.io/WebProgramming/assignments/lab-dom.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link href="./COMP 20_ Web Programming - Lab_ Document Object Model_files/css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="./COMP 20_ Web Programming - Lab_ Document Object Model_files/stylesheet.css" media="screen">
+<link rel="stylesheet" type="text/css" href="./COMP 20_ Web Programming - Lab_ Document Object Model_files/pygment_trac.css" media="screen">
+<link rel="stylesheet" type="text/css" href="./COMP 20_ Web Programming - Lab_ Document Object Model_files/print.css" media="print">
+<link rel="stylesheet" type="text/css" href="./COMP 20_ Web Programming - Lab_ Document Object Model_files/custom.css" media="screen">
+
+<!--[if lt IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<title>COMP 20: Web Programming - Lab: Document Object Model</title>
+<style type="text/css"></style><style type="text/css"></style></head>
+    
+<body>
+<header>
+<div class="inner">
+<h1>Web Programming</h1>
+<h2>Lab: Ms. Pac-Man</h2>
+</div>
+</header>
+
+<div id="content-wrapper">
+<div class="inner clearfix">
+<section id="main-content">
+
+<h2>Lab Objectives</h2>
+<ol>
+	<li>Practice writing JavaScript.</li>
+	<li>Practice using the Document Object Model (DOM).</li>
+	<li>Practice with using JavaScript objects.</li>
+	<li>Render 2D graphics on the web browser with HTML5's canvas.</li>
+</ol>
+
+<h2>Overview</h2>
+<p>On May 21, 2010, Google released a special version of the game Pac-Man, playable on the web browser, to commemorate the game's 30th anniversary (still available at <a href="https://www.google.com/doodles/30th-anniversary-of-pac-man" target="_blank">https://www.google.com/doodles/30th-anniversary-of-pac-man</a>).  In this lab, you will draw the blue game board and Ms. Pac-Man on the game board on a web page using JavaScript.  The result will look like the following:</p>
+<p><img src="./COMP 20_ Web Programming - Lab_ Document Object Model_files/mspacman.png" alt="Result"></p>
+
+<h2>The JavaScript Canvas API</h2>
+<p>A canvas is simply a drawing area.  HTML5 introduces a new element called <code>&lt;canvas&gt;</code>.  Drawing can be done onto the canvas via of the JavaScript Canvas API.  The Canvas API contains many powerful methods: from drawing lines to image manipulation.</p>
+<p>The API also contains a method, <code>drawImage()</code> that allows <span class="stress">slicing</span> an image.  That is, only draw parts of an image onto the canvas (recall the <a href="http://tuftsdev.github.io/WebProgramming/assignments/lab-css.html">last lab</a> where you had to slice an image using CSS).  Please refer to <a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Using_images" target="blank">the "Slicing" section in https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Using_images</a> for the parameters and usage of <code>drawImage()</code>.  To get the coordinates (in pixels) of the part of the image you want to render, you can use tools such as Preview on Mac OS X, Gimp, or Photoshop.</p>
+<p>There is an excellent tutorial on the JavaScript Canvas API through Mozilla at <a href="https://developer.mozilla.org/en-US/docs/HTML/Canvas/Tutorial" target="_blank">https://developer.mozilla.org/en-US/docs/HTML/Canvas/Tutorial</a></p>
+<p>The <code>&lt;canvas&gt;</code> is initially blank, and to display something a script (your <code>game.js</code>) first needs to access the rendering context and draw on it. The canvas element has a DOM method called <code>getContext()</code>, used to obtain the rendering context and its drawing functions. <code>getContext()</code> takes one parameter, the type of context.</p>
+<pre>canvas = document.getElementById('nameofcanvas');
+ctx = canvas.getContext('2d');
+</pre>
+
+<h2>Calling a JavaScript Function On Page Load</h2>
+<p>When a web page has completely loaded all content (including images, JavaScript files, CSS files, etc.), you can execute JavaScript code immediately via the <code>onload</code> attribute for the <code>body</code> element.  That is:</p>
+
+<pre>&lt;body onload="<span class="stress">SomeJavaScriptCodeOrFunction</span>"&gt;
+</pre>
+
+<h2>Instructions</h2>
+<ol>
+<li>Download the file <code><a href="http://tuftsdev.github.io/WebProgramming/assignments/mspacman.zip">mspacman.zip</a></code> directly into the folder <code>comp20-firstletterofyourfirstnameandlastname</code> on your computer (the same folder you used for Lab 4).</li>
+<li>Unzip the ZIP file.  A folder <code>mspacman</code> with files will be created.</li>
+<li>Remove the ZIP file <code>mspacman.zip</code></li>
+<li>Run <code>git add .</code></li>
+<li>Run <code>git commit -m "Starting Lab 5"</code></li>
+<li>Run <code>git push</code></li>
+</ol>
+<p>You are provided with four files in the <code>mspacman</code> directory:</p>
+<ol>
+<li><code>index.html</code> - HTML page with a canvas</li>
+<li><code>style.css</code> - The stylesheet</li>
+<li><code>pacman10-hp-sprite.png</code> - The actual sprite sheet containing all the images (sprites) that is used for the Google Doodle game.</li>
+<li><code>game.js</code> - Where you will write all your JavaScript code.</li>
+</ol>
+
+<p>Review the <code>index.html</code> code.  Your job is to modify the <code>game.js</code> file to draw the blue game board and Ms. Pac-Man on the game board on the canvas (like what is show in the image above). <span class="note">IMPORTANT: you are not allowed to modify the HTML, CSS, or sprite sheet files!</span></p>
+
+<h2>Readings and References</h2>
+<ul>
+	<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API" target="_blank">Canvas API Documentation (via Mozilla Developer Network)</a></li>
+</ul>
+
+<h2>Viewing Your Work</h2>
+<p>Open the <code>index.html</code> file on a web browser (Chrome, Firefox, Safari, the latest version of Microsoft Internet Explorer)</p>
+<p class="note">For obvious reasons, you are not allowed to make your work publicly accessibly on the web --yet.</p>
+
+<!-- So I ripped this off from Norman Ramsey at http://www.cs.tufts.edu/comp/105/details.html -->
+<h2>The <code>README</code> File</h2>
+<p>Every assignment and lab shall include a <code>README</code> file that describes the work. This description must:</p>
+<ol>
+<li>Identify what aspects of the work have been correctly implemented and what have not.</li>
+<li>Identify anyone with whom you have collaborated or discussed the assignment.</li>
+<li>Say approximately how many hours you have spent completing the assignment.</li>
+<li>Be written in either text format (<code>README.txt</code>) or in Markdown (<code>README.md</code>). No other formats will be accepted.</li>
+</ol>
+
+<h2>Warnings</h2>
+<ul>
+	<li>You are not allowed to use jQuery for this lab.</li>
+</ul>
+
+<h2>Notes and Hints</h2>
+<ul>
+	<li>Don't be alarmed if you think your solution is fairly short.</li>
+	<li>You may run into a problem of loading the image.  That is, on the first load, nothing shows up on the canvas but image shows up when you refresh the web browser.  This is normal.  What you need to do is to make sure that the image is fully loaded before drawing on the canvas.  Use the (JavaScript) event <code>onload</code> for an image: read the section "Creating an image from scratch" in <a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Using_images" target="_blank">https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Using_images</a></li>
+</ul>
+
+<h2>Submitting Your Lab</h2>
+<p>Push all your files in the <code>mspacman</code> folder inside of the private GitHub repo I created for you.  Say that your private repository is named <code>comp20-mchow</code>, make sure all the files are pushed to <code>comp20-mchow/mspacman</code>.</p>
+<pre># Inside your private GitHub repo folder (e.g., <code>comp20-mchow</code>)
+git add .
+git commit -m "<span class="stress">Some good commit message here</span>"
+git push
+</pre>
+
+<h2>Assessment</h2>
+<p>This lab is worth 3 points.</p>
+<ul>
+	<li>(1 point) The basics: folder name in private GitHub repository, file names, didn't modify HTML and CSS files, README file</li>
+	<li>(2 points) JavaScript code that draws blue game board and Ms. Pac-Man on the game board, on the canvas</li>
+	<li>(-1 points) You rendered Pac-Man instead of Ms. Pac-Man
+	</li><li>(-2 points) JavaScript errors exist</li>
+	<li>(-3 points) You modified the HTML, CSS, and/or the image file(s)</li>
+	<li>(-4 points) You used jQuery</li>
+</ul>
+<audio src="start.mp3" autoplay=""></audio>
+</section>
+</div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="./COMP 20_ Web Programming - Lab_ Document Object Model_files/ga.js" type="text/javascript"></script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-582953-9");
+pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+
+</body></html>

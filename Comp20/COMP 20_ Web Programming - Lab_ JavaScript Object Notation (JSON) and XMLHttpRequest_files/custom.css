@@ -1,0 +1,41 @@
+.yay {
+	color: green;
+}
+
+.note {
+	color: red;
+}
+
+.directions {
+	font-weight: bold;
+}
+
+
+.title {
+	font-style: italic;
+	font-weight: bold;
+}
+
+code {
+	font-weight: bold;
+}
+
+.stress {
+	font-style: italic;
+}
+
+.def {
+	font-style: italic;
+	font-weight: bold;
+}
+
+table {
+  width: 100%;
+  border: 1px solid #000000;
+}
+
+tr th, td {
+	width: 33%;
+	text-align: left;
+	border: 1px solid #000000;
+}

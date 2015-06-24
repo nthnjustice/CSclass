@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<title>Captain's Log</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script>
+	 	$(document).keypress(function(enter) {
+    		if(enter.which == 13) {
+    			var timeStamp = new Date();
+    			timeStamp.toDateString();
+    			var post = '<p>' + timeStamp + ' - ' + msg.value + '<p>';
+        		$('#log').prepend(post);
+        		$('#msg').val('');
+        		localStorage.setItem(timeStamp, post);
+    		}
+		});
+	$(document).ready( function() {
+		audio = new Audio('KirkLog.mp3');
+		audio.play();
+		$('body').css('background-image','url("stars.jpg")');
+		$('h1').css('background-color','white');
+		$('h3').css('background-color','white');
+		$('#log').css('background-color','white');
+ 		for(var i in window.localStorage) {
+   			var recoveredPost = localStorage.getItem(i); 
+   			$('#log').prepend(recoveredPost);
+		}
+ 	});
+	</script>
+</head>
+
+<body>
+	<h1>Captain's Log</h1>
+	<h3>New entry: <input type="text" id="msg" name="msg" size="30" /></h3>
+	<div id="log"></div>
+</body>
+</html>

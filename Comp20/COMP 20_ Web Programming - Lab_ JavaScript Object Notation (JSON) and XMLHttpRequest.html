@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<!-- saved from url=(0066)http://tuftsdev.github.io/WebProgramming/assignments/lab-json.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link href="./COMP 20_ Web Programming - Lab_ JavaScript Object Notation (JSON) and XMLHttpRequest_files/css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="./COMP 20_ Web Programming - Lab_ JavaScript Object Notation (JSON) and XMLHttpRequest_files/stylesheet.css" media="screen">
+<link rel="stylesheet" type="text/css" href="./COMP 20_ Web Programming - Lab_ JavaScript Object Notation (JSON) and XMLHttpRequest_files/pygment_trac.css" media="screen">
+<link rel="stylesheet" type="text/css" href="./COMP 20_ Web Programming - Lab_ JavaScript Object Notation (JSON) and XMLHttpRequest_files/print.css" media="print">
+<link rel="stylesheet" type="text/css" href="./COMP 20_ Web Programming - Lab_ JavaScript Object Notation (JSON) and XMLHttpRequest_files/custom.css" media="screen">
+
+<!--[if lt IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<title>COMP 20: Web Programming - Lab: JavaScript Object Notation (JSON) and XMLHttpRequest</title>
+<style type="text/css"></style><style type="text/css"></style></head>
+    
+<body>
+<header>
+<div class="inner">
+<h1>Web Programming</h1>
+<h2>Lab: Messages</h2>
+</div>
+</header>
+
+<div id="content-wrapper">
+<div class="inner clearfix">
+<section id="main-content">
+
+<p class="note">This lab is worth 5 points.</p>
+
+<h2>Lab Objectives</h2>
+<ol>
+<li>Practice using JavaScript associative arrays.</li>
+<li>Practice using the JavaScript <code>XMLHttpRequest</code> object</li>
+<li>Practice parsing JSON data.</li>
+<li>Understand the limitations of client-side JavaScript.</li>
+</ol>
+
+<h2>Overview</h2>
+<p>In this lab, you will load JSON data using JavaScript's <code>XMLHttpRequest</code> object, parse the JSON file, and output the data to a section of a completely loaded HTML file.</p>
+
+<h2>Getting Started</h2>
+<ol>
+<li>Download the file <code><a href="http://tuftsdev.github.io/WebProgramming/assignments/messages.zip">messages.zip</a></code> directly into the folder <code>comp20-username</code> on your computer (the same folder you used for Lab 4 and 5).</li>
+<li>Unzip the ZIP file.  A folder <code>messages</code> with files will be created.</li>
+<li>Remove the ZIP file <code>messages.zip</code></li>
+<li>Run <code>git add .</code></li>
+<li>Run <code>git commit -m "Starting Lab 6"</code></li>
+<li>Run <code>git push</code></li>
+</ol>
+<p>You are provided with four files in the <code>messages</code> directory:</p>
+<ol>
+<li><code>index.html</code> - HTML page</li>
+<li><code>style.css</code> - An empty stylesheet. You are free to modify this file.</li>
+<li><code>data.json</code> - A file containing JSON data</li>
+<li><code>lab.js</code> - Where you will write all your JavaScript code.</li>
+</ol>
+
+<h2>Instructions, Part 1: Loading the Data from the <code>data.json</code> file</h2>
+<p>Review the <code>index.html</code> file.  Your job is to modify the <code>lab.js</code> file to open the JSON file using <code>XMLHttpRequest</code>, parse the JSON data, and output the messages in the "messages" section of the HTML, as ordered in JSON file.  <span class="note">IMPORTANT: you are not allowed to modify the HTML file!  You are also not allowed to use jQuery!</span>  However, you are free to display the messages on the page however you want them to look as I am giving you a blank CSS file to modify.</p>
+
+<h2>Example Output</h2>
+<p><img src="./COMP 20_ Web Programming - Lab_ JavaScript Object Notation (JSON) and XMLHttpRequest_files/lab-json.png" alt="Lab JSON"></p>
+
+<h2>Viewing Your Work and Submitting the Assignment</h2>
+<p>Using the <code>XMLHttpRequest</code> to open a file requires your page to be hosted on a web server.  Alas, simply opening the <code>index.html</code> page on a web browser will not work for this assignment --and you will need to explain why, more later. You must create branch named <code>gh-pages</code> on your private GitHub repo and then view your work via <code>http://tuftsdev.github.io/comp20-username/messages</code>.  Think of a branch in Git as a new project history or a new idea.  If you create a specific branch named <code>gh-pages</code> in GitHub, content in the branch will be served to the public.</p>
+
+<p>To create the <code>gh-pages</code> branch in your private Git repository, run <code>git branch gh-pages</code>.  <span class="note">You only need to run this once!  If you already started Assignment 2 and did this step already, you do not need to do it again.</span></p>
+
+<p>To push work on your private Git repository under your new <code>gh-pages</code> branch to GitHub, run <code>git push origin gh-pages</code>.</p>
+
+<p>To switch back to using your default <code>master</code> branch, run <code>git checkout master</code>.</p>
+
+<p>To switch back to using your <code>gh-pages</code> branch, run <code>git checkout gh-pages</code>.</p>
+
+<p>To submit this assignment, your work must be in both the <code>gh-pages</code> and <code>master</code> branches of your private Git repository on GitHub.</p>
+
+<p>To make sure that both your <code>gh-pages</code> and <code>master</code> are in sync, you must merge them.  To replace everything that is in your <code>gh-pages</code> branch with everything that is in the <code>master</code> branch, run <code>git checkout gh-pages ; git merge -X theirs master</code>.  Or to replace everything that is in your <code>master</code> branch with everything that is in the <code>gh-pages</code> branch, run <code>git checkout master ; git merge -X theirs gh-pages</code>.</p>
+<h2>Debugging</h2>
+<p>Be sure to look at your JavaScript console for any errors.</p>
+
+<h2>Instructions, Part 2: Loading the Data Given a URI</h2>
+<p>If the first part worked, instead of loading the data from the <code>data.json</code> file, try loading the JSON data from a URI (yes, a remote location).  Replace <code>data.json</code> in your <code>lab.js</code> to <code>http://messagehub.herokuapp.com/messages.json</code>.  The JSON looks very similar with the same important fields.  You do not need to modify any other code in your JavaScript.  Does it work?</p>
+
+<!-- So I ripped this off from Norman Ramsey at http://www.cs.tufts.edu/comp/105/details.html -->
+<h2>The <code>README</code> File</h2>
+<p>Every assignment and lab shall include a <code>README</code> file that describes the work. This description must:</p>
+<ol>
+<li>Identify what aspects of the work have been correctly implemented and what have not.</li>
+<li>Identify anyone with whom you have collaborated or discussed the assignment.</li>
+<li>Say approximately how many hours you have spent completing the assignment.</li>
+<li>Be written in either text format (<code>README.txt</code>) or in Markdown (<code>README.md</code>). No other formats will be accepted.</li>
+</ol>
+<p class="note">For this lab, you must also answer an important question: <strong>is it possible to request the data from a different origin (e.g., <code>http://messagehub.herokuapp.com/</code>) or from your local machine (from <code>file:///</code>) from using <code>XMLHttpRequest</code>?  Why or why not?</strong>  Please read the following three articles, in order, to help you answer this question:</p>
+<ol>
+	<li><a href="https://en.wikipedia.org/wiki/XMLHttpRequest" target="_blank">https://en.wikipedia.org/wiki/XMLHttpRequest</a>. Yes, you may be balking that I am making you read a Wikipedia article but there is a very important line in the overview.  This serves as good background reading.</li>
+	<li><a href="https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy" target="_blank">https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy</a></li>
+	<li><a href="https://security.stackexchange.com/questions/8264/why-is-the-same-origin-policy-so-important" target="_blank">https://security.stackexchange.com/questions/8264/why-is-the-same-origin-policy-so-important</a></li>
+</ol>
+<h2>Assessment</h2>
+<ol>
+<li>(1 point) The basics (e.g., file names, Git commit messages)</li>
+<li>(2 points) Your JavaScript code that parses the JSON, modifies "messages" section of HTML</li>
+<li>(2 points) The <code>README</code></li>
+<li>(-5.0 point) Outputs exist in JavaScript console</li>
+<li>(-5.0 point) You modified the HTML</li>
+<li>(-5.0 point) You used jQuery</li>
+</ol>
+
+</section>
+</div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="./COMP 20_ Web Programming - Lab_ JavaScript Object Notation (JSON) and XMLHttpRequest_files/ga.js" type="text/javascript"></script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-582953-9");
+pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+
+</body></html>

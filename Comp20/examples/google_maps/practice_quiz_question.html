@@ -1,0 +1,23 @@
+<!doctype html>
+
+<html>
+<head>
+<title>Practice Quiz 2 Question 1</title>
+<script>
+  function getMyLocation() {
+    found = 0;
+    if (navigator.geolocation) {
+      console.log(found);
+      navigator.geolocation.getCurrentPosition(function(position) {
+        found = 1;
+        console.log(found);
+      });
+    }
+    console.log(found);
+  }
+</script>
+</head>
+<body onload="getMyLocation()">
+  <h1>Please take a look at your JavaScript console...</h1>
+</body>
+</html>

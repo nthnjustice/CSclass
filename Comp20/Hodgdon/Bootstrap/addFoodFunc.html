@@ -1,0 +1,65 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <title>jQuery UI Selectable - Default functionality</title>
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+ 
+  <style>
+
+    #feedback { font-size: 1.4em; }
+    #selectable .ui-selecting { background: #FECA40; }
+    #selectable .ui-selected { background: #F39814; color: white; }
+    #selectable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+    #selectable li { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 18px; }
+
+  </style>
+
+  <script>
+
+    $(document).ready(function () {
+      getData();
+    });
+
+    function getData() {
+      xhr = new XMLHttpRequest();
+
+      var url = "https://hodgdon.herokuapp.com/addFood";
+      xhr.open("GET", url, true);
+
+      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+      xhr.send();
+
+      xhr.onreadystatechange = function()  {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          var data = JSON.parse(xhr.responseText);
+
+          var html = '<ol id="selectable">';
+
+          $.each(data, function(index, value) {
+            html += '<li class="ui-widget-content">' + value + '</li>';
+          });
+          html += '</ol>';
+          document.getElementById("box").innerHTML = html;
+        }
+      }
+    }
+  </script>
+
+</head>
+
+<body>
+
+  <div id="box"></div>
+
+</body>
+
+</html>

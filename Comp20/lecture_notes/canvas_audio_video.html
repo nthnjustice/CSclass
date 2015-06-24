@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/pygment_trac.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/custom.css" media="screen" />
+
+<!--[if lt IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<title>COMP 20: Web Programming - JavaScript Canvas, Audio, and Video</title>
+</head>
+    
+<body>
+<header>
+<div class="inner">
+<h1>Web Programming</h1>
+<a href="https://github.com/tuftsdev/WebProgramming" class="button"><small>All examples used in class<br/>are here on </small>GitHub</a>
+<h2>JavaScript Canvas, Audio, and Video</h2>
+</div>
+</header>
+
+<div id="content-wrapper">
+<div class="inner clearfix">
+<section id="main-content">
+
+<h3>Client-Side JavaScript Limitations</h3>
+<ol>
+    <li>Only runs on the browser itself</li>
+    <li>Not entirely portable: some methods and scripts only work on certain browser</li>
+    <li>Subject to many security limits including the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Same_origin_policy_for_JavaScript" target="_blank">same-domain policy</a>; cannot access a file system (i.e., you can't write a program that list files in a folder); cannot connect to database servers directly, etc.</li>
+</ul>
+
+<h3>So What Exactly is HTML5?</h3>
+<ul>
+<li>Not just markup</li>
+<li>A hybrid of three concepts:
+<ol>
+<li>Content (HTML + XML)</li>
+<li>Presentation of content (CSS)</li>
+<li>Interaction with content (JavaScript)</li>
+</ol>
+</li>
+<li><a href="../images/html5.jpg">Infographic</a></li>
+<li><span class="stress">Still work in progress</span></li>
+<li>XML-based but no longer SGML-based</li>
+<li>Originally coined as <span class="stress">Web Applications 1.0</span></li>
+<li>Backing from Google, Microsoft, Facebook, Mozilla, (of course) Apple, and many other companies</li>
+<li>Currently supported in some degree or another in Chrome, Firefox 3.5+, Opera, and Safari</li>
+<li>Many incompatibilities exist in each browser. Run <a href="http://www.html5test.com/" target="_blank">html5test</a> to see what HTML5 features are supported by your web browser.</li>
+<li>Will be flexible with error handling (i.e., incorrect syntax).  Older browsers will safely ignore the new HTML5 syntax.</li>
+</ul>
+
+<h3>HTML5 Elements with JavaScript APIs</h3>
+<ul>
+<li>There are new elements in HTML5 that have their own special JavaScript API: <code>canvas</code>, <code>audio</code>, <code>video</code></li>
+<li>Requires using the Document Object Model (DOM)</li>
+<li>We will work with <code>canvas</code>, <code>audio</code>, and <code>video</code></li>
+</ul>
+
+<h3><code>canvas</code></h3>
+<ul>
+<li>The idea: a drawing surface</li>
+<li>Can render 2D and 3D graphics, drawings</li>
+<li>The coordinate system: origin (0, 0) is on top-left corner</li>
+<li>Initialization (<code>&lt;head&gt;</code>)
+<pre>
+&lt;script&gt;
+    function draw() {
+        canvas = document.getElementById('simple');
+        // Check if canvas is supported on browser
+        if (canvas.getContext) {
+            ctx = canvas.getContext('2d');
+            //...
+        }
+        else {
+            alert('Sorry, canvas is not supported on your browser!');
+        }
+    }
+&lt;/script&gt;
+</pre>
+</li>
+<li>To display something, your script first needs to access <span class="stress">the rendering context</span> and draw on it</li>
+<li>Your <code>&lt;body&gt;</code>
+<pre>
+&lt;body onload="draw();"&gt;
+    &lt;canvas id="simple" width="150" height="150"&gt;&lt;/canvas&gt;
+&lt;/body&gt;
+</pre>
+<li>The attributes <code>id</code>, <code>width</code>, and <code>height</code> are required for the <code>canvas</code> element.</li>
+<li>Capabilities of the JavaScript canvas API:
+<ul>
+<li>Rectangles</li>
+<li>Paths (triangles)</li>
+<li>Arcs (circles)</li>
+<li>Lines (various styles supported)</li>
+<li>Colors</li>
+<li>Images</li>
+<li>Image processing: translating, rotating, scaling</li>
+<li>Animation (well, not directly)</li>
+</ul>
+</li>
+<li><a href="../examples/javascript-canvas/canvas_demo1.html">Example 1: Simple Drawing</a></li>
+<li><a href="../examples/javascript-canvas/canvas_demo2.html">Example 2: Advanced Drawing (with rotated transparent image)</a></li>
+<li><a href="../examples/javascript-canvas/canvas_demo3.html">Example 3: Animation</a></li>
+<li><a href="https://developer.mozilla.org/en/Canvas_tutorial" target="_blank">For more details, refer to Mozilla's documentation and tutorial</a></li>
+</ul>
+
+<h3>Audio and Video</h3>
+<ul>
+<li>Capabilities of the JavaScript video API:
+<ul>
+<li>Play</li>
+<li>Pause</li>
+<li>Get current time of the playing video</li>
+<li>Pause</li>
+</ul>
+</li>
+</ul>
+<video src="http://mirrorblender.top-ix.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_stereo.ogg" id="video"></video>
+<script type="text/javascript">
+    video = document.getElementById("video");
+</script>
+<p><button type="button" onclick="video.play();">Play</button>
+<button type="button" onclick="video.pause();">Pause</button>
+<button type="button" onclick="video.currentTime = video.currentTime - 1;">&lt;&lt; Rewind</button>
+<button type="button" onclick="video.currentTime = video.currentTime + 1">&gt;&gt; Forward</button>
+</p>
+<ul>
+<li>The source (in <code>&lt;body&gt;</code>):
+<pre>
+&lt;video src="http://mirrorblender.top-ix.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_stereo.ogg" id="video"&gt;&lt;/video&gt;
+&lt;script&gt;
+    video = document.getElementById("video");
+&lt;/script&gt;
+&lt;p&gt;&lt;button type="button" onclick="video.play();"&gt;Play&lt;/button&gt;
+&lt;button type="button" onclick="video.pause();"&gt;Pause&lt;/button&gt;
+&lt;button type="button" onclick="video.currentTime = video.currentTime - 1;"&gt;&amp;lt;&amp;lt; Rewind&lt;/button&gt;
+&lt;button type="button" onclick="video.currentTime = video.currentTime + 1"&gt;&amp;gt;&amp;gt; Forward&lt;/button&gt;
+&lt;/p&gt;
+</pre>
+</li>
+<li><span class="note">WATCH OUT!</span> Video format incompatibilities abound! <a href="http://en.wikipedia.org/wiki/HTML5_video" target="_blank">http://en.wikipedia.org/wiki/HTML5_video</a> (this is one of the few times I will use Wikipedia)</li>
+<li>JavaScript video and audio API Reference: <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Using_HTML5_audio_and_video">https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Using_HTML5_audio_and_video</a></li>
+<li>So what can you do with HTML5 video?
+<ul>
+<li>Video annotations</li>
+<li>Karaoke machine</li>
+</ul>
+</li>
+</ul>
+
+<h3>The Big Picture</h3>
+<ul>
+<li>Given what you have seen, HTML5 can potentially eliminate Adobe Flash (proprietary)</li>
+<li>The significance: mobile and tablet devices do not support Flash (even Android no longer supports Flash)</li>
+<li>But can HTML5, presently as it is, eliminate Flash? Not yet.  Why not?</li>
+<li>Some hope: <a href="http://www.html5rocks.com/en/tutorials/getusermedia/intro/" target="_blank">http://www.html5rocks.com/en/tutorials/getusermedia/intro/</a></li>
+</ul>
+
+</section>
+</div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-582953-9");
+pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+</body>
+</html>

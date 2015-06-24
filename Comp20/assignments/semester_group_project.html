@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/pygment_trac.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/custom.css" media="screen" />
+
+<!--[if lt IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<title>COMP 20: Web Programming - Semester Group Project</title>
+</head>
+    
+<body>
+<header>
+<div class="inner">
+<h1>Web Programming</h1>
+<h2>Spring 2015 Semester Group Project</h2>
+</div>
+</header>
+
+<div id="content-wrapper">
+<div class="inner clearfix">
+<section id="main-content">
+<h2>Overview</h2>
+<p>You will be working on a team of 4 or 5 people (see below) to create a prototype pertaining to <span class="def">food (yes, something that has to do with food)</span>.  Please note that a prototype is different than a product: a product is a complete system with documentation while a prototype simulates most of the complete system.  I do not expect a full-blown product to be completed by the end of the semester.</p>
+
+<h2>Goal of Semester Group Project</h2>
+<p class="stress">Have students work in a team to define a problem, build and demo a solution.</p>
+
+<h2>Past Semester Group Project Themes</h2>
+<ul>
+<li>Fall 2014: Personal Health and Fitness</li>
+<li>Spring 2014: Personal Finance</li>
+<li>Spring 2013: Vehicles</li>
+<li>Spring 2011: Retail</li>
+<li>Fall 2010: Personal Finance</li>
+</ul>
+
+<h2>Unacceptable Project Ideas</h2>
+<ul>
+<li>A blog</li>
+<li>A message board</li>
+<li>Find the nearest watering hole. Been there, done that since 2009 (Sarah Keefe, you are not forgotten).</li>
+<li>Anything related to payments. Don't go there.</li>
+</ul>
+
+<h2>Absolute Requirements</h2>
+<p>Your team's project must adhere to the following non-negotiable requirements:</p>
+<ol>
+<li>Must use HTML5.</li>
+<li>Must use JavaScript, jQuery, and Ajax.</li>
+<li>The team must use <a href="http://github.com/" target="_blank">GitHub</a> for the project.  Each team will be provided a private repo in GitHub under the <code>tuftsdev</code> organization.</li>
+<li>Must have desktop and mobile web user interfaces.  That is, the user interface is different on the desktop than on mobile.</li>
+<li>Must use a server-side framework or technology (e.g., Node.js, Django, Ruby on Rails)</li>
+<li>Must use least 2 web / RESTful APIs (e.g., Yelp!) with JSON and/or XML parsing</li>
+</ol>
+
+<h2>Pick Five</h2>
+<p>On top of the absolute requirements, the project must use at least 5 of the following technologies or ideas (your team's choice):</p>
+<ul>
+<li>Geolocation</li>
+<li>Server-side data persistence (e.g., with PostgreSQL, MongoDB, MySQL)</li>
+<li>Client-side data persistence with either local storage or web SQL</li>
+<li>Front-end framework including Bootstrap, React, Backbone.js, AngularJS</li>
+<li>Data or screen scraping</li>
+<li>Reporting with charts and graphs</li>
+<li>Send emails, SMSes, or push notifications</li>
+</ul>
+
+<h2>Deliverables</h2>
+<ol>
+<li><span class="def">Project proposal and design doc (15 points; <span class="note">due on Thursday, March 5th</span>)</span>.  In Markdown format, in a <code>README.md</code> file in your team's GitHub repository, using bullet-points:
+<ul>
+<li>Project title</li>
+<li>Problem statement (i.e., what is the problem?)</li>
+<li>How do you solve the problem?</li>
+<li>List of all the features that your team <span class="stress">will</span> implement (including which of the "Pick 5" items were chosen by the team). Your team will be held accountable for the features you list!</li>
+<li>What data will your prototype be using and collecting</li>
+<li>Any algorithms or special techniques that will be necessary</li>
+<li>Electronic mockups of what your team will be developing using <span class="stress">wireframes</span>.  No hand-drawn mockups accepted.  Tools to create wireframes include <a href="https://balsamiq.com/" target="_blank">Balsamiq (commercial; de facto standard)</a>, <a href="http://www.gliffy.com/" target="_blank">Gliffy</a>, <a href="http://www.mockflow.com/" target="_blank">MockFlow</a>, and even Microsoft PowerPoint.</li>
+</ul>
+</li>
+<li><span class="def">Project checkup (10 points; <span class="note">due on Thursday, April 2nd</span>)</span> - I will be looking for evidence in your team's private GitHub repository that your team started working on the project.  It does not have to be elaborate.</li>
+<li><span class="def">Status report 1 (5 points; <span class="note">due on Friday, April 10th</span>)</span> - This file must be in your team's private GitHub repository, written in either text or Markdown format, that outlines (1) what was accomplished during the week, (2) challenges and issues team faced during the week, and (3) your goals for the next week.</li>
+<li><span class="def">Status report 2 (5 points; <span class="note">due on Friday, April 17th</span>)</span> - Please do not overwrite your status report from the week before.</li>
+<li><span class="def">Status report 3 (5 points; <span class="note">due on Friday, April 24th</span>)</span> - Ditto.</li>
+
+<li><span class="def">The completed project (40 points; <span class="note">ABSOLUTE DEADLINE on Friday, May 1st at 12 PM</span>)</span></li>
+<li><span class="def">Elevator pitch presentation (10 points; <span class="note">on Friday, May 1st at 12 PM</span>)</span> - You have less than 5 minutes to explain your project to me and to the judges!  Room and location TBD.</li>
+</ol>
+
+<p>The remaining 10 points of the project (out of 100 total points) will be for individual performance on the team based on your teammates' feedback.  That is, underperforming members of a team can receive a lower grade for the final project.</p>
+
+<h2>Example Project Proposal</h2>
+<p>Here is <a href="https://github.com/TylerLubeck/comp20-team3">one from spring 2013</a> (Tyler Lubeck's team).</p>
+
+<h2>Intellectual Property</h2>
+<p>All works and ideas are owned by the members of the team.  I cannot take ownership of any of your work.  I do not have stake or equity in any project created in my classes for that matter.</p>
+
+<h2>Important Notes</h2>
+<ul>
+<li>I can add to the list of "Pick 5" at any time.</li>
+<li>Your team is allowed to change direction or scope of the project but your team will need to submit a new project proposal / design doc and no time extension will be given.</li>
+<li>A note on privacy and data collection: the less personal information you collect, the better. Enough said.</li>
+<li>Do not do anything with payments. Lots of trouble if you get it wrong (and chances are, you will).</li>
+</ul>
+
+<h2>Assessment</h2>
+<p>Your team will be graded on five factors:</p>
+<ol>
+<li><span class="stress">Functionality</span> - Something that works consistently. Remember, a project with fewer features that work is significantly better than one with numerous features, in which some either do not work or are buggy.</li>
+<li><span class="stress">Utility</span> - Does your project fulfill a recognized need?  Is it also easy to understand?</li>
+<li><span class="stress">Originality</span> - C'mon, another running app or calorie counter?  Better if your team strives to do something more cosmic.</li>
+<li><span class="stress">Technical Competency</span> - Use <a href="http://kotaku.com/5975610/the-exceptional-beauty-of-doom-3s-source-code" target="_blank">good programming practices</a>, consistent Git commits and pushes, meaningful Git commit messages used.  Egregious data collecting will be penalized.</li>
+<li><span class="stress">Teamwork</span> - Does all team members contribute?  Having one or two people doing all the work is not good.  <span class="note">After the presentations on May 1st, everyone will conduct a performance review on each teammate!</span></li>
+</ol>
+
+<h2 id="teams">Teams</h2>
+
+<p>Team 1</p>
+<ul>
+<li>Wanxin Cheng</li>
+<li>Mengtian Li</li>
+<li>Tiancheng Li</li>
+<li>Feiyu Lu</li>
+<li>Valerie Ng</li>
+</ul>
+
+<p>Team 2</p>
+<ul>
+<li>Khuyen Bui</li>
+<li>Adam Hotaling</li>
+<li>Zabir Islam</li>
+<li>Gabe Terrell</li>
+</ul>
+
+<p>Team 3</p>
+<ul>
+<li>Sibonay Koo</li>
+<li>Barry Maswan</li>
+<li>Andrew Schneer</li>
+<li>Hunter Wapman</li>
+</ul>
+
+<p>Team 4</p>
+<ul>
+<li>Sam	Burck</li>
+<li>Carter Casey</li>
+<li>Sonal Chatter</li>
+<li>Lisa Fukushima</li>
+<li>Raphael Osorio</li>
+</ul>
+
+<p>Team 5</p>
+<ul>
+<li>Kelsey Gilchrist</li>
+<li>Jake Jarvis</li>
+<li>Thomas Li</li>
+<li>Dane Roberts</li>
+</ul>
+
+<p>Team 6</p>
+<ul>
+<li>Phillip	Booth</li>
+<li>Sam Broner</li>
+<li>Will Dolan</li>
+<li>Brad Frizzell</li>
+<li>Ayal Pierce</li>
+</ul>
+
+<p>Team 7</p>
+<ul>
+<li>Andrea Compton</li>
+<li>Caitlyn Klein</li>
+<li>Nate McArdle</li>
+<li>Alex Salvatore</li>
+</ul>
+
+<p>Team 8</p>
+<ul>
+<li>Dan Callahan</li>
+<li>Zach Kirsch</li>
+<li>Danielle Zelin</li>
+<li>Saul Sparber</li>
+</ul>
+
+<p>Team 9</p>
+<ul>
+<li>David Blass</li>
+<li>Jackson	Clawson</li>
+<li>Ethan Donowitz</li>
+<li>Michael Seltzer</li>
+</ul>
+
+<p>Team 10</p>
+<ul>
+<li>Katie Kurtz</li>
+<li>Ruth Sun</li>
+<li>Brian Williamson</li>
+<li>Henry Zhou</li>
+</ul>
+
+<p>Team 11</p>
+<ul>
+<li>Reema Al-Marzoog</li>
+<li>Quinn Collins</li>
+<li>Stephen Michel</li>
+<li>Julia Rowe</li>
+</ul>
+
+<p>Team 12</p>
+<ul>
+<li>Matt Cardarelli</li>
+<li>Rebecca	Larson</li>
+<li>Nick Sempere</li>
+<li>McKenzie Welter</li>
+</ul>
+
+<p>Team 13</p>
+<ul>
+<li>Lani Godenzi</li>
+<li>Alice Lee</li>
+<li>Hannah Clark</li>
+<li>Mike Yeung</li>
+</ul>
+
+<p>Team 14</p>
+<ul>
+<li>Sylvie Abookire</li>
+<li>Aditi Ashok</li>
+<li>Thomas Colgrove</li>
+<li>Zoe Monosson</li>
+</ul>
+
+<p>Team 15</p>
+<ul>
+<li>Kalina Allen</li>
+<li>Zoe	Greene</li>
+<li>Nathan Justice</li>
+<li>Ami Wulf</li>
+</ul>
+
+<p>Team 16</p>
+<ul>
+<li>Ian	Gray</li>
+<li>Mitchell Katz</li>
+<li>Owen Martin</li>
+<li>Matt Paleologopoulos</li>
+</ul>
+
+<p>Team 17</p>
+<ul>
+<li>Anna Richardson</li>
+<li>Thomas Schaffner</li>
+<li>Norman Young</li>
+<li>Sosena Bekele</li>
+</ul>
+
+<p>Team 18</p>
+<ul>
+<li>Alexander Ravan</li>
+<li>Lucas Johnson</li>
+<li>Lydia Pezzullo</li>
+<li>Naomi Zarrilli</li>
+</ul>
+
+<p>Team 19</p>
+<ul>
+<li>Sabina Campero</li>
+<li>Alex King</li>
+<li>Amar Patel</li>
+<li>Cori Jacoby</li>
+</ul>
+
+<p>Team 20</p>
+<ul>
+<li>Ben Battle</li>
+<li>Param Chopra</li>
+<li>Tafari Duncan</li>
+<li>Jason Fan</li>
+</ul>
+
+<p>Team 21</p>
+<ul>
+<li>Maggie Chapman</li>
+<li>Gabe Jacobs</li>
+<li>Aaron Kahen</li>
+<li>Dan Kane</li>
+<li>Nate Matthews</li>
+</ul>
+
+<p>Team 22</p>
+<ul>
+<li>John Gallagher</li>
+<li>Elias Jarzombek</li>
+<li>Charlie Meyer</li>
+<li>Kyle Slinger</li>
+</ul>
+
+<p>Team 23</p>
+<ul>
+<li>Maddie Golison</li>
+<li>Andre Newland</li>
+<li>Justin Sullivan</li>
+<li>Danielle Westerman</li>
+</ul>
+
+<p>Team 24</p>
+<ul>
+<li>Yi Ding</li>
+<li>Amoses Holton</li>
+<li>Eric Peterson</li>
+<li>Jacob Watton</li>
+</ul>
+
+<p>Team 25</p>
+<ul>
+<li>Laura Brooks</li>
+<li>Jacob Caccamo</li>
+<li>Nathan Majumder</li>
+<li>Marcy Regalado</li>
+</ul>
+
+<p>Team 26</p>
+<ul>
+<li>Jacob Katsiaficas</li>
+<li>Elwin Ng</li>
+<li>Alex Nguyen</li>
+<li>Nicholas Yan</li>
+</ul>
+
+<p>Team 27</p>
+<ul>
+<li>Andrew Cavallaro</li>
+<li>James McDowell</li>
+<li>Jeremy Marcus</li>
+</ul>
+
+</section>
+</div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-582953-9");
+pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+</body>
+</html>

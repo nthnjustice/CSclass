@@ -1,0 +1,36 @@
+{
+"name": "hodg_items",
+"children": [
+	{
+	"name": "Meat",
+	"children": [
+		{"name": "Chicken Parm", "size": 73},
+		{"name": "Basil Wings", "size": 47},
+		{"name": "Meatballs w/ Sauce", "size": 95},
+		{"name": "Italian Meal", "size": 29},
+		{"name": "Meatball Sub w/ Sauce", "size": 82},
+		{"name": "Steak and Cheese", "size": 120}
+		]
+	},
+	{
+	"name": "Seafood",
+	"children": [
+		{"name": "Eggroll (shrimp)", "size": 215}
+		]
+	},
+	{
+	"name": "Carb",
+	"children": [
+		{"name": "Pasta Dijon", "size": 144},
+		{"name": "Pasta w/ Marinara Sauce", "size": 120}
+		]
+	},
+	{
+	"name": "Veggie",
+	"children": [
+		{"name": "Green Beans", "size": 130},
+		{"name": "Falafel", "size": 139}
+		]
+	}
+	]
+}

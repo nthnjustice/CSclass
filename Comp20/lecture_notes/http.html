@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/pygment_trac.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/custom.css" media="screen" />
+
+<!--[if lt IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<title>COMP 20: Web Programming - HTTP</title>
+</head>
+    
+<body>
+<header>
+<div class="inner">
+<h1>Web Programming</h1>
+<a href="https://github.com/tuftsdev/WebProgramming" class="button"><small>All examples used in class<br/>are here on </small>GitHub</a>
+<h2>Basic Networking and the Hypertext Transport Protocol (HTTP)</h2>
+</div>
+</header>
+
+<div id="content-wrapper">
+<div class="inner clearfix">
+<section id="main-content">
+<h3>Basic Networking</h3>
+<ul>
+<li>Communications between two computers</li>
+<li>"Handshaking" via TCP/IP
+<ul>
+<li>Explanation: <a href="http://www.inetdaemon.com/tutorials/internet/tcp/3-way_handshake.shtml" target="_blank">http://www.inetdaemon.com/tutorials/internet/tcp/3-way_handshake.shtml</a></li>
+</ul>
+</li>
+<li><span class="def">Packet</span> - A block of data sent over the network transmitting the identities of the sending and receiving stations, error-control information, and message</li>
+<li><span class="def">Port</span> - Represents an endpoint for network communications; application-specific</li>
+<li><span class="def">Port number</span> - A number assigned to a particular network service on a host that ranges from 0 to 65535 (generally, HTTP is Port 80 and MySQL is Port 3306)
+<ul>
+<li>See <a href="http://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.txt" target="_blank">http://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.txt</a> for list of port numbers</li>
+</ul>
+</li>
+<li><span class="def">Domain Name System (DNS)</span> - A set of servers that map written names to IP addresses.  Example: <code>yahoo.com</code> =&gt; <code>69.147.76.15</code></li> 
+</ul>
+
+<h3>The Internet</h3>
+<ul>
+<li>The world's largest computer network</li>
+<li>It also contains other networks (e.g., network or networks)</li>
+<li>Originated in the 1960s.  Funded by Defense Advanced Research Projects Agency (DARPA), part of the US DoD</li>
+</ul>
+
+<h3>The World Wide Web (WWW)</h3>
+<ul>
+<li>A collection of web sites and pages around the world</li>
+<li>Provide documents in a markup language that reference other documents and media</li>
+<li>Not to be confused with the Internet.  The Internet includes other services such as e-mail, chat, Gopher, telnet, etc.</li>
+<li>Client-server technology; "information pull"
+<ul>
+<li><span class="def">Client</span> - A program running on your computer
+<ul>
+<li>Web browser - a client application that displays web pages (e.g., Chrome, Firefox, Microsoft Internet Explorer, Safari, Opera, lynx)</li>
+</ul>
+</li>
+<li><span class="def">Server</span> - A computer running web server software on a remote computer; delivers information to other clients
+<ul>
+<li><a href="http://httpd.apache.org/" target="_blank">Apache HTTP Server</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span class="def">Uniform Resource Locator (URL)</span> - a universal naming scheme to specify the location of a document on a web site
+<ul>
+<li>A subset of the Uniform Resource Identifier (URI)</li>
+<li>Created by Tim Berners-Lee in 1994</li>
+<li>Format: <code>protocol://machine_or_server/directory/file.type</code>
+<ul>
+<li>Protocols: <code>http, ftp, telnet, gopher, mailto, file</code></li>
+<li>Example: <code>http://www.eecs.tufts.edu/index.html</code>
+<ul>
+<li><code>http</code> - Hypertext Transport Protocol</li>
+<li><code>www.eecs.tufts.edu</code> - machine <code>www</code>, domain <code>eecs.tufts.edu</code></li>
+<li><code>index.html</code> - a file in the Hypertext Markup Language (<code>.html</code>)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>More URLs:
+<ul>
+<li>Anchors: <code>http://tuftsdev.github.com/WebProgramming<strong>#syllabus</strong></code>. This will bring you directly to the syllabus section of our course home page.</li>
+<li>Parameters: <code>http://www.google.com/search<strong>?q=grand+theft+auto&amp;lr=lang_zh-TW</strong></code> (returns Google results on "Grand Theft Auto" in Chinese Traditional language)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<h3>URL Encoding</h3>
+<ul>
+<li>Only certain characters can be used in a URL (e.g., letters --cAsE sEnSiTiVe, and numbers).  For special characters including a whitespace, use URL encoding</li>
+<li>Convert special characters to equivalent for <span class="stress">URLs</span> only!</li>
+<li>Reference: <a href="http://www.w3schools.com/tags/ref_urlencode.asp" target="_blank">http://www.w3schools.com/tags/ref_urlencode.asp</a></li>
+<li>Example 1: Whitespace = <code>%20</code></li>
+<li>Example 2: <code>http://venturebeat.com/2010/09/13/startups-find-strong-opportunities-in-3-%E2%80%9Cbig-data%E2%80%9D-markets/?utm_source=feedburner&amp;utm_medium=feed&amp;utm_campaign=Feed:+Venturebeat+(VentureBeat)</code></li>
+</ul>
+
+<h3>Hypertext Transport Protocol (HTTP)</h3>
+<ul>
+<li>Request-response protocol</li>
+<li>Application layer of OSI model (networking)</li>
+<li>The complete RFC (Request For Comments): <a href="http://www.w3.org/Protocols/rfc2616/rfc2616.html" target="_blank">http://www.w3.org/Protocols/rfc2616/rfc2616.html</a></li>
+<li>Commands sent from a web browser to web server. Request methods:
+<ul>
+<li><code>GET</code> - Download</li>
+<li><code>POST</code> - Sent from a form</li>
+<li><code>PUT</code> - Upload</li>
+<li><code>DELETE</code></li>
+</ul>
+</li>
+<li>Server response header:
+<ul>
+<li>Define characteristics of the data that is requested or the data that has been provided</li>
+<li>Separated from the request or response body (e.g., HTML) by a blank line</li>
+<li>List of header fields: <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html" target="_blank">http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html</a></li>
+</ul>
+</li>
+<li>Status codes:
+<ul>
+<li>200 - Ok</li>
+<li>301 - Moved Permanently</li>
+<li>302 - Found (the request was redirected to another URL/URI)</li>
+<li>401 - Unauthorized</li>
+<li>403 - Forbidden</li>
+<li>404 - Not Found</li>
+<li>500 - Internal Server Error</li>
+<li>Complete list: <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html" target="_blank">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html</a></li>
+</ul>
+</li>
+</ul>
+
+<h3>Applications of HTTP Information</h3>
+<ul>
+<li>"Gaming" Foursquare <a href="http://compbio.cs.uic.edu/~mayank/4sq.html" target="_blank">http://compbio.cs.uic.edu/~mayank/4sq.html</a></li>
+<li><a href="http://www.shodanhq.com/" target="_blank">SHODAN - Computer Search Engine</a></li>
+</ul>
+
+<h3>Questions</h3>
+<ol>
+<li>How can you browse the web without a modern web browser?</li>
+<li>How do you build a web browser?</li>
+<!-- http://stackoverflow.com/questions/598841/how-to-get-started-building-a-web-browser :-) -->
+<li>What does the following evaluate to: <code>%77%77%77%2E%34%63%68%61%6E%2E%6F%72%67</code>?  If you cut-and-paste <code>%77%77%77%2E%34%63%68%61%6E%2E%6F%72%67</code> into the URL bar of your web browser, will work?</li>
+</ol>
+
+</section>
+</div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-582953-9");
+pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+</body>
+</html>

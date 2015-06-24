@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/pygment_trac.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print" />
+<link rel="stylesheet" type="text/css" href="../stylesheets/custom.css" media="screen" />
+
+<!--[if lt IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<title>COMP 20: Web Programming - Document Object Model (DOM)</title>
+</head>
+    
+<body>
+<header>
+<div class="inner">
+<h1>Web Programming</h1>
+<a href="https://github.com/tuftsdev/WebProgramming" class="button"><small>All examples used in class<br/>are here on </small>GitHub</a>
+<h2>Document Object Model (DOM)</h2>
+</div>
+</header>
+
+<div id="content-wrapper">
+<div class="inner clearfix">
+<section id="main-content">
+<h3>Readings</h3>
+<ol>
+<li><a href="http://www.w3.org/TR/DOM-Level-2-Core/introduction.html" target="_blank">What is the Document Object Model? (W3C)</a>
+<li><a href="https://developer.mozilla.org/en-US/docs/DOM/About_the_Document_Object_Model" target="_blank">About the Document Object Model (Mozilla)</a></li>
+</ol>
+
+<h3>Document Object Model (DOM)</h3>
+<ul>
+<li>The big idea: a structural representation a la <span class="stress">tree</span> of objects that represents the HTML document; a standard for how to get, change, add, or delete HTML elements.</li>
+<li>A standard programming interface for HTML (API)</li>
+<li>Allows you to view and modify page elements in script code after page has loaded.  This is browser independent.</li>
+<li>Very powerful: allows progressive enhancements of pages, and responsive interactions on the client-side</li>
+<li>Standardized by the W3C</li>
+<li>Each document is a hierarchy</li>
+<li>Evolution:
+<ul>
+<li>DOM 1.0 - limited mutability</li>
+<li>DOM 2.0 - full mutability</li>
+<li>DOM 3.0+ - manipulation of child elements</li>
+</ul>
+</li>
+</ul>
+
+<h3>Consider the Example</h3>
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Page Title&lt;/title&gt;
+&lt;meta http-equiv="content-type" content="text/html; charset=utf-8" /&gt;
+&lt;meta http-equiv="Content-Language" content="en-us" /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;This is a heading&lt;/h1&gt;
+&lt;p&gt;A paragraph with a &lt;a href="http://www.google.com/"&gt;link&lt;/a&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;a list item&lt;/li&gt;
+&lt;li&gt;another list item&lt;/li&gt;
+&lt;li&gt;a third list item&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<ul>
+<li>The resulting DOM tree: <img src="../images/dom_tree.gif" alt="DOM Tree" /></li>
+<li>Your turn: give the graphical representation of the DOM for the following:
+<pre>
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Shady Grove&lt;/td&gt;
+      &lt;td&gt;Aeolian&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Over the River, Charlie&lt;/td&gt;
+      &lt;td&gt;Dorian&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</pre>
+</li>
+</ul>
+
+<h3>Nodes</h3>
+<ul>
+<li><span class="stress">Element nodes</span> - Can have children and/or attributes; example: HTML tags. <span class="notes">WARNING! Not all element nodes contains text!</span></li>
+<li><span class="stress">Text nodes</span> - A child within an element node; cannot have children; example: text in a block element</li>
+<li><span class="stress">Attribute nodes</span> - A child within an element node; cannot have children; example: attribute-value pair</li>
+</ul>
+
+</section>
+</div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-582953-9");
+pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+</body>
+</html>
