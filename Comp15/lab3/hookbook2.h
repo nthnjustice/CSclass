@@ -1,0 +1,24 @@
+#include<iostream>
+using namespace std;
+
+const INIT_CAPACITY = 5;
+
+struct Pirate
+{
+  int memberID;
+  string name;
+  int* friendList;
+  int friendCount;
+  int friendCapacity;
+};
+
+class classyPirate{
+  public:
+    classyPirate();
+    bool addPirate(int member, string nm);
+    
+  private:
+    Pirate* hbook;
+    int pirateCount;
+    int pirateCapacity;
+};

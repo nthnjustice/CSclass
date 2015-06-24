@@ -1,0 +1,23 @@
+const int ROWS = 14;
+const int COLS = 20;
+const double premium_price = 200.0;
+const double general_price = 150.0;
+const double deduction = .1;
+
+class Hall
+{
+  public:
+	
+    Hall();
+	
+    bool request(string name, int num, string type, int day);
+	
+    bool cancel(string name);
+	
+    void print();
+
+  private:
+	
+    string seating[ROWS][COLS];
+    double pricing[ROWS][COLS];
+};

@@ -1,0 +1,5 @@
+g++ -g -Wall -Wextra BogScorer.cpp scorerMain.cpp -o bbscorer
+g++ -Wall -Wextra BogValidator.cpp BogSolver.cpp dictionary.o checkerMain.cpp -o bbchecker
+g++ -Wall -Wextra BogSolver.cpp solverMain.cpp dictionary.o -o bbscorer 
+touch bbsolver
+

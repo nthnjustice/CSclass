@@ -1,0 +1,44 @@
+Script started on Fri Jan 25 19:48:14 2013
+hostnam~/Desktop/comp11/hw2 > hostname
+sunfire31
+~/Desktop/comp11/hw2 > who
+aschul01 pts/24       Jan 23 15:25 (c-98-216-108-217.hsd1.ma.comcast.net)
+ndatir01 pts/30       Dec 29 19:41 (bosave-vj01.eecs.tufts.edu)
+ali04    pts/56       Jan 25 19:10 (wr-130-64-186-232.medford.tufts.edu)
+akasem01 pts/67       Jan 25 19:25 (wr-130-64-223-240.medford.tufts.edu)
+edrin01  pts/68       Jan 25 19:31 (c-65-96-173-46.hsd1.ma.comcast.net)
+pchang04 pts/69       Jan 25 17:25 (wr-130-64-195-101.medford.tufts.edu)
+njusti01 pts/70       Jan 25 19:44 (wr-130-64-186-190.medford.tufts.edu)
+cdowns01 pts/73       Jan 25 10:03 (wr-130-64-92-103.medford.tufts.edu)
+mporte03 pts/77       Jan 25 19:34 (resnet161-216.medford.tufts.edu)
+sskret   pts/79       Jan 25 17:45 (216.87.95.135)
+sdanie01 pts/80       Jan 25 19:37 (209-6-30-166.c3-0.smr-ubr2.sbo-smr.ma.cable.rcn.com)
+spurce02 pts/81       Jan 25 19:39 (130.64.98.6)
+njusti01 pts/82       Jan 25 19:48
+~/Desktop/comp11/hw2 > w
+pwd
+ls - 19:48:28 up 72 days, 11:25, 19 users,  load average: 0.64, 0.45, 0.34
+USER     TTY      FROM              LOGIN@   IDLE   JCPU   PCPU WHAT
+aschul01 pts/24   c-98-216-108-217 Wed15    7:06m  7:42   0.36s vim a1.c
+ndatir01 pts/30   bosave-vj01.eecs 29Dec12 26days  0.28s  0.28s -tcsh
+ali04    pts/56   wr-130-64-186-23 19:10   46.00s  0.25s  0.25s -tcsh
+akasem01 pts/67   wr-130-64-223-24 19:25    1.00s  0.30s  0.30s -tcsh
+edrin01  pts/68   c-65-96-173-46.h 19:31   40.00s  1.25s  0.94s emacs digits.cp
+pchang04 pts/69   wr-130-64-195-10 17:25    4:26   0.51s  0.51s -tcsh
+njusti01 pts/70   wr-130-64-186-19 19:44    0.00s  0.28s  0.00s script
+cdowns01 pts/73   wr-130-64-92-103 10:03    3:43m  1:31   1:31  ssh sunfire47 -
+mporte03 pts/77   resnet161-216.me 19:34    1:48   3.08s  2.76s emacs digits.cp
+sskret   pts/79   216.87.95.135    17:45   42:33   1.07s  0.84s pine
+sdanie01 pts/80   209-6-30-166.c3- 19:37   26.00s  0.40s  0.13s vim bitpack.h
+spurce02 pts/81   130.64.98.6      19:39   16.00s  1.66s  1.31s vim fgroups.c
+njusti01 pts/82                    19:48    4.00s  0.16s  0.09s w
+~/Desktop/comp11/hw2 > pwd
+/h/njusti01/Desktop/comp11/hw2
+~/Desktop/comp11/hw2 > ls -l
+[00mtotal 4
+-rw------- 1 njusti01 other 618 Jan 25 19:46 [00mdigits.cpp[00m
+-rw------- 1 njusti01 other   0 Jan 25 19:48 [00mtypescript[00m
+[m~/Desktop/comp11/hw2 > exit
+exit
+
+Script done on Fri Jan 25 19:48:32 2013

@@ -1,0 +1,121 @@
+#include "BogScorer.h"
+
+/*****************************************************************************
+Precondition: There exists a list of words and a bool for their validity, 
+	a word is sent in to be added to the linked-list
+Postcondition:	The word is added to the linked-list
+*****************************************************************************/
+void BogScorer::assignment(string s, Node* iter)
+{
+	//traverses the linked-list
+	Node* temp = iter;
+
+	//moves to the end of the linked-list
+	while (temp->next != NULL){
+		temp = temp->next;
+	}
+
+	//sets the validity of the word according to the input
+	if ((s == "OK") || (s == "NO")){
+		temp->validity = s;
+	}
+	else{
+		//adds the word to the linked-list and calls the scorer
+		//	function
+		temp->word = s;
+		wordScore(iter);
+	
+		//builds a new node for the linked-list
+		temp->next = new Node;
+		temp = temp->next;
+		temp->next = NULL;
+	}
+}
+
+/*****************************************************************************
+Precondition: There exists a word that needs to be scored
+Postcondition:	Sets a score for the word according to it's length
+*****************************************************************************/
+void BogScorer::wordScore(Node* iter)
+{
+	//Traverses the linked-list
+	Node* temp = iter;
+
+	while (temp->next != NULL){
+		temp = temp->next;
+	}
+
+	if (temp->word.length() == 3){
+		temp->points = 1;
+	}
+	if (temp->word.length() == 4){
+		temp->points = 1;
+	}
+	if (temp->word.length() == 5){
+		temp->points = 2;
+	}
+	if (temp->word.length() == 6){
+		temp->points = 3;
+	}
+	if (temp->word.length() == 7){
+		temp->points = 5;
+	}
+	if (temp->word.length() >= 8){
+		temp->points = 11;
+	}
+	//if the word is not valid it receives no points
+	if (temp->validity == "NO"){
+		temp->points = 0;
+	}
+}
+
+/*****************************************************************************
+Precondition: There exists a linked-list of words
+Postcondition:	Print statements
+*****************************************************************************/
+void BogSolver::output(Node* head)
+{
+	Node* temp = head;
+
+	while (temp != NULL){
+		if (temp->word != ""){
+			cout << temp->points << " ";
+			cout << temp->validity << " ";
+			cout << temp->word << endl;
+		}
+		temp = temp->next;
+	}
+
+	//calls the function to calculate the total points of all words
+	finalScore(head);
+} 
+
+/*****************************************************************************
+Precondition: There exists a linked-list of words that have scores
+Postcondition:	Prints the total score of all the words combined and the 
+	number of valid words
+*****************************************************************************/
+void BogSolver::finalScore(Node* head)
+{
+	//used to traverse the linked-list
+	Node* temp = head;
+	//total score
+	int total = 0;
+	//number of valid words in the linked-list
+	int numWords = 0;
+
+	while (temp != NULL){
+		if (temp->word != ""){
+			//adds the word score to the total score
+			total += temp->points;
+		}
+		//if the word is valid the number of valid words is increased
+		if (temp->validity == "OK"){
+			numWords++;
+		}
+		temp = temp->next;
+	}
+
+	cout << numWords << " words ";
+	cout << total << " points" << endl;
+}

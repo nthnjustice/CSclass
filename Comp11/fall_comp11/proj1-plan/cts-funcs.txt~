@@ -1,0 +1,123 @@
+Int main ()
+Input Command
+o	Purpose: This function allows the user to input the desired command. 
+	The function accepts the following command options: request a seat, 
+	cancel a reservation, print the seating chart, track and print the total 
+	revenue, and quit the program. If a legal command is inputted, this 
+	function sends the user to the next function. If an illegal command 
+	is inputted, this function outputs that the user requested an invalid command
+o	Arguments: This function accepts the following commands: RQ, CA, PR, QU.
+o	Return Value: This function returns its values to Int Main (). 
+o	Effects: There are no specific effects for this function.
+o	Notes: This function is the primary body of the program. It needs 
+	to be able to accept certain commands and direct the user accordingly 
+	throughout the program. This function also needs to be able to properly 
+	reject illegal commands.
+	
+Request Seat
+o	Purpose: This function allows the user to reserve seats. It gives 
+	the user the ability to choose between the following three options: 
+	high price seat, low price seat, or any seat. 
+o	Argument: This function uses the 2-D array that is the concert seating.
+o	Return Value: This function returns the reserved seats to the Input 
+	Command function.
+o	Effects: There are no specific effects for this function.
+o	Notes: This function needs to be able to accept
+ 	the three different seating options and reject any illegal 
+	requests. The function will call the 2-D array structs from 
+	subsequent functions.
+	
+High Price
+o	Purpose: This function is ran when the user chooses to reserve 
+	a high price seat. It reserves the seat in the 2-D array 
+	in the appropriate high-price section. 
+o	Argument: This function uses the 2-D array that is the 
+	concert seating.
+o	Return Value: This function returns a 
+	specific struct into the 2-D array.
+o	Effect: There are no specific effects for this function.
+o	Notes: Remember, this function returns values as 
+	structs into the 2-D array.
+Low Price
+o	Purpose: This function is ran when the user chooses to
+ 	reserve a low price seat. It reserves the seat in the 
+	2-D array in the appropriate low-price section.
+o	Argument: This function uses the 2-D array that 
+	is the concert seating.
+o	Return Value: This function returns a specific 
+	struct into the 2-D array.
+o	Effect: There are no specific effects for this function.
+o	Notes: Remember, this function returns values as 
+	structs into the 2-D array.
+Any Price
+o	Purpose: This function is ran when the user does
+ 	not choose a specific seat price. The function 
+	will automatically reserve seats in the high-price 
+	section if space is available.
+ 	If space is not available, this function will 
+	assign the user to seats in the low-price seating.
+o	Argument: This function uses the 2-D array that 
+	is the concert seating. 
+o	Return Value: This function returns a specific
+ 	struct into the 2-D array.
+o	Effect: There are no specific effects for this function.
+o	Notes: Remember to make two condition for this 
+	function; one if high-price seating is available, 
+	and one if high-price seating is unavailable.
+10% off for split party
+o	Purpose: This function takes 10% off the price 
+	of the ticket if the number of reserved seats has 
+	to be separated into different rows of the array 
+	that represents the concert seating. This function 
+	works for high, low, and any price ticket requests.
+o	Argument: This function will take in the stuct 
+	of the high, low, and any price functions.
+o	Return Value: If this function is executed, it 
+	will return the price of the tickets with the 
+	10% off discount.
+o	Effect: This function will deduct 10% from 
+	the price of the ticket if the seats are split amongst rows.
+o	Notes: No specific notes required.
+Quit Program
+o	Purpose: This function will allow the user to 
+	quit and exit the program.
+o	Argument: This function will take in the command QU.
+o	Return Value: This function will return 1 and exit 
+	the program.
+o	Effect: This function will close the program.
+o	Notes: This function will close the program entirely.
+	Cancel Reservation
+o	Purpose: This function will allow the user to cancel a 
+	reservation.
+o	Argument: This function will take in the structs 
+	from the request seat function that are stored in the 
+	input command function.
+o	Return Value: This function will return an ?Empty? 
+	struct to the appropriate position in the 2-D array.
+o	Effect: This function will remove what?s stored 
+	in structs form other functions.
+o	Notes: No specific notes for this function.
+Print out Seating Chart
+o	Purpose: This function will print the 
+	seating chart and show who has what seats reserved and where.
+o	Argument: This function will take in the 2-D array built from the 
+	request function.
+o	Return Value: This function does not return any value.
+o	Effect: This function has no specific function.
+o	Notes: If there are no reservations in a particular seat, print 
+	?---?.
+Track and Print Revenue
+o	Purpose: This function will keep track of the revenue raised 
+	from selling all of the other seats.
+o	Argument: This function will take in the 2-D array built 
+	from the request function.
+o	Return Value: This function does not return any value.
+o	Effect: This function has no specific function.
+o	Notes: Remember to keep track of the different high and low
+ 	priced seats sold.
+
+
+
+
+
+

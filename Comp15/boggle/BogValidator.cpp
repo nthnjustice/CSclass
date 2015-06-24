@@ -1,0 +1,226 @@
+#include "BogValidator.h"
+
+/*****************************************************************************
+Precondition: Constructor - no precondition
+Postcondition: Head pointer is set to NULL
+*****************************************************************************/
+BogValidator::BogValidator()
+{
+	head = NULL;
+}
+
+/*****************************************************************************
+Precondition: There exists a BogValidator object
+Postcondition: Destroys the linked-list of user's guesses
+*****************************************************************************/
+BogValidator::~BogValidator()
+{
+	//pointer to traverse the linked-list
+	ANode* iter = head->next;
+	
+	//iterates through the linked-list and destroys it node by node
+	while (iter != NULL){
+		delete head;
+		head = iter;
+		iter = iter->next;
+	}
+
+	//destroys the pointers
+	delete head;
+	delete iter;
+}
+
+/*****************************************************************************
+Precondition: A dictionary object exists
+Postcondition:	Adds the dictionary to the object declared in the class
+*****************************************************************************/
+bool BogValidator::readDict()
+{
+	string s;
+	int i = 0;
+
+	while (cin >> s){
+		//reads until the sentinel
+		if (s == "."){
+			break;
+		}
+
+		//sets each word to all uppercase
+		while (s.length() > 0){
+			s[i] = toupper(s[i]);
+			i++;
+		}
+
+		//inserts each word to the object
+		dict.insert(s);
+	}
+
+	return true;
+}
+
+/*****************************************************************************
+Precondition: Board dimensions are sent in
+Postcondition: A boggle board is built to the proper size
+*****************************************************************************/
+bool BogValidator::readBoard()
+{
+	int junk = 0;
+
+	cin >> boardSize;
+	//catches the second dimension because it is not needed
+	cin >> junk;
+
+	//checks validity of dimensions
+	if (boardSize != junk){
+		return false;
+	}
+	if (boardSize <= 0){
+		return false;
+	}
+
+	//builds the board to the proper size
+	bogBoard = new Tile*[boardSize];
+
+	//constructs the second dimension
+	for (int i = 0; i < boardSize; i++){
+		bogBoard[i] = new Tile[boardSize];
+	}
+
+	fillBoard();
+
+	return true;
+}
+
+/*****************************************************************************
+Precondition: A readboard() function was called and built a board to the 
+	proper dimension
+Postcondition: Fills the board with letters
+*****************************************************************************/
+void BogValidator::fillBoard()
+{
+	char x;
+
+	//loops to fill the board with the letters
+	for (int i = 0; i < boardSize; i++){
+		for (int j = 0; j < boardSize; j++){
+			cin >> x;
+			//converts the letters to all uppercase
+			x = toupper(x);
+			bogBoard[i][j].letter = x;
+		}
+	}
+}
+
+/*****************************************************************************
+Precondition: There exists a filled boggle boards, the user submits their 
+	guesses
+Postcondition: Calls other functions to complete the program
+*****************************************************************************/
+void BogValidator::checkWords()
+{
+	//iter to traverse the linked-list of guesses
+	ANode* iter = head;
+	iter = head;
+
+	//calls inportant functions for the declared BogSolver object
+	solved.readDict();
+	solved.readBoard();
+	solved.solve();
+
+	//calls a function to take the user's guesses
+	takeInput();
+	//checks to see if each user guess is valid
+	while (iter != NULL){
+		if (isValid(iter->word)){
+			iter->validity = true;
+		}
+		else{
+			iter->validity = false;
+		}
+		iter = iter->next;
+	}
+}
+
+/*****************************************************************************
+Precondition: The user submits a list of guesses of words from the boggle
+	board
+Postcondition: Builds a linked-list of guesses
+*****************************************************************************/
+void BogValidator::takeInput()
+{
+	string s;
+	ANode* iter = new ANode;
+	iter = head;
+
+	while (cin >> s){
+		//if the list is empty
+		if (head == NULL){
+			head = new ANode;
+			head->word = s;
+			head->validity = false;
+			head->next = NULL;
+			iter = head;
+		}
+		else{
+			iter->next = new ANode;
+			iter = iter->next;
+			iter->word = s;
+			iter->validity = false;
+			iter->next = NULL;
+		}
+	}
+}
+
+/*****************************************************************************
+Precondition: The user submits a list of guesses of words from the boggle
+	board
+Postcondition: Returns true if the user's guess is in the dictionary, else
+	false
+*****************************************************************************/
+bool BogValidator::isValid(string s)
+{
+	bool status = false;
+	//variable to hold the size of the linked-list
+	int bound = solved.getWords()->numWords;
+
+	for (int i = 0; i < bound; i++){
+		for (int j = 0; j < solved.getWords()->words[i].numLetts; j++){
+			//checks the guess character by character to see if it a prefix or a
+			//	word
+			if(s[j] == solved.getWords()->words[i].letts[j].c){
+				status = true;
+			}
+			else{
+				status = false;
+			}
+		}
+		if (status){
+			return true;
+		}
+	}
+
+	return status;
+}
+
+/*****************************************************************************
+Precondition: The user submits a list of guesses of words from the boggle
+	board
+Postcondition: Prints the list of user's guesses and whether or not they are
+	valid guesses for the boggle board
+*****************************************************************************/
+void BogValidator::output()
+{
+	ANode* iter = new ANode;
+	iter = head;
+
+	while (iter != NULL){
+		if (iter->validity){
+			cout << "OK ";
+		}
+		else if (!iter->validity){
+			cout << "NO ";
+		}
+		cout << iter->word << endl;
+		iter = iter->next;
+	}
+}

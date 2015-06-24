@@ -1,0 +1,50 @@
+/***********************************************************************/
+/*                        FrequencyTable1 Interface                    */
+/***********************************************************************/
+/* A minimal implementation of a Frequency Table.                      */
+/* Author:  Nathan Justice                                             */
+/*                                                                     */
+/* A list is either:                                                   */
+/*      -empty                                                         */
+/*      -non-empty node containing:                                    */
+/*           - a struct Head                                           */
+/*           - a Node tail                                             */
+/*                                                                     */
+/*  Operations:                                                        */
+/*  (see functions below for parameter/type information)               */
+/*    FrequencyTable(): initializes an empty list                     */
+/*    in(): checks if a word is in the list                            */
+/*    insert(): adds a word to the lift if it is not already present   */
+/*    frequency(): finds the frequency of a word in the list           */
+/*    size(): finds the size of the list                               */
+/*    get(): finds the n-th node in the list                           */
+/*    destroy(): clears and destroys the list                          */
+/*    fill_head(): fills the head of a node with data                  */
+/*    whatnode(): finds the node that a word is in                     */
+/*    addnode(): adds a node with a word if it isn't already present   */
+/***********************************************************************/
+
+#include <iostream>
+using namespace std;
+
+#include "WordFreqList.h"
+
+//class represents a "Frequency Table" that ultimately prints the
+//frequency of alphabetized words in a document
+class FrequencyTable
+{
+  public:
+    FrequencyTable();
+    bool in(string word);
+    void insert(string word);
+    int frequency(string word);
+    int size();
+    void get(int n, string *ptrToWord, int *ptrToFrequency);
+    void destroy();
+  private:
+    WordFreqList list;//the linked list
+
+    Head fill_head(string word);
+    WordFreqList whatnode(string word);
+    void addnode(string word);
+};

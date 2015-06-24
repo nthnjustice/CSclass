@@ -1,0 +1,35 @@
+Good day,
+
+Welcome to my program.
+
+First thing's first: After publishing my programs to the website I have come to
+find that neither my bbchecker nor my bbsolver works correctly. Regrettably,
+I need to submit incomplete programs. I'm in a position in which I can no 
+longer afford time to continue this assignment. I've written all of my
+functions, I believe my algorithms are sound, and I've attempted to complete
+each requirement for this assignment. I hope I wrote redeeming code. 
+
+I would like to start with BogScorer.cpp. I utilize a linked-list to store the
+words and their validity that the user submits. The linked-list is composed of
+Nodes that store the valditiy as a string ("OK" or "NO"), the word, the nubmer
+of points the word receives, and a pointer to another Node. First I build the
+linked-list with all of the words and their validity. Next I iterate through
+the list and allocate points according to the length of the word. Lastly I 
+iteratre through the list again and total all of the points. I then print the
+results. 
+
+Next is BogSolver.cpp. BogSolver takes in a dictionary. I used the dictionary 
+provided to us. Next the program takes in dimensions for a Boggle boad and it 
+builds the board and fills it with letters sent in from main. The board
+is a 2D dynamic arrays of a struct called Tile. A Tile consists of a letter
+stored as a string and a boolean that indicates whether or not the cell has
+been visited by the search function. The function also has a BogWordList struct
+that represents a list of all the words in the boggle board found by the 
+program. I also have various print functions. One that prints all of the words
+in the HBF format, one that prints all words of a desired length in HBF format,
+one that prints all the words as a list, and one that prints all the words of
+a desired length in a list. My solve() function builds a valid word from board
+Tiles. The functions calls the traverse() function, which is recursive by 
+nature. The function searches the word, checking each Node and all of it's 
+neighbors as it builds prefixes. Once a word is constructed, it is stored
+in the list. 

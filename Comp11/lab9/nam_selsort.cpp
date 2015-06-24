@@ -1,0 +1,128 @@
+#include <iostream>
+
+using namespace std;
+
+/*
+ * nam_selsort.cpp - selection sort with count of swaps and compares
+ *
+ * purpose:	see how count of swaps and comps depends on
+ *		a) order of input data
+ *		b) size of data set
+ *
+ * written by: Nathan Justice
+ * on    date: 3/27/13
+ */
+
+const int SIZE = 50000;
+
+struct Person {
+        int    year;
+        string name;
+};
+
+int read_in_data(Person array[], int space);
+void name_sort  (Person array[], int len);
+void print_array(Person array[], int len);
+int locate_lowest(Person array[], int start, int len);
+void swap_elements(Person array[], int start, int lowest);
+
+int main() 
+{
+        Person person[SIZE];
+        int    len = 0;
+
+        len = read_in_data(person, SIZE);
+        name_sort(person, len);
+        print_array(person, len);
+
+        return 0;
+}
+
+/*
+ * read_in_data -- read in array of year, name from cin
+ * args: array to read, maxlen
+ * rets: number of items read
+ * note: truncates input if space is filled, no error report
+ * NEW!: stops at EOF, no sentinel needed
+ */
+int read_in_data(Person array[], int space)
+{
+        int  pos      = 0;
+        bool finished = false;
+
+        while ((pos < space) && (!finished)) {
+                cin >> array[pos].year;
+                if (cin.eof()) {
+                        finished = true;
+                } else {
+                        cin >> array[pos].name;
+                        pos++;
+                }
+        }
+        return pos;
+}
+
+/*
+ * name_sort -- sort an array structs on name
+ *   args: array of structs, number of elements in array
+ *   rets: nothing
+ *   acts: a) Sorts the array using the selection sort algorithm
+ *         b) At end, prints number of comparisons and number of swaps
+ */
+void name_sort(Person array[], int len) 
+{
+  int lowest = 0;
+  int start = 0;
+
+  for (int i = 0; i < len; i++){
+    lowest = locate_lowest(array, start, len);
+    swap_elements(array, start, lowest);
+    start++;
+  }
+
+}
+
+// -------------------- WRITE TWO HELPER FUNCTIONS -----------------
+
+// locate_lowest -- find index of lowest value in range
+//   args: array of structs, start of range, end of range
+//   rets: index of lowest item in range
+//   note: if two with lowest, returns first one
+int locate_lowest(Person array[], int start, int len)
+{
+  int min = 0;
+
+  for(int i = start; i < len; i++){
+    if(array[i].name < array[start].name)
+      min = i;
+  }
+
+  return min;
+}
+
+// swap_elements -- swap two elements in the array
+//   args: array of structs, index of pos1, index of pos2
+//   rets: nothing
+
+// -------------------- END OF HELPER FUNCTIONS --------------------
+void swap_elements(Person array[], int x, int y)
+{
+  Person temp = array[x];
+
+  array[x] = array[y];
+  array[y] = temp;
+}
+/*
+ * print_array -- print the array to cout
+ *  args: array of strings, number of elements to print
+ *  rets: nothing
+ *  acts: loops through array sending each item to cout
+ */
+void print_array(Person array[], int len) 
+{
+        int i;
+
+        for (i = 0; i < len; i++) {
+                cout << array[i].year << " " << array[i].name << endl;
+        }
+}

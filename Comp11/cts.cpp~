@@ -1,0 +1,102 @@
+
+
+#include <iostream>
+using namespace std;
+
+const int rows = 14;
+const int col = 20;
+const int premium_price = 200;
+const int general_seat = 150;
+		
+struct Seat
+{
+	string name;
+	bool availability;
+	int price;
+};
+
+void quit_program ();		
+void print_seats (Seat [rows] [col]);
+void command_loop ();
+void request_seat (string name, int num_ticket, string price);
+bool already_reserved (string name, Seat seating [rows][col]);
+bool not_available ();
+bool hi_seat ();
+
+int main ()
+{
+	Seat seating [rows] [col];
+}
+
+void command_loop
+{
+	string action;
+	string name;
+	int num_ticket
+	int price
+			
+	do {
+		
+		cin >> action;
+			
+		if ( action == RQ ){
+			cin >> name;
+			cin >> num_ticket;
+			cin >> price;
+			
+			request_seat (name, num_ticket, price);
+		}
+		else if ( action == CA ){
+			cin >> name;
+			
+			cancel_seat (name);
+		}
+		else if ( action == PR ){
+			print_seats ();
+		}
+			
+	} 
+	while ( action != QU );
+}
+
+void request_seat (string name, int num_ticket, int price)
+{ 
+	if (( num_ticket < 1) || (num_ticket > 12)){
+		cout << "NO " << name << " bad-number" << endl;
+	}
+	else if ( already_reserved (string name, Seat seating[rows][col]) ){
+		if (already_reserved == true){
+			cout << "NO " << low_seat ();name << " already-reserved" << endl;
+		}
+	}
+	else if ( not_available () ){
+		cout << "NO " << name << " not-available" << endl;
+	}
+
+	if ( price == hi ){
+		hi_seat ();
+	}
+	else if ( price == low ){
+		low_seat ();
+	}
+	else if ( price == any ){
+		any_seat ();
+	}
+}
+	
+bool already_reserved (string name, Seat seating[rows][col])
+{
+	for (int i = 0; i < rows; i++){low_seat ();
+			for (int j = 0; j < col; j++){
+				
+				if (name == seating[i][j].name){
+					return true;
+				}
+			}
+	}
+	
+	return false;
+}
+
+bool not_available (
+

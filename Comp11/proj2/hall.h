@@ -1,0 +1,72 @@
+#include <string>
+using namespace std;
+
+const int ROWS = 14;
+const int COLS = 20;
+const int SIZE = 7;
+const int min_num_seat = 1;
+const int max_num_seat = 12;
+const int HI_LIM_BOTTOM = 8;
+const int HI_LIM_LEFT = 4;
+const int HI_LIM_RIGHT = 16;
+const double premium_price = 200.0;
+const double general_price = 150.0;
+const double deduction = .1;
+
+/******************************************************************************
+Difinition of the Hall class:
+  A Hall class maintains a concert hall and allows a user to request
+  reservations, cancel reservations, print a seating chart, or quit the
+  program
+Operations for a Hall
+  request - takes a name, number of tickets, price type desired, and day
+    desired
+  cancel - takes in a customer ID and day desired for cancellation
+  print - allows the user to print a specific day or all of the days
+******************************************************************************/
+class Hall
+{
+  public:
+
+    //constuctor
+    Hall();
+    //request seat
+    bool request(string custID, int num, string price, int day);
+    //cancel seat
+    bool cancel(string custID);
+    //print hall
+    void print();
+
+  private:
+
+    //seating chart
+    string seating[ROWS][COLS];
+    //pricing chart
+    double pricing[ROWS][COLS];
+    int private_day;
+
+    double revenue_calculator();
+    int split_seating(string custID, int num, string price);
+    int check_split_all(string custID, int num);
+    int check_split_hi(string custID, int num, string price);
+    int fill_split_hi(string custID, int num);
+    int fill_split_lo_left(string custID, int num);
+    int fill_split_lo_right(string custID, int num);
+    int fill_split_lo_bottom(string custID, int remaining_seats_mark2);
+    int check_split_any(string custID, int num);
+    bool search_hi_seating(string custID,int num,string price);
+    bool search_lo_seating(string custID, int num, string price);
+    bool name_already_reserved(string custID);
+    bool bad_number_requested(string custID, int num);
+    bool check_if_occupied_hi(int num, int row_num, int col_num);
+    bool check_if_occupied_left(int num, int row_num, int col_num);
+    bool check_if_occupied_right(int num, int row_num, int col_num);
+    bool check_if_occupied_bottom(int num, int row_num, int col_num);
+    bool any_seating(string custID, int num, string price);
+    bool check_seating_type_desired(string custID, int num, string price);
+    void fill_seat(string custID, int num, int row_num, int col_num, 
+                   double ticket_price);
+    void printing_split_confirmation(string custID, int num);
+    void fill_split_any(string custID, int num);
+    void rejection(string custID);
+};

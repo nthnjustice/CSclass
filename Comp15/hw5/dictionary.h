@@ -1,0 +1,37 @@
+#include <iostream>
+#include <cctype>
+#include <string>
+#include <cstdlib>
+using namespace std;
+
+//The size of the alphabet and the size of each Node array
+const int CAPACITY = 26;
+
+//Represents characters of strings and holds an array
+struct Node{
+		//Signals the end of a word
+		bool flag;
+		//Pointer to a dynamic array of Nodes
+		Node** children;
+};
+
+class Dictionary{
+	public:
+		Dictionary();
+
+		//Inserts strings into the Dictionary
+		bool insert(string s);
+		//Checks to see if a string is a prefix of a word in the Dictionary
+		bool isPrefix(string s);
+		//Checks to see if a string is a word in the Dictionary
+		bool isWord(string s);
+	private:
+		//Pointer to the first Node
+		Node* root;
+
+		//Returns the interger value of a character passed into the function
+		int charToInt(char c);
+
+		//Converts the string to lowercase
+		string convert(string s);
+};

@@ -1,0 +1,359 @@
+#include "BogSolver.h"
+
+/*****************************************************************************
+Precondition: Constructor - no precondition
+Postcondition: Board pointer is set to NULL, array of words is set to NULL, 
+	capacity of word list is initialized to 10
+*****************************************************************************/
+BogSolver::BogSolver()
+{
+	bogBoard = NULL;
+	wordList.words = NULL;
+	wordListCapacity = 10;
+}
+
+/*****************************************************************************
+Precondition: An instance of BogSolver exists
+Postcondition: Destroys the board, destroys each word in the list, destroys 
+	the list
+*****************************************************************************/
+BogSolver::~BogSolver()
+{
+	delete bogBoard;
+	
+	//loops to delete each word in the list
+	for (int i = 0; i < wordList.numWords; i++){
+		//deletes words by deleting the array of letters
+		delete wordList.words[i].letts;
+	}
+
+	delete [] wordList.words;
+}
+
+/*****************************************************************************
+Precondition: A dictionary object exists
+Postcondition:	Adds the dictionary to the object declared in the class
+*****************************************************************************/
+bool BogSolver::readDict()
+{
+	string s;
+	int i = 0;
+
+	while (cin >> s){
+		//reads until the sentinel
+		if (s == "."){
+			break;
+		}
+		
+		//sets each word to all uppercase
+		while (s.length() > 0){
+			s[i] = toupper(s[i]);
+			i++;
+		}
+		
+		//inserts each word to the object
+		dict.insert(s);
+	}
+
+	return true;
+}
+
+/*****************************************************************************
+Precondition: Board dimensions are sent in
+Postcondition: A boggle board is built to the proper size
+*****************************************************************************/
+bool BogSolver::readBoard()
+{
+	int junk = 0;
+
+	cin >> boardSize;
+	//catches the second dimension because it is not needed
+	cin >> junk;
+
+	//checks validity of dimensions
+	if (boardSize != junk){
+		return false;
+	}
+	if (boardSize <= 0){
+		return false;
+	}
+
+	//builds the board to the proper size
+	bogBoard = new Tile*[boardSize];
+	
+	//constructs the second dimension
+	for (int i = 0; i < boardSize; i++){
+		bogBoard[i] = new Tile[boardSize];
+	}
+
+	fillBoard();
+
+	return true;
+}
+
+/*****************************************************************************
+Precondition: A readboard() function was called and built a board to the 
+	proper dimension
+Postcondition: Fills the board with letters
+*****************************************************************************/
+void BogSolver::fillBoard()
+{
+	char x;
+
+	//loops to fill the board with the letters
+	for (int i = 0; i < boardSize; i++){
+		for (int j = 0; j < boardSize; j++){
+			cin >> x;
+			//converts the letters to all uppercase
+			x = toupper(x);
+			bogBoard[i][j].letter = x;
+		}
+	}
+}
+
+/*****************************************************************************
+Precondition: A filled boggle board exists 
+Postcondition: Returns true when completed
+*****************************************************************************/
+bool BogSolver::solve()
+{
+	string tempWord;
+	tempWord = "";
+
+	for (int i = 0; i < boardSize; i++){
+		for (int j = 0; j < boardSize; j++){
+			//builds the word in progress
+			tempWord+= bogBoard[i][j].letter;
+			//calls function to search the board
+			traverse(tempWord, i, j);
+			//resets the word in progress for the next word
+			tempWord = "";
+		}
+	}
+
+	return true;
+}
+
+/*****************************************************************************
+Precondition: A filled board exists and the solve() function was called
+Postcondition: Function searches the board for words present in the 
+	dictionary, utilizes recursion
+*****************************************************************************/
+void BogSolver::traverse(string tempWord, int row, int col)
+{
+	//if the word in progress is not a prefix, ditch it
+	if (!dict.isPrefix(tempWord)){
+		return;
+	}
+
+	//if the node has been looked at, don't look at it again
+	if (bogBoard[row][col].visited == true){
+		return;
+	}
+
+	//if the word is in the dictionary, add it to the list
+	if (dict.isWord(tempWord)){
+		store(tempWord);
+	}
+
+	for (int i = row - 1; i < row + 1; i++){
+		for (int j = col - 1; j < col + 1; j++){
+			//checks for a search in bounds
+			if ((i > 0) && (j > 0) && (j <= boardSize)){
+				//recurse
+				traverse(tempWord, row, col);
+			}
+		}
+	}
+}
+
+/*****************************************************************************
+Precondition: A word guessed by the user exists and the traverse() function
+	was called
+Postcondition: Stores the valid word in the list
+*****************************************************************************/
+void BogSolver::store(string tempWord)
+{
+	int intTemp = tempWord.length();
+
+	//if the list is empty, build a new dynamic array to store words
+	if (wordList.words == NULL){
+		wordList.words = new BogWord[wordListCapacity];
+		for (int i = 0; i < intTemp; i++){
+			wordList.words[0].letts[i].c = tempWord[i];
+			wordList.words[0].numLetts = tempWord.length();
+			wordList.numWords = 1;
+		}
+	}
+
+	//expands the list if the dynamic array runs out of space
+	if (wordList.numWords >= wordListCapacity){
+		expand();
+	}
+	
+	//loop stores the word in the list
+	for (int i = 0; i < intTemp; i++){
+		wordList.words[wordList.numWords + 1].letts[i].c = tempWord[i];
+		wordList.words[wordList.numWords + 1].numLetts = tempWord.length();
+		wordList.numWords++;
+	}
+}
+
+/*****************************************************************************
+Precondition: The list runs out of space to store more words
+Postcondition:	The capacity of the dynamic array list is doubled
+*****************************************************************************/
+void BogSolver::expand()
+{
+	wordListCapacity = wordListCapacity * 2;
+}
+
+/*****************************************************************************
+Precondition: There exists a list of words as a dynamic array
+Postcondition:	Returns the number of words in the list
+*****************************************************************************/
+int BogSolver::numWords()
+{
+	return wordList.numWords;
+}
+
+/*****************************************************************************
+Precondition: There exists a list of words as a dynamic array
+Postcondition:	Returns the number of words in the list of the desired size
+*****************************************************************************/
+int BogSolver::numWords(int len)
+{
+	int desired = 0;
+
+	for (int i = 0; i < wordList.numWords; i++){
+		if (wordList.words->numLetts == len){
+			desired++;
+		}
+	}
+
+	return desired;
+}
+
+/*****************************************************************************
+Precondition: There exists a list of words as a dynamic array
+Postcondition: Retruns the list of words in the board found by the program,
+	stored as a dynamic array
+*****************************************************************************/
+BogWordList* BogSolver::getWords()
+{
+	BogWordList* tempList = new BogWordList;
+
+	for (int i = 0; i < wordList.numWords; i++){
+		tempList->words[i] = wordList.words[i];
+		tempList->numWords++;
+	}
+
+	return tempList;
+}
+
+/*****************************************************************************
+Precondition: There exists a list of words as a dynamic array
+Postcondition: Retruns the list of words in the board found by the program,
+	stored as a dynamic array
+*****************************************************************************/
+BogWordList* BogSolver::getWords(int len)
+{
+	BogWordList* tempList = new BogWordList;
+
+	for (int i = 0; i < wordList.numWords; i++){
+		if (wordList.words->numLetts == len){
+			tempList->words[i] = wordList.words[i];
+		}
+	}
+
+	return tempList;
+}
+
+/*****************************************************************************
+Precondition: There exists a list of words found in the board by the program,
+	stored as a dynamic array
+Postcondition: Prints all of the words, character by character, and each 
+	letters appropriate coordinates in the board
+*****************************************************************************/
+void BogSolver::printWords()
+{
+
+	for (int i = 0; i < wordList.numWords; i++){
+		cout << "< ";
+		for (int j = 0; j < wordList.words[i].numLetts; j++){
+			//if (wordList.words[i].letts[j] == 'Q'){
+			//	cout << "QU " << endl;
+			//}
+			//else{
+				cout << wordList.words[i].letts[j].c << " ";
+			//}
+			cout << wordList.words[i].letts[j].row << " ";
+			cout << wordList.words[i].letts[j].col << " ";
+		}
+		cout << ">" << endl;
+	}
+
+	//end of list
+	cout << "< >" << endl;
+}
+
+/*****************************************************************************
+Precondition: There exists a list of words found in the board by the program,
+	stored as a dynamic array
+Postcondition: Prints all of the words of the desired size, character by 
+	character, and each letters appropriate coordinates in the board
+*****************************************************************************/
+void BogSolver::printWords(int len)
+{
+	for (int i = 0; i < wordList.numWords; i++){
+		if (wordList.words[i].numLetts == len){
+			cout << "< ";
+			for (int j = 0; j < wordList.words[i].numLetts; j++){
+				if (wordList.words[i].letts[j] == 'Q'){
+					cout << "QU " << endl;
+				}
+				else{
+					cout << wordList.words[i].letts[j].c << " ";
+				}
+				cout << wordList.words[i].letts[j].row << " ";
+				cout << wordList.words[i].letts[j].col << " ";
+			}
+			cout << ">" << endl;
+		}
+	}
+
+	//end of list
+	cout << "< >" << endl;
+}
+
+/*****************************************************************************
+Precondition: There exists a list of words found in the board by the program,
+	stored as a dynamic array
+Postcondition: Prints all of the words found in the board by the program in
+	a list format
+*****************************************************************************/
+void BogSolver::listWords()
+{
+	for (int i = 0; i < wordList.numWords; i++){
+		for (int j = 0; j < wordList.words->numLetts; j++){
+			cout << wordList.words[i].letts[j].c;
+		}
+	}
+}
+
+/*****************************************************************************
+Precondition: There exists a list of words found in the board by the program,
+	stored as a dynamic array
+Postcondition: Prints all of the words of the desired length found in the 
+	board by the program in a list format
+*****************************************************************************/
+void BogSolver::listWords(int len)
+{
+	for (int i = 0; i < wordList.numWords; i++){
+		if (wordList.words[i].numLetts == len){
+			for (int j = 0; j < wordList.words->numLetts; j++){
+				cout << wordList.words[i].letts[j].c;
+			}
+		}
+	}
+}

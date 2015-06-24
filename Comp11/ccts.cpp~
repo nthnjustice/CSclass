@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+
+#include "hall.h"
+
+int main()
+{
+  Hall hall;
+
+  string command;
+
+  do{
+    cin >> command;
+
+    if(command == "RQ"){
+    }
+    else if(command == "CA"){
+    }
+    else if(command == "PR"){
+      hall.print();
+    }
+  }while(command != "QU");
+
+}
+
+

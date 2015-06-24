@@ -1,0 +1,9 @@
+Hello Grader,
+
+I'm going to describe my program from the inner-most level and work myself out.
+
+The first level is a dynamic array of Workers. A Worker processes package units in a queue at a rate defined by their single member variable. Their rate is sent in from main(). Even though this program is intended to handle only a single Worker, I made the structure a dynamic array anticipating the need for multiple Workers in the second version of this assignmnet. 
+
+The dynamic array of Workers is stored in an AssemblyLine. Essentially, an AssemblyLine is a means of storing a dynamic array of workers. In the factory class, there exists a pointer to a dynamic array of AssemblyLines. I did this anticipating the need for multiple AssemblyLines, each with their own array of Workers, in the next version of this assignment. 
+
+A linked-list queue is declared in the Factory class and implemented as its own class. The linked

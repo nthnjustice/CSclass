@@ -1,0 +1,24 @@
+#include <iostream>
+using namespace std;
+
+//struct for a linked-list of words
+struct Node{
+	string validity;
+	string word;
+	int points;
+	Node* next;
+};
+
+class BogScorer{
+	public:
+		//builds the linked-list
+		void assignment(string s, Node* iter);
+		//calculates the individual score of a word
+		void wordScore(Node* iter);
+		//print function
+		void output(Node* head);
+		//prints the total score of all words combined
+		void finalScore(Node* head);
+};
+
+

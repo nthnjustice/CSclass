@@ -1,0 +1,115 @@
+/***********************************************************************/
+/*                          IntList Utilities                          */
+/***********************************************************************/
+
+#include <iostream>
+
+using std::cout;
+
+#include "IntList.h"
+
+
+/*
+ * Can use a while or for loop. 
+ */
+void print(IntList list)
+{
+  cout << "[";
+  while(!isEmpty(list)){
+    cout << head(list);
+    if(!isEmpty(tail)(list)){
+      cout << " ,";
+    }
+    list = tail(list);
+  }
+  cout << "]";
+}
+
+// 	4 ~> 3 ~> ()
+void printArtistically(IntList list)
+{
+  while(!isEmpty(list)){
+    cout << head(list);
+    cout << " ~> ";
+    list = tail(list);
+  }
+  cout << "()";
+}
+
+int sumList(IntList list)
+{
+  int sum = 0;
+
+  while(!isEmpty(list)){
+    sum += head(list);
+    list = tail(list);
+  }
+  return sum;
+}
+
+int length(IntList list)
+{
+  int len;
+
+  while(!isEmpty(list)){
+    len++;
+    list = tail(list);
+  }
+  return len;
+}
+
+IntList copy(IntList list)
+{
+  IntList list2;
+
+  while(!isEmpty(list)){
+    head(list2) = head(list);
+    list = tail(list);
+  }
+  return list2;
+}
+
+IntList mapIncrement(IntList list)
+{
+  IntList list2;
+
+  while(!isEmpty(list)){
+    head(list2) = head(list) + 1;
+    list = tail(list);
+  }
+  return list2;
+}
+
+IntList mapIncrementBy(IntList list, int increment)
+{
+	// STUB
+	return empty();
+}
+
+IntList sum(IntList list1, IntList list2)
+{
+  int sum = 0;
+
+  while(!isEmpty(list)){
+    sum += head(list);
+    list = tail(list);
+  }
+return sum;
+}
+
+IntList filterPositive(IntList list)
+{
+	// STUB
+	return empty();
+}
+
+IntList range(int lo, int hi)
+{
+	// STUB
+	return empty();
+}
+
+void deleteList(IntList *p_list)
+{
+	// STUB
+}

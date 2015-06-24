@@ -1,0 +1,22 @@
+PR
+RQ a 10 hi
+RQ b 10 hi
+RQ c 10 hi
+RQ d 10 hi
+RQ e 10 hi
+RQ f 10 hi
+RQ g 10 hi
+RQ h 10 hi
+PR
+RQ i 10 hi
+CA a
+RQ a 10 any
+RQ aa 12 lo
+RQ bb 12 lo
+RQ cc 12 lo
+RQ dd 12 lo
+RQ ee 12 lo
+RQ ff 12 lo
+RQ gg 12 lo
+PR
+QU

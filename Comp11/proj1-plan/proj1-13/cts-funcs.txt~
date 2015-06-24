@@ -1,0 +1,68 @@
+Name: int main()
+purpose: define seating chart and pricing chart, calls the input command function
+arguments: n/a
+returns: n/a
+effects: initializes the two arrays
+notes: n/a
+
+Name: command()
+purpose: initializes command and allows the user to input the desired command 
+	then calls the appropriate
+	function
+arguments: seating chart and pricing chart
+returns: n/a
+effects: n/a
+notes: user must type input in the correct format
+
+Name: request_seat()
+purpose: initializes price and allows the user to request a seat at high, low, 
+	or any 	price, also initializes num_seats and allows the user to request 
+	the number of seats requested.
+arguments: command, seating chart, pricing chart
+returns: n/a
+effects: n/a
+notes: function calls appropriate function after desired price is inputted
+
+Name: high_price()
+purpose: assigns the appropriate number of seats to the user in the premium 
+	seating
+arguments: price, seating chart, pricing chart, and num_seats
+returns: seating chart and pricing chart
+effects: alters the seating and pricing charts
+notes: this is for premium seating only
+
+Name: low_price()
+purpose: assigns the appropriate number of seats to the user in the general
+	seating
+arguments: price, seating chart, pricing chart, and num_seats
+returns: seating chart and pricin chart
+effects: alters the seating and pricing charts
+notes: this is for general seating only
+
+Name: any_price()
+purpose: assigns the appropriat enumber of seats to the user looking first 
+	in premium seating, and then general
+arguments: price, seating chart, pricin chart, and num_seats
+returns: seating chart and pricing chart
+effects: alters the seating and pricing charts
+notes: this is for when the user has no seating preference, the function 
+	seeks to obtain the most revenue
+	
+Name:split_party()
+purpose: subtracts 10% off the price of the tickets for a party that is split
+	up into different rows when being seated
+arguments: seating and pricing charts
+returns: seating and pricing charts
+effects: alters pricing chart
+notes: can be called by either the high, low, or any price functions
+
+Name: quit_program()
+purpose: to terminate the program
+arguments: command
+retuns: n/a
+effects: ends the program
+notes: can only be called by the command function
+
+Name: cancel()
+purpose: 
+	

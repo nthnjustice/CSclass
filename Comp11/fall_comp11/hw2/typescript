@@ -1,0 +1,63 @@
+Script started on Thu Sep 20 15:12:54 2012
+~/Desktop/comp11/hw2 > hostname
+sunfire31
+~/Desktop/comp11/hw2 > who
+noah     pts/1        Sep 20 10:45 (localhost:11.0)
+mrogov02 pts/3        Sep 20 14:55 (c-98-217-68-207.hsd1.ma.comcast.net)
+mcao01   pts/4        Sep 20 14:58 (wr-130-64-93-49.medford.tufts.edu)
+jfeuerst pts/5        Sep 13 17:57 (c-98-217-74-198.hsd1.ma.comcast.net)
+spokha01 pts/6        Sep 20 15:00 (resnet160-41.medford.tufts.edu)
+agronb01 pts/7        Sep 20 14:56 (wr-130-64-195-190.medford.tufts.edu)
+njusti01 pts/8        Sep 20 15:10 (wr-130-64-186-75.medford.tufts.edu)
+sskret   pts/9        Sep 20 11:02 (64.197.5.90)
+ejp      pts/10       Sep 19 11:12 (woodstock.eecs.tufts.edu)
+ali04    pts/11       Sep 20 15:07 (wr-130-64-219-52.medford.tufts.edu)
+rkolla01 pts/13       Sep 20 14:57 (209-6-41-150.c3-0.smr-ubr1.sbo-smr.ma.cable.rcn.com)
+dguri01  pts/14       Sep 20 14:57 (wr-130-64-180-242.medford.tufts.edu)
+slenoa01 pts/15       Sep 20 14:46 (c-24-61-43-125.hsd1.ma.comcast.net)
+awishn02 pts/16       Sep 20 14:58 (wr-130-64-218-220.medford.tufts.edu)
+cmeng01  pts/17       Sep 20 14:15 (resnet157-94.medford.tufts.edu)
+xfeng    pts/18       Sep 18 13:56 (xian.eecs.tufts.edu)
+mrogov02 pts/21       Sep 20 15:11 (c-98-217-68-207.hsd1.ma.comcast.net)
+babuei01 pts/24       Sep 20 15:11 (wr-130-64-176-217.medford.tufts.edu)
+mrisgin  pts/25       Sep 20 13:53 (unhm-2060.unh.edu)
+ttarra01 pts/26       Sep 20 15:12 (wr-130-64-187-241.medford.tufts.edu)
+njusti01 pts/29       Sep 20 15:12
+~/Desktop/comp11/hw2 > w
+
+pwd
+^[[A    
+ 15:13:22 up 7 days,  1:48, 21 users,  load average: 1.05, 1.09, 1.10
+USER     TTY      FROM              LOGIN@   IDLE   JCPU   PCPU WHAT
+noah     pts/1    localhost:11.0   10:45    2:32  18.52s  0.36s -csh
+mrogov02 pts/3    c-98-217-68-207. 14:55    2:24   2.80s  0.17s sshd: mrogov02 
+mcao01   pts/4    wr-130-64-93-49. 14:58    9:59   0.11s  0.11s -bash
+jfeuerst pts/5    c-98-217-74-198. 13Sep12 43:13m 37.65s 37.44s pine -i
+spokha01 pts/6    resnet160-41.med 15:00    1:23   0.12s  0.12s -tcsh
+agronb01 pts/7    wr-130-64-195-19 14:56    2:03   3.21s  0.65s sshd: agronb01 
+njusti01 pts/8    wr-130-64-186-75 15:10    2.00s  0.25s  0.00s script
+sskret   pts/9    64.197.5.90      11:02    2:33m  1.22s  1.01s pine
+ejp      pts/10   woodstock.eecs.t Wed11   27:52m  0.36s  0.36s -bash
+ali04    pts/11   wr-130-64-219-52 15:07    4:18   0.23s  0.23s -tcsh
+rkolla01 pts/13   209-6-41-150.c3- 14:57   12.00s  0.26s  0.26s -tcsh
+dguri01  pts/14   wr-130-64-180-24 14:57   36.00s  0.28s  0.28s -tcsh
+slenoa01 pts/15   c-24-61-43-125.h 14:46   44.00s  0.30s  0.30s -tcsh
+awishn02 pts/16   wr-130-64-218-22 14:58   29.00s  2.68s  0.26s sshd: awishn02 
+cmeng01  pts/17   resnet157-94.med 14:15    8:08   0.28s  0.28s -tcsh
+xfeng    pts/18   xian.eecs.tufts. Tue13    2days  2days  2days ./dt1
+mrogov02 pts/21   c-98-217-68-207. 15:11   18.00s  0.24s  0.24s -tcsh
+babuei01 pts/24   wr-130-64-176-21 15:11    1.00s  0.24s  0.24s -tcsh
+mrisgin  pts/25   unhm-2060.unh.ed 13:53    1:19m  0.33s  0.20s pine
+ttarra01 pts/26   wr-130-64-187-24 15:12    0.00s  0.23s  0.23s -tcsh
+njusti01 pts/29   -                15:12   16.00s  0.11s  0.04s w
+~/Desktop/comp11/hw2 > 
+~/Desktop/comp11/hw2 > pwd
+/h/njusti01/Desktop/comp11/hw2
+~/Desktop/comp11/hw2 > 
+~/Desktop/comp11/hw2 > ls -1
+[00m[00mdigits.cpp[00m
+[00mtypescript[00m
+[m~/Desktop/comp11/hw2 > exit
+exit
+
+Script done on Thu Sep 20 15:13:38 2012

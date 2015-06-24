@@ -1,0 +1,31 @@
+#include <iostream>
+#include "sandwichList.h"
+using namespace std;
+
+int main()
+{
+	SandwichList slist;
+	Order testCases[3];
+	Order temp;
+
+	testCases[0].sandwich = "Meatball";
+	testCases[0].customerName = "Jim";
+	testCases[0].orderNbr = 66;
+	testCases[0].fries = true;
+
+	testCases[1].sandwich = "Italian";
+	testCases[1].customerName = "Sid";
+	testCases[1].orderNbr = 67;
+	testCases[1].fries = true;
+
+	testCases[2].sandwich = "Ham";
+	testCases[2].customerName = "Nathan";
+	testCases[2].orderNbr = 68;
+	testCases[2].fries = true;
+
+	cout << "Printing:" << endl;
+	for(int i = 0; i < 3; i++){	
+		temp = slist.getNext();
+		slist.printOrder(temp);
+	}
+}

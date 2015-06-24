@@ -1,0 +1,45 @@
+:::: Test test1-A :::::
+==========v Constructor Tests v=======
+test1-A: sequenceA.cpp:46: ElementType SequenceA::first() const: Assertion `!isEmpty()' failed.
+
+:::: Test test1-L :::::
+==========v Constructor Tests v=======
+test1-L: sequenceL.cpp:83: ElementType SequenceL::first() const: Assertion `!isEmpty()' failed.
+
+:::: Test test2-A :::::
+==========v Constructor Tests v=======
+Trying to remove from empty
+
+:::: Test test2-L :::::
+==========v Constructor Tests v=======
+Trying to remove from empty
+
+:::: Test test3-A :::::
+==========v Constructor Tests v=======
+test3-A: sequenceA.cpp:46: ElementType SequenceA::first() const: Assertion `!isEmpty()' failed.
+
+:::: Test test3-L :::::
+==========v Constructor Tests v=======
+test3-L: sequenceL.cpp:83: ElementType SequenceL::first() const: Assertion `!isEmpty()' failed.
+
+:::: Test test4-A :::::
+==========v Constructor Tests v=======
+Error: in 'ElementType first()': no elements to return because current size is 0
+
+:::: Test test4-L :::::
+==========v Constructor Tests v=======
+Error: in 'ElementType first()': no elements to return because current size is 0
+
+:::: Test test5-A :::::
+==========v Constructor Tests v=======
+
+:::: Test test5-L :::::
+==========v Constructor Tests v=======
+
+:::: Test test6-A :::::
+==========v Constructor Tests v=======
+you are using my program incorrectly and now it will terminate
+
+:::: Test test6-L :::::
+==========v Constructor Tests v=======
+

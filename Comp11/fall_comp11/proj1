@@ -1,0 +1,14 @@
+
+
+#include <iostream>
+using namespace std;
+
+const int rows = 14;
+const int col = 20;
+const int premium_price = 200
+const int general_seat = 150
+
+int main ()
+{
+
+}

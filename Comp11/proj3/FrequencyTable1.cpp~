@@ -1,0 +1,185 @@
+/*****************************************************************************
+name: FrequencyTable1.cpp
+purpose: defines all the functions present in FrequencyTable1.h
+usage: functions are used to run the program wordfreq.cpp
+input: n/a
+output: n/a
+note: this program is a slower version of FrequencyTable2.cpp
+by: Nathan Justice
+modified: 4/19/13
+*****************************************************************************/
+
+#include <iostream>
+using namespace std;
+
+#include "FrequencyTable1.h"
+
+/******************************************************************************
+purpose: initializes an empty list
+input: n/a
+returns: n/a
+******************************************************************************/
+FrequencyTable::FrequencyTable()
+{
+  list = empty();//represents an empty Node
+}
+
+/******************************************************************************
+purpose: checks if a word is in the list
+input: word
+returns: true if the word exists in the list, false if the word is novel
+******************************************************************************/
+bool FrequencyTable::in(string word)
+{
+  WordFreqList temp = list;
+
+  while(temp != empty()){
+    if(word == temp->wfpair.word){//means the word is already in the list
+      return true;
+    }
+    temp = tail(temp);
+  }
+  return false;
+}
+
+/******************************************************************************
+purpose: adds a word to the list if it is not already present
+input:  word
+returns:  n/a
+******************************************************************************/
+void FrequencyTable::insert(string word)
+{
+  WordFreqList temp = list;
+
+  if(in(word)){
+    temp = whatnode(word);
+    set_freq(temp, (frequency(word) +1));
+  }
+  else{
+    addnode(word);
+  }
+}
+
+/******************************************************************************
+purpose: finds the node that a word is in
+input: word
+returns: a pointer to the node the word is present in
+******************************************************************************/
+WordFreqList FrequencyTable::whatnode(string word)
+{
+  WordFreqList temp = list;
+
+  while(word != temp->wfpair.word){
+    temp = tail(temp);
+  }
+
+  return temp;
+}
+
+/******************************************************************************
+purpose: fills the head of a node with data
+input: word
+returns: a new head for the list
+******************************************************************************/
+Head FrequencyTable::fill_head(string word)
+{
+  Head temp;
+
+  temp.word = word;
+  temp.frequency = 1;
+
+  return temp;
+}
+
+/******************************************************************************
+purpose: adds a node with a word if it isn't already present
+input: word
+returns: n/a
+******************************************************************************/
+void FrequencyTable::addnode(string word)
+{
+  WordFreqList before;
+  WordFreqList after;
+
+  if(isEmpty(list)){
+  list = prepend(fill_head(word), list);
+  }
+  if(word < list->wfpair.word){
+  list = prepend(fill_head(word), list);
+  }
+  else{
+  after = list;
+  while(!isEmpty(after) && word > after->wfpair.word){
+    before = after;
+    after = tail(after);
+  }
+
+   insertAfter(before, fill_head(word));
+  }
+}
+
+/******************************************************************************
+purpose: finds the frequency of a word in the list
+input: word
+returns: the frequency of a word in the list
+******************************************************************************/
+int FrequencyTable::frequency(string word)
+{
+  WordFreqList temp = list;
+
+  while(temp != empty()){
+    if(word == temp->wfpair.word){
+      return temp->wfpair.frequency;
+    }
+    temp = tail(temp);
+  }
+  return 0;
+}
+
+/******************************************************************************
+purpose: finds the size of the list 
+input: n/a
+returns: the size of the list as an integer
+******************************************************************************/
+int FrequencyTable::size()
+{
+  WordFreqList temp = list;
+  int counter = 0;
+
+  while(!isEmpty(temp)){
+    counter++;
+    temp = tail(temp);
+  }
+
+  return counter;
+}
+
+/******************************************************************************
+purpose: finds the n-th node in the list
+input: integer, a pointer to a word in the list and a pointer to the frequency
+        of a word in the list
+returns: n/a
+******************************************************************************/
+void FrequencyTable::get(int n, string *ptrToWord, int *ptrToFrequency)
+{
+  WordFreqList temp = list;
+
+  for(int i = 0; i != n; i++){
+    temp = tail(temp);
+  }
+
+  *ptrToWord = head(temp).word;
+  *ptrToFrequency = frequency(*ptrToWord);
+}
+
+/******************************************************************************
+purpose:clears and destroys the list
+input: n/a
+returns: n/a
+******************************************************************************/
+void FrequencyTable::destroy()
+{
+  while(!isEmpty(list)){
+    list = deleteHead(list);
+  }
+}

@@ -1,0 +1,3 @@
+g++ -Wall -Wextra factory.h factoryP.cpp assemblyLine.h assemblyLine.cpp packQ.h packQ.cpp dispatcher.h dispatcher.cpp main.cpp -o simp
+g++ -Wall -Wextra factory.h factoryU.cpp assemblyLine.h assemblyLine.cpp packQ.h packQ.cpp dispatcher.h dispatcher.cpp main.cpp -o simu
+g++ -Wall -Wextra factory.h factoryT.cpp assemblyLine.h assemblyLine.cpp packQ.h packQ.cpp dispatcher.h dispatcher.cpp main.cpp -o simt

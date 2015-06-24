@@ -1,0 +1,1 @@
+I would like to thank Alex Goldscmidt for his assistance with project design, function parameter recommendations, and his eagle-eye debugging skills. 

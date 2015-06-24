@@ -1,0 +1,136 @@
+/***************************************************
+filename: sequenceL.cpp
+date: 9/16/2013
+description: program that concatenates linked-lists
+		sequences
+****************************************************/
+#include <iostream>
+#include <cstdlib>
+#include "sequenceA.h"
+
+//Default constructor - called when there is no character input
+SequenceA::SequenceA()
+{
+	capacity = 1;
+	array_size = 0;
+
+	p_array = new ElementType[capacity];
+
+	p_array[0] = '\0';
+}
+
+//Constructor called to take input and create a node for storage
+SequenceA::SequenceA(ElementType input)
+{
+	array_size = 1;
+	capacity = array_size;
+
+	p_array = new ElementType[capacity];
+
+	p_array[0] = input; //Input from main
+}
+
+//Checks to see if the sequence is currently empty
+bool SequenceA::isEmpty()
+{
+	if(p_array[0] != '\0'){
+		return false;
+	}
+	else{
+		return true;
+	}
+}
+
+//Calculates the size of the current sequence
+int SequenceA::size()
+{
+	return capacity;
+}
+
+//Attaches a sequence from a new instance of the class to the original sequence
+void SequenceA::concatenate(SequenceA* nInstance)
+{
+	int j = array_size;
+	int temp = 0;
+
+	if(nInstance->isEmpty()){ //When nothing is concatenated with something
+		return;		//Or if nothing is concatenated with nothing
+	}
+
+	if(isEmpty()){ //When something is concatenated with nothing
+		for(int i = 0; i < nInstance->array_size; i++){
+			if(capacity < nInstance->array_size){ 
+			  expand(); //Makes the array bigger if it is filled
+			}
+			p_array[i] = nInstance->p_array[i];
+			array_size++;
+		}
+		return;
+	}
+
+	//When something is concatenated with something
+	for(int i = array_size; i < array_size + nInstance->array_size; i++){
+		if(capacity < nInstance->array_size){
+		  expand(); //Makes the array bigger if it is filled completely
+		}
+		p_array[i] = nInstance->p_array[temp];
+		j++; //Tracks real size of the array
+		temp++;
+	}
+
+	array_size = j; //Assigns the correct size of the array
+}
+
+//Doubles the size of the dynamic array if it completely filled
+void SequenceA::expand()
+{
+	capacity *= 2;
+
+	ElementType* temp = new ElementType [capacity];
+
+	for(int i = 0; i < array_size; i++){
+		temp[i] = p_array[i];
+	}
+
+	delete [] p_array;
+
+	p_array = temp;
+}
+
+//Executes when main asks for the first value of the sequence
+ElementType SequenceA::first()
+{
+	return p_array[0];
+}
+
+//Executes when main asks for the sequence, minus the first value
+SequenceA* SequenceA::rest()
+{
+	SequenceA* new_instance;
+	new_instance = new SequenceA; //Creates a new instance of the class
+	int j = 0;
+
+	while(new_instance->capacity < array_size){
+		new_instance->expand();
+	}
+
+	for(int i = 1; i < array_size; i++){
+		new_instance->p_array[j] = p_array[i];
+		j++; //Special iterator that starts the new array at 0, not 1
+	}
+
+	new_instance->array_size = array_size - 1;
+
+	return new_instance;
+}
+
+//Prints the data in the array
+void SequenceA::print()
+{
+
+	for(int i = 0; i < array_size; i++){
+		cout << p_array[i] << " ";
+	}
+	cout << endl;
+}
+
