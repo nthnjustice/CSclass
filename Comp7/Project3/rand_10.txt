@@ -1,0 +1,20 @@
+>39  M01675:6:000000000-A6HK1:1:2102:14387:15187
+Bacteria; 0.96; Proteobacteria; 0.96; Gammaproteobacteria; 0.96; Pasteurellales; 0.96; Pasteurellaceae; 0.96; Haemophilus; 0.96;
+>39  M01675:6:000000000-A6HK1:1:1113:24736:14866
+Bacteria; 0.96; Proteobacteria; 0.96; Gammaproteobacteria; 0.96; Pasteurellales; 0.96; Pasteurellaceae; 0.96; Actinobacillus; 0.96;
+>39  M01675:6:000000000-A6HK1:1:1105:8111:22606
+Bacteria; 0.96; Firmicutes; 0.96; Bacilli; 0.96; Lactobacillales; 0.96; Streptococcaceae; 0.96; Streptococcus; 0.96;
+>39  M01675:6:000000000-A6HK1:1:1104:16866:13561
+Bacteria; 0.96; Bacteroidetes; 0.96; Bacteroidia; 0.96; Bacteroidales; 0.96; Porphyromonadaceae; 0.96; Porphyromonas; 0.96;
+>39  M01675:6:000000000-A6HK1:1:1110:12308:6345
+Bacteria; 0.96; Firmicutes; 0.96; Bacilli; 0.96; Gemellales; 0.96; Gemellaceae; 0.96; Gemella; 0.96;
+>39  M01675:6:000000000-A6HK1:1:1110:13258:4073
+Bacteria; 0.96; Firmicutes; 0.96; Bacilli; 0.96; Lactobacillales; 0.96; Streptococcaceae; 0.96; Streptococcus; 0.96;
+>39  M01675:6:000000000-A6HK1:1:1105:18515:8427
+Bacteria; 0.96; Firmicutes; 0.96; Bacilli; 0.96; Lactobacillales; 0.96; Streptococcaceae; 0.96; Streptococcus; 0.96;
+>39  M01675:6:000000000-A6HK1:1:2103:11310:27012
+Bacteria; 0.96; Firmicutes; 0.96; Bacilli; 0.96; Lactobacillales; 0.86; Streptococcaceae; 0.81; Streptococcus; 0.81;
+>39  M01675:6:000000000-A6HK1:1:1111:16134:15314
+Bacteria; 0.96; Firmicutes; 0.96; Clostridia; 0.96; Clostridiales; 0.96; Peptostreptococcaceae; 0.96; Peptostreptococcus; 0.76;
+>39  M01675:6:000000000-A6HK1:1:2103:17798:18293
+Bacteria; 0.96; Firmicutes; 0.96; Bacilli; 0.96;
