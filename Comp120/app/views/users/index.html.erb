@@ -1,0 +1,19 @@
+<% provide(:title, 'All users') %>
+
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+			<h2>All users</h2>
+			<%= will_paginate %>
+				<% @users.each do |user| %>
+					<h3>
+				  	<%= link_to user.last_name+", "+user.first_name, user %>
+				  		<% if current_user.admin? && !current_user?(user) %>
+				  			| <%= link_to "delete user", user, method: :delete, data: { confirm: "Would you like to delete this user?" } %> |
+				  		<% end %>
+				  	<% end %>
+					</h3>
+			<%= will_paginate %>
+		</div>
+	</div>
+</div>

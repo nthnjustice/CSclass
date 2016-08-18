@@ -1,0 +1,518 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/*==================================================
+                    Universal                  
+==================================================*/
+
+body {
+  background-color: white;
+  font-family: "MS Sans-serif", sans-serif, Georgia;
+}
+
+#subtitle {
+  font-weight: bold;
+  color: #094c6c;
+  font-style: italic;
+}
+
+.gold {
+  color: #cea600;
+}
+
+.red {
+  color: #980800;
+}
+
+.sorting_asc {
+  color: black;
+  font-color: black;
+}
+
+.center {
+  width: 50%;
+  margin: 0 auto; 
+}
+
+.resolved {
+  color: #1ab602;
+  font-weight: bold;
+  font-style: italic;
+}
+
+/*=========== Background colors ============*/
+
+
+#aboutSection {
+  background-color: #282828;
+  color: white;
+}
+
+#contactSection {
+  background-color: #C8C8C8;
+}
+
+#newReportSlot {
+  background-color: #f0f8ff;
+}
+
+/*======== Footer ========*/
+
+footer {
+  border-top: 1px solid black;
+}
+
+footer a {
+  color: black;
+  font-weight: bold;
+}
+
+footer a:hover {
+  color: gray;
+}
+
+footer p {
+  float: left;
+}
+
+footer ul {
+  float: right;
+  list-style: none;
+}
+
+footer ul li {
+  float: left;
+  display: inline;
+  margin-right: 15px;
+}
+
+/*======= Form Errors ========*/
+
+#error_explanation {
+  color: red;
+  ul {
+    color: red;
+    margin: 0 0 30px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .has-error;
+  .form-control {
+    color: $state-danger-text;
+  }
+}
+
+/*==================================================
+=            Bootstrap 3 Media Queries             =
+==================================================*/
+
+/*==================================================
+=        Login, Signup, About, Contact             =
+==================================================*/
+
+/*==========  Mobile First Method  ==========*/
+/* iPhone4 (portrait) */
+@media only screen and (min-width: 320px) {
+
+  #logo {
+    height: auto;
+    width: auto;
+    max-height: 175px;
+    max-width: 175px;
+    margin-top: 5%;
+  }
+
+  #subtitle {
+    font-size: 200%;
+  }
+
+  .loginLabel {
+    margin-top: 5%;
+    font-weight: bold;
+  }
+
+  #loginButton {
+    margin-bottom: 5%;
+    font-weight: bold;
+    font-size: 120%;
+  }
+
+  #newUserText {
+    font-size: 110%;
+  }
+
+  #signupText {
+    font-size: 115%;
+  }
+
+  #aboutHead {
+    font-size: 225%;
+  }
+
+  #aboutText {
+    font-size: 115%;
+  }
+
+  #signupHeader {
+    font-weight: bold;
+    font-size: 200%;
+    margin-top: 0%;
+  }
+
+  .formLabel {
+    margin-top: 5%;
+  }
+
+  #submitFormButton {
+    margin-top: 5%;
+    font-weight: bold;
+    font-size: 115%;
+  }
+
+}
+
+/* iphone6 (portrait) */
+@media only screen and (min-width: 360px) {
+
+  #logo {
+    height: auto;
+    width: auto;
+    max-height: 200px;
+    max-width: 200px;
+  }
+
+  .loginLabel {
+    font-size: 135%;
+  }
+
+  .loginForm {
+    font-size: 115%;
+  }
+
+  #rememberMeText {
+    font-size: 115%;
+  }
+
+  #loginButton {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    font-size: 125%;
+  }
+
+  #newUserText {
+    font-size: 115%;
+  }
+
+  #signupText {
+    font-size: 120%;
+  }
+
+  #subtitle {
+    font-size: 225%;
+  }
+
+  #aboutHead {
+    font-size: 250%;
+  }
+
+  #aboutText {
+    font-size: 130%;
+  }
+
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width: 480px) {
+
+  #logo {
+    height: auto;
+    width: auto;
+    max-height: 250px;
+    max-width: 250px;
+  }
+
+  #subtitle {
+    font-size: 250%;
+  }
+
+  .loginLabel {
+    font-size: 160%;
+  }
+
+  .loginForm {
+    font-size: 145%;
+  }
+
+  #rememberMeText {
+    font-size: 140%;
+  }
+
+  #loginButton {
+    font-size: 150%;
+  }
+
+  #newUserText {
+    font-size: 140%;
+  }
+
+  #aboutHead {
+    font-size: 275%;
+  }
+
+  #aboutText {
+    font-size: 150%;
+  }
+
+  #signupHeader {
+    font-size: 215%;
+  }
+
+  .formLabel {
+    font-size: 110%;
+  }
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width: 768px) {
+
+  #logo {
+    height: auto;
+    width: auto;
+    max-height: 325px;
+    max-width: 325px;
+  }
+
+  .loginLabel {
+    font-size: 200%;
+  }
+
+  .loginForm {
+    font-size: 170%;
+  }
+
+  #rememberMeText {
+    font-size: 170%;
+  }
+
+  #loginButton {
+    font-size: 200%;
+  }
+
+  #newUserText {
+    font-size: 170%;
+  }
+
+  #subtitle {
+    font-size: 325%;
+  }
+
+  #aboutHead {
+    font-size: 350%;
+  }
+
+  #aboutText {
+    font-size: 200%;
+  }
+
+  #signupHeader {
+    font-size: 300%;
+    margin-top: 5%;
+  }
+
+  .formLabel {
+    font-size: 150%;
+  }
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width: 992px) {
+
+  #logo {
+    height: auto;
+    width: auto;
+    max-height: 325px;
+    max-width: 325px;
+  }
+
+  #subtitle {
+    font-size: 375%;
+  }
+
+  #loginButton {
+    margin-top: 3%;
+  }
+
+  #aboutHead {
+    font-size: 375%;
+  }
+
+  #aboutText {
+    font-size: 250%;
+  }
+
+  .contactHead {
+    font-size: 200%;
+  }
+
+  #signupHeader {
+    margin-top: 0%;
+  }
+
+  #submitFormButton {
+    font-size: 150%;
+  }
+
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width: 1200px) {
+
+  #logo {
+    height: auto;
+    width: auto;
+    max-height: 375px;
+    max-width: 375px;
+    margin-top: 2%;
+  }
+
+  .loginLabel {
+    font-size: 215%;
+  }
+
+  .loginForm {
+    font-size: 170%;
+  }
+
+  #rememberMeText {
+    font-size: 175%;
+  }
+
+  #loginButton {
+    font-size: 215%;
+  }
+
+  #newUserText {
+    font-size: 175%;
+  }
+
+  #aboutHead {
+    font-size: 400%;
+  }
+
+  #aboutText {
+    font-size: 265%;
+  }
+
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width: 1400px) {
+
+}
+
+/*==================================================
+=            Home, Micropost Show                  =
+==================================================*/
+
+/*==========  Mobile First Method  ==========*/
+/* iPhone4 (portrait) */
+@media only screen and (min-width: 320px) {
+
+  #newReportHeader {
+    font-weight: bold;
+    font-size: 150%;
+  }
+
+  #newReportButton {
+    font-weight: bold;
+    font-size: 125%;
+  }
+
+  #timelineHeader {
+    font-size: 250%;
+  }
+
+}
+
+/* iphone6 (portrait) */
+@media only screen and (min-width: 360px) {
+
+  #newReportHeader {
+    font-size: 180%;
+  }
+
+  .newReportLabel {
+    font-size: 115%;
+  }
+
+  #emergencyCheckBox {
+    width: 20px;
+    height: 20px;
+  }
+
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width: 480px) {
+
+  #newReportHeader {
+    font-size: 200%;
+  }
+
+  .newReportLabel {
+    font-size: 125%;
+  }
+
+  #newReportButton {
+    font-size: 150%;
+  }
+
+  #timelineHeader {
+    font-size: 300%;
+  }
+
+  #feedTable {
+    font-size: 150%;
+  }
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width: 768px) {
+
+  #newReportHeader {
+    font-size: 275%;
+  }
+
+  .newReportLabel {
+    font-size: 150%;
+  }
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width: 900px) {
+
+  #photoUpload {
+    margin-left: 30%;
+  }
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width: 992px) {
+
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width: 1200px) {
+
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width: 1400px) {
+
+}

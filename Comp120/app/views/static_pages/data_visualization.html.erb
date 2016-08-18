@@ -1,0 +1,51 @@
+<% provide(:title, "Report Map") %>
+
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+			<h2 class="text-muted">Report Heatmap</h2>
+			<div id="mapCanvas" style="width: 100%; height: 500px;"></div>
+			<br>
+			<br>
+		</div>
+	</div>
+</div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0nKXA3huAMfcormU4i1h3ALXlwOFkz_E&libraries=visualization"></script>
+
+<script>
+
+	heatmapData = [];
+
+	<% @reports.each do |report| %>
+		lat = parseFloat("<%= report.location_lat %>");
+		lng = parseFloat("<%= report.location_long %>");
+
+		if ("<%= report.emergency %>" === "true" ) {
+			heatmapData.push({location: new google.maps.LatLng(lat, lng), weight: 10});
+		}
+		else {
+			heatmapData.push({location: new google.maps.LatLng(lat, lng), weight: 1});
+		}
+	<% end %>
+
+	if(navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(function(position) {
+			currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+			map = new google.maps.Map(document.getElementById('mapCanvas'), {
+			  center: currentLocation,
+			  zoom: 16,
+			});
+
+			var heatmap = new google.maps.visualization.HeatmapLayer({
+			  data: heatmapData
+			});
+			heatmap.setMap(map);
+		});
+	}
+	else {
+    alert("Geolocation is not supported by your browser.");
+  }
+
+</script>

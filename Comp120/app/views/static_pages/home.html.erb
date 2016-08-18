@@ -1,0 +1,46 @@
+<% provide(:title, "Home") %>
+
+<div id="newReportSlot">
+  <%= render 'shared/micropost_form' %>
+</div>
+
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <hr>
+      <h1 id="timelineHeader"><em>Report Timeline</em></h1>
+      <br>
+    </div>
+  </div>
+</div>
+<% if @feed_items.any? %>
+  <div id="feedWrapper">
+    <%= render 'shared/feed' %>
+  </div>
+<% else %>
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center"> 
+        <h3 class="text-muted">There are currently no incident reports submitted.</h3>
+        <br>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<script>
+
+$(document).ready(function() {
+    pollFeed();
+  });
+
+function pollFeed() {    
+  setTimeout(function() {
+    $.ajax({
+      url: "poll"
+    });
+    pollFeed();
+  }, 15000);
+}
+
+</script>

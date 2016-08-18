@@ -1,0 +1,30 @@
+# Leg 4: Static Content Optimizations
+
+## 1) Optimization techniques used:
+
+ - A content deliver network (CDN) - "Amazon Cloudfront: Amazon Web Services"
+ - JavaScript and CSS minification - (http://jscompress.com/) and (https://cssminifier.com/)
+ - Combined JavaScript files and Css files
+ - JavaScript placed at the bottom of the page
+
+## 2) Tools for testing performance:
+
+1) Before optimization
+ - PageSpeed Tools - scored a C for mobile and a B for desktop
+ - YSlow - scored a C
+ 
+2) After optimization
+ - PageSpeed Tools - scored a B for mobile and an A for desktop
+ - YSlow - scored a A
+
+## 3) What performance aspects have been improved:
+
+ - The file sizes have been improved. Specifically, the file sizes of the asset files have been reduced using the minification tools.
+ - The loading time has been reduced because the number of HTTP requests made for each page of the site has been reduced. Additionally, by using a CDN service like CloudFront, which has many servers all across the world, the time associated with the physical distance for asset requests has been reduced.
+ - CSS placed and the top and JavaScript at the bottom has improved the user experience when visiting the page (visual cues that page is loading even when not entirely complete).
+
+## 4) Lingering performance issues:
+
+ - The performance of our application could be further improved by minifying our HTML code. Additionally, serving HTML content over a CDN would also improve our application's load time. This has not been addressed because we're still developing HTML code, but this issue will be addressed towards the end of development. 
+ - Another lingering performance issue is to reduce the number of HTTP requests even more. As of now, we are requesting many different CDNs in our HTML code.
+ - Our performance could be improved by adding expiry headers.

@@ -1,0 +1,21 @@
+<% provide(:title, @user.first_name) %>
+
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+			<h3><strong>Name: </strong><%= @user.first_name+" "+@user.last_name %></h3>
+			<h3><strong>Phone Number: </strong><%= @user.phone_number %></h3>
+			<h3><strong>Email: </strong><%= @user.email %></h3>
+			<h3><strong>Department: </strong><%= @user.department %></h3>
+			<h2><strong><em><%= link_to "Update Profile", edit_user_path(current_user) %></em></strong></h2>
+			<hr>
+    	<% if @user.microposts.any? %>
+      	<h3><strong>Submitted Reports </strong>(<%= @user.microposts.count %>):</h3>
+      		<hr>
+	        <% @microposts.each do |micropost| %>
+	        	<h3><%= link_to micropost.subject, micropost %></h3>
+	        <% end %>
+    	<% end %>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<title>Incident Reporter | <%= yield(:title) %></title>
+	<meta name="Dutchess University Incident Reporter" content="Beta">
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+	<%= csrf_meta_tags %>
+	<%= render 'layouts/shim' %>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+<% if logged_in? %>
+	<%= render 'layouts/header' %>
+<% end %>
+
+<%= render 'shared/logoSection' %>
+
+<div class="text-center">
+	<% flash.each do |message_type, message| %>
+    <div class="alert alert-<%= message_type %>"><%= message %></div>
+  <% end %>
+</div>
+
+<%= yield %>
+<%= render 'layouts/footer' %>
+
+</body>
+
+</html>

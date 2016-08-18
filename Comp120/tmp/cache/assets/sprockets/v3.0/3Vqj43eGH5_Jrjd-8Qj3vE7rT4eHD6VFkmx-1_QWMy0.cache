@@ -1,0 +1,20 @@
+I"T(function() {
+  var MicropostsPoller;
+
+  MicropostsPoller = {
+    poll: function() {
+      return setTimeout(this.request, 5000);
+    },
+    request: function() {
+      return $.get($('#feed').data('url'));
+    }
+  };
+
+  jQuery(function() {
+    if ($('#feed').length > 0) {
+      return MicropostsPoller.poll();
+    }
+  });
+
+}).call(this);
+:ET

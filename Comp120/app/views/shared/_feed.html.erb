@@ -1,0 +1,22 @@
+<table id="feedTable" class="table table-striped" cellspacing="0" width="100%">
+	<thead>
+		<tr>
+			<th>Subject</th>
+			<th>Severity</th>
+			<th>Submitted</th>
+			<th>Status</th>
+		</tr>
+	</thead>
+	<tbody>
+  	<%= render @feed_items %>
+  	<%= will_paginate @feed_items %>
+	</tbody>
+</table>
+
+<script>
+
+	$(document).ready(function() {
+    $('#feedTable').DataTable({});
+  });
+
+</script>

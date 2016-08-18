@@ -1,0 +1,72 @@
+source 'https://rubygems.org'
+
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '4.2.5.1'
+# Bootstrap
+gem 'bootstrap-sass', '3.2.0.0'
+# Use postgresql as the database for Active Record
+gem 'pg', '~> 0.15'
+# Use SCSS for stylesheets
+gem 'sass-rails', '~> 5.0'
+# Use Uglifier as compressor for JavaScript assets
+gem 'uglifier', '>= 1.3.0'
+# Use CoffeeScript for .coffee assets and views
+gem 'coffee-rails', '~> 4.1.0'
+
+# Use jquery as the JavaScript library
+gem 'jquery-rails'
+
+# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+#gem 'turbolinks'
+
+# bundle exec rake doc:rails generates the API under doc/api.
+gem 'sdoc', '~> 0.4.0', group: :doc
+
+# Use ActiveModel has_secure_password
+gem 'bcrypt', '~> 3.1.7'
+
+# Content pagination
+gem 'will_paginate', '3.0.7'
+gem 'bootstrap-will_paginate', '0.0.10'
+
+# Create fake information for seeding the database
+gem 'faker', '1.4.2'
+
+# Datatables
+gem 'jquery-datatables-rails', '~> 3.3.0'
+
+# File upload solution
+gem 'carrierwave', '0.10.0'
+# Photo resizing
+gem 'mini_magick', '3.8.0'
+# Photo cloud-storage solution
+gem 'fog', '1.36.0'
+
+# API 
+gem 'jbuilder', '~> 2.0'
+gem 'grape', '~> 0.6.1'
+gem 'grape-entity', '~> 0.4.0'
+gem 'rack-contrib', '~> 1.1.0'
+gem 'grape-swagger', '~> 0.7.2'
+gem 'grape-swagger-rails',  '~> 0.0.8'
+# Disable strong_params at the model layer, allows for Grape params
+gem 'hashie-forbidden_attributes'
+
+# reCAPTCHA
+gem "recaptcha", require: "recaptcha/rails"
+
+# Cache
+gem 'dalli'
+
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+group :development, :test do
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug'
+  gem 'web-console', '~> 2.0'
+end
+
+group :production do
+  gem 'puma', '3.1.0'
+end

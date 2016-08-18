@@ -1,0 +1,23 @@
+<tr>
+  <td>
+    <p><%= link_to micropost.subject, micropost %></p>
+    <% if micropost.picture? %>
+      <p>(photo available)</p>
+    <% end %>
+  </td>
+  <td>
+    <% if micropost.emergency == true %>
+      <p class="red">EMERGENCY</p>
+    <% else %>
+      <p>Non-emergency</p>
+    <% end %>
+  </td>
+  <td><%= time_ago_in_words(micropost.created_at)+" ago" %></td>
+  <td>
+    <% if micropost.open == true %>
+      <p>Unresolved</p>
+    <% else %>
+      <p class="resolved">Resolved</p>
+    <% end %> 
+  </td>
+</tr>
